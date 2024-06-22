@@ -1,6 +1,6 @@
 # Cyclone_3DR_Autonomous_Mission
 This repository represents the senior design of Southern Illinois University Edwardsville, SIUE, Mechatronics/Robotics engineering program. The contributors are as follows:
-hello 
+
 1) Zechariah Georgian (Repo Owner)
 2) Jackson Zawitkowski
 3) Chen Chen
