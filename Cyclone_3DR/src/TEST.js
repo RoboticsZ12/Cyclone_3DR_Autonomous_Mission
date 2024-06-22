@@ -34,7 +34,7 @@ function AddWaypoint(AddPt)
 }
 
 // Duration of wait time for spot at each point
-function Spotwait(Duration)
+function SpotWait(Duration)
 {
     
 }
@@ -45,12 +45,12 @@ function Spotwait(Duration)
 let InitialX = parseFloat(prompt("Select starting x coordinate (Type with decimal): "));
 let InitialY = parseFloat(prompt("Select starting y coordinate (Type with decimal): "));
 let InitialZ = parseFloat(prompt("Select starting z coordinate (Type with decimal): "));
-InitialPt(); // Call initial point function 
+InitialPt(InitialX, InitialY, InitialZ); // Call initial point function 
 
 
 let Long = parseFloat(prompt("Enter the Longitude of the station (Type with decimal): "));
 let Lat = parseFloat(prompt("Enter the Latitude of the station (Type with decimal): "));
-LongLat(); // Call Long/Lat function
+LongLat(Long, Lat); // Call Long/Lat function
 
 let NumPts = parseInt(prompt("Enter number of waypoints for this mission: "));
 NumWaypoints(); // Call Number of Waypoint function 
@@ -64,7 +64,7 @@ let AddPt = parseFloat(prompt("Select next waypoint mission"));
 AddWaypoint(); // Call next waypoint function 
 
 let Spotwait = parseInt(prompt("How long should spot wait between each point? (Seconds): "));
-Spotwait(); // call spot robot wait function
+SpotWait(); // call spot robot wait function
 
 prompt("Your chosen values are respectively listed: ");
 alert("Initial X: " + InitialX + "\nInitial Y: " + InitialY + "\nInitial Z: " + InitialZ
