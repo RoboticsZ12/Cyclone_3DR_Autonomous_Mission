@@ -53,18 +53,18 @@ let Lat = parseFloat(prompt("Enter the Latitude of the station (Type with decima
 LongLat(Long, Lat); // Call Long/Lat function
 
 let NumPts = parseInt(prompt("Enter number of waypoints for this mission: "));
-NumWaypoints(); // Call Number of Waypoint function 
+NumWaypoints(NumPts); // Call Number of Waypoint function 
 
 let IncrementX = parseInt(prompt("Enter incrementation in X: "));
 let IncrementY = parseInt(prompt("Enter incrementation in Y: "));
 let IncrementZ = parseInt(prompt("Enter incrementation in Z: "));
-PointIncrementation(); // Call point of incrementation function
+PointIncrementation(IncrementX, IncrementY, IncrementZ); // Call point of incrementation function
 
 let AddPt = parseFloat(prompt("Select next waypoint mission"));
-AddWaypoint(); // Call next waypoint function 
+AddWaypoint(AddPt); // Call next waypoint function 
 
-let Spotwait = parseInt(prompt("How long should spot wait between each point? (Seconds): "));
-SpotWait(); // call spot robot wait function
+let Duration = parseInt(prompt("How long should spot wait between each point? (Seconds): "));
+SpotWait(Duration); // call spot robot wait function
 
 prompt("Your chosen values are respectively listed: ");
 alert("Initial X: " + InitialX + "\nInitial Y: " + InitialY + "\nInitial Z: " + InitialZ
