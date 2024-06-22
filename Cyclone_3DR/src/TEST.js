@@ -52,16 +52,22 @@ let Long = parseFloat(prompt("Enter the Longitude of the station (Type with deci
 let Lat = parseFloat(prompt("Enter the Latitude of the station (Type with decimal): "));
 LongLat(); // Call Long/Lat function
 
-let NumPts = parse(prompt("Enter number of waypoints for this mission: "));
+let NumPts = parseInt(prompt("Enter number of waypoints for this mission: "));
 NumWaypoints(); // Call Number of Waypoint function 
 
-let IncrementX = parse(prompt("Enter incrementation in X: "));
-let IncrementY = parse(prompt("Enter incrementation in Y: "));
-let IncrementZ = parse(prompt("Enter incrementation in Z: "));
+let IncrementX = parseInt(prompt("Enter incrementation in X: "));
+let IncrementY = parseInt(prompt("Enter incrementation in Y: "));
+let IncrementZ = parseInt(prompt("Enter incrementation in Z: "));
 PointIncrementation(); // Call point of incrementation function
 
 let AddPt = parseFloat(prompt("Select next waypoint mission"));
 AddWaypoint(); // Call next waypoint function 
 
-let Spotwait = parse(prompt("How long should spot wait between each point? (Seconds): "));
+let Spotwait = parseInt(prompt("How long should spot wait between each point? (Seconds): "));
 Spotwait(); // call spot robot wait function
+
+prompt("Your chosen values are respectively listed: ");
+alert("Initial X: " + InitialX + "\nInitial Y: " + InitialY + "\nInitial Z: " + InitialZ
+    + "\nLongitude: " + Long + "\nLatitude: " + Lat + "\nNumber of Points: " + NumPts 
+    + "\nIncrement X: " + IncrementX + "\nIncrement Y" + IncrementY + "\nIncrement Z" + IncrementZ
+    + "\nSpot wait time: " + Spotwait); 
