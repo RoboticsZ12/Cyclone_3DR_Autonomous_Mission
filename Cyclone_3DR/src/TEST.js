@@ -26,20 +26,20 @@ function PointIncrementation(IncrementX, IncrementY, IncrementZ)
 {
     
 // X Direction
-    var myDialog = SDialog.New("IncrementX");
+    var myDialog = SDialog.New("Increment X, Y, Z");
     myDialog.AddLength({id: 'X length', name: "X Increment", value: 0, saveValue: true, readOnly: false});
     var dialogResult = myDialog.Run();
 
     var iVector = SVector.New(0, 0, 2); 
 
 // Y Drection 
-    var myDialog = SDialog.New("IncrementY");
+    // var myDialog = SDialog.New("IncrementY");
     myDialog.AddLength({id: 'Y length', name: "Y Increment", value: 0, saveValue: true, readOnly: false});
     var dialogResult = myDialog.Run();
     var iVector = SVector.New(0, 0, 3); 
 
 // Z Direction
-    var myDialog = SDialog.New("IncrementZ");
+    // var myDialog = SDialog.New("IncrementZ");
     myDialog.AddLength({id: 'Z length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
     var dialogResult = myDialog.Run();
     var iVector = SVector.New(0, 0, 4);
