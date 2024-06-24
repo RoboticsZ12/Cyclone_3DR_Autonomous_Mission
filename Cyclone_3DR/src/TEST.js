@@ -24,38 +24,25 @@ function NumWaypoints(NumPts)
 // Will need to know what units Cyclone use for "+1"
 function PointIncrementation(IncrementX, IncrementY, IncrementZ)
 {
+    
+// X Direction
     var myDialog = SDialog.New("IncrementX");
     myDialog.AddLength({id: 'X length', name: "X Increment", value: 0, saveValue: true, readOnly: false});
     var dialogResult = myDialog.Run();
 
-    if (dialogResult.ErrorCode == 0) 
-        var iStep = dialogResult.steplength; // get distance for step
+    var iVector = SVector.New(0, 0, 2); 
 
-    var iPoint = IncrementX.GetBoundingBox().LowPoint; // get lowest point of the mesh
-    var iVector = SVector.New(0, 0, 2); // vertical direction is defined
-    var sectionResult = IncrementX.SectionPlane(iVector, iPoint, -1, iStep); // function for planar section
-///////////////////////////////////
-    // var myDialog = SDialog.New("IncrementY");
-    // myDialog.AddLength({id: 'Y length', name: "Y Increment", value: 0, saveValue: true, readOnly: false});
-    // var dialogResult = myDialog.Run();
+// Y Drection 
+    var myDialog = SDialog.New("IncrementY");
+    myDialog.AddLength({id: 'Y length', name: "Y Increment", value: 0, saveValue: true, readOnly: false});
+    var dialogResult = myDialog.Run();
+    var iVector = SVector.New(0, 0, 3); 
 
-    // if (dialogResult.ErrorCode == 0) 
-    //     var iStep = dialogResult.steplength; // get distance for step
-
-    // var iPoint = IncrementY.GetBoundingBox().LowPoint; // get lowest point of the mesh
-    // var iVector = SVector.New(0, 0, 3); // vertical direction is defined
-    // var sectionResult = IncrementY.SectionPlane(iVector, iPoint, -1, iStep); // function for planar section
-    // /////////////////////////////////
-    // var myDialog = SDialog.New("IncrementZ");
-    // myDialog.AddLength({id: 'Z length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
-    // var dialogResult = myDialog.Run();
-
-    // if (dialogResult.ErrorCode == 0) 
-    //     var iStep = dialogResult.steplength; // get distance for step
-
-    // var iPoint = IncrementZ.GetBoundingBox().LowPoint; // get lowest point of the mesh
-    // var iVector = SVector.New(0, 0, 4); // vertical direction is defined
-    // var sectionResult = IncrementZ.SectionPlane(iVector, iPoint, -1, iStep); // function for planar section
+// Z Direction
+    var myDialog = SDialog.New("IncrementZ");
+    myDialog.AddLength({id: 'Z length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
+    var dialogResult = myDialog.Run();
+    var iVector = SVector.New(0, 0, 4);
 }
 
 // Adding point to position after incrementation
@@ -83,32 +70,14 @@ function SpotWait(Duration)
     var myDialog = SDialog.New("Spot Robot Step Distance");
     myDialog.AddLength({id: 'Steplength', name: "Step Distance", value: 0, saveValue: true, readOnly: false});
     var dialogResult = myDialog.Run();
-
-    if (dialogResult.ErrorCode == 0) 
-        var iStep = dialogResult.steplength; // get distance for step
-
-    var iPoint = Duration.GetBoundingBox().LowPoint; // get lowest point of the mesh
-    var iVector = SVector.New(0, 0, 1); // vertical direction is defined
-    var sectionResult = Duration.SectionPlane(iVector, iPoint, -1, iStep); // function for planar section
-
-    // if (sectionResult.ErrorCode == 1) {
-    //     ErrorMessage("An error occurred during the extraction of planar sections.");
-    // }
-    // else {
-    //     var i = 0;
-    //     for (i = 0; i < sectionResult.MultiTbl.length; i++) {
-    //         var temp = sectionResult.MultiTbl[i];
-    //         temp.SetName("Section " + i);
-    //         temp.AddToDoc();
-    //     }
-    //     print("\nPlanar sections are extracted.");
-    //     return sectionResult.MultiTbl;
-    // }
+    var iVector = SVector.New(0, 0, 1); 
 }
 
 // MAIN
 let Duration = 1;
 SpotWait(Duration);
+
+PointIncrementation(1,1,1);
 
 // Ask user initial x, y, z (fiducial)
 // let InitialX = parseFloat(print("Select starting x coordinate (Type with decimal): "));
