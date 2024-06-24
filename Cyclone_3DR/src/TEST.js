@@ -20,8 +20,7 @@ function NumWaypoints(NumPts)
 
 }
 
-// Define distance from one waypoint to the next (EX: InitialX+1)
-// Will need to know what units Cyclone use for "+1"
+// Determines increment between points. 
 function PointIncrementation(IncrementX, IncrementY, IncrementZ)
 {
 // X Direction
