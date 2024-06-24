@@ -24,7 +24,38 @@ function NumWaypoints(NumPts)
 // Will need to know what units Cyclone use for "+1"
 function PointIncrementation(IncrementX, IncrementY, IncrementZ)
 {
+    var myDialog = SDialog.New("IncrementX");
+    myDialog.AddLength({id: 'X length', name: "X Increment", value: 0, saveValue: true, readOnly: false});
+    var dialogResult = myDialog.Run();
 
+    if (dialogResult.ErrorCode == 0) 
+        var iStep = dialogResult.steplength; // get distance for step
+
+    var iPoint = Duration.GetBoundingBox().LowPoint; // get lowest point of the mesh
+    var iVector = SVector.New(0, 0, 2); // vertical direction is defined
+    var sectionResult = Duration.SectionPlane(iVector, iPoint, -1, iStep); // function for planar section
+///////////////////////////////////
+    var myDialog = SDialog.New("IncrementY");
+    myDialog.AddLength({id: 'Y length', name: "Y Increment", value: 0, saveValue: true, readOnly: false});
+    var dialogResult = myDialog.Run();
+
+    if (dialogResult.ErrorCode == 0) 
+        var iStep = dialogResult.steplength; // get distance for step
+
+    var iPoint = Duration.GetBoundingBox().LowPoint; // get lowest point of the mesh
+    var iVector = SVector.New(0, 0, 3); // vertical direction is defined
+    var sectionResult = Duration.SectionPlane(iVector, iPoint, -1, iStep); // function for planar section
+    /////////////////////////////////
+    var myDialog = SDialog.New("IncrementZ");
+    myDialog.AddLength({id: 'Z length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
+    var dialogResult = myDialog.Run();
+
+    if (dialogResult.ErrorCode == 0) 
+        var iStep = dialogResult.steplength; // get distance for step
+
+    var iPoint = Duration.GetBoundingBox().LowPoint; // get lowest point of the mesh
+    var iVector = SVector.New(0, 0, 4); // vertical direction is defined
+    var sectionResult = Duration.SectionPlane(iVector, iPoint, -1, iStep); // function for planar section
 }
 
 // Adding point to position after incrementation
@@ -50,7 +81,7 @@ function AddWaypoint(AddPt)
 function SpotWait(Duration)
 {
     var myDialog = SDialog.New("Spot Robot Step Distance");
-    myDialog.AddLength({id: 'Steplength', name: "Step Distance", value: 1, saveValue: true, readOnly: false});
+    myDialog.AddLength({id: 'Steplength', name: "Step Distance", value: 0, saveValue: true, readOnly: false});
     var dialogResult = myDialog.Run();
 
     if (dialogResult.ErrorCode == 0) 
