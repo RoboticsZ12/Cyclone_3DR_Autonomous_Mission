@@ -24,25 +24,24 @@ function NumWaypoints(NumPts)
 // Will need to know what units Cyclone use for "+1"
 function PointIncrementation(IncrementX, IncrementY, IncrementZ)
 {
-    
 // X Direction
     var myDialog = SDialog.New("Increment X,Y,Z");
     myDialog.AddLength({id: 'X length', name: "X Increment", value: 0, saveValue: true, readOnly: false});
-    var dialogResult = myDialog.Run();
-
-    var iVector = SVector.New(0, 0, 2); 
+    
+    var iVector = SVector.New(0, 0, 2); // Set X Position
 
 // Y Drection 
     // var myDialog = SDialog.New("IncrementY");
     myDialog.AddLength({id: 'Y length', name: "Y Increment", value: 0, saveValue: true, readOnly: false});
-    var dialogResult = myDialog.Run();
-    var iVector = SVector.New(0, 0, 3); 
+    
+    var iVector = SVector.New(0, 0, 3); // Set Y Position
 
 // Z Direction
     // var myDialog = SDialog.New("IncrementZ");
     myDialog.AddLength({id: 'Z length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
     var dialogResult = myDialog.Run();
-    var iVector = SVector.New(0, 0, 4);
+
+    var iVector = SVector.New(0, 0, 4); // Set Z Position 
 }
 
 // Adding point to position after incrementation
