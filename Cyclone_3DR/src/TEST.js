@@ -60,24 +60,25 @@ function SpotWait(Duration)
     var iVector = SVector.New(0, 0, 1); // vertical direction is defined
     var sectionResult = Duration.SectionPlane(iVector, iPoint, -1, iStep); // function for planar section
 
-    if (sectionResult.ErrorCode == 1) {
-        ErrorMessage("An error occurred during the extraction of planar sections.");
-    }
-    else {
-        var i = 0;
-        for (i = 0; i < sectionResult.MultiTbl.length; i++) {
-            var temp = sectionResult.MultiTbl[i];
-            temp.SetName("Section " + i);
-            temp.AddToDoc();
-        }
-        print("\nPlanar sections are extracted.");
-        return sectionResult.MultiTbl;
-    }
+    // if (sectionResult.ErrorCode == 1) {
+    //     ErrorMessage("An error occurred during the extraction of planar sections.");
+    // }
+    // else {
+    //     var i = 0;
+    //     for (i = 0; i < sectionResult.MultiTbl.length; i++) {
+    //         var temp = sectionResult.MultiTbl[i];
+    //         temp.SetName("Section " + i);
+    //         temp.AddToDoc();
+    //     }
+    //     print("\nPlanar sections are extracted.");
+    //     return sectionResult.MultiTbl;
+    // }
 }
 
 // MAIN
 let Duration = 1;
 SpotWait(Duration);
+
 // Ask user initial x, y, z (fiducial)
 // let InitialX = parseFloat(print("Select starting x coordinate (Type with decimal): "));
 // let InitialY = parseFloat(print("Select starting y coordinate (Type with decimal): "));
