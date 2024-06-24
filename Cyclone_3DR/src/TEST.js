@@ -25,23 +25,27 @@ function NumWaypoints(NumPts)
 function PointIncrementation(IncrementX, IncrementY, IncrementZ)
 {
 // X Direction
-    var myDialog = SDialog.New("Increment X,Y,Z");
-    myDialog.AddLength({id: 'X length', name: "X Increment", value: 0, saveValue: true, readOnly: false});
+    var IncrementationX = SDialog.New("Increment X,Y,Z");
+    IncrementationX.AddLength({id: 'X length', name: "X Increment", value: 0, saveValue: true, readOnly: false});
     
-    var iVector = SVector.New(0, 0, 2); // Set X Position
+    var iVectorX = SVector.New(0, 0, 2); // Set X Position
 
 // Y Drection 
-    // var myDialog = SDialog.New("IncrementY");
-    myDialog.AddLength({id: 'Y length', name: "Y Increment", value: 0, saveValue: true, readOnly: false});
+    var IncrementationY = SDialog.New("IncrementY");
+    IncrementationY.AddLength({id: 'Y length', name: "Y Increment", value: 0, saveValue: true, readOnly: false});
     
-    var iVector = SVector.New(0, 0, 3); // Set Y Position
+    var iVectorY = SVector.New(0, 0, 3); // Set Y Position
 
 // Z Direction
-    // var myDialog = SDialog.New("IncrementZ");
-    myDialog.AddLength({id: 'Z length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
-    var dialogResult = myDialog.Run();
+    var IncrementationZ = SDialog.New("IncrementZ");
+    IncrementationZ.AddLength({id: 'Z length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
 
-    var iVector = SVector.New(0, 0, 4); // Set Z Position 
+    var iVectorZ = SVector.New(0, 0, 4); // Set Z Position 
+
+// Run Box User Input.
+    var dialogX = IncrementationX.Run();
+    var dialogY = IncrementationY.Run();
+    var dialogZ = IncrementationZ.Run();
 }
 
 // Adding point to position after incrementation
