@@ -31,31 +31,31 @@ function PointIncrementation(IncrementX, IncrementY, IncrementZ)
     if (dialogResult.ErrorCode == 0) 
         var iStep = dialogResult.steplength; // get distance for step
 
-    var iPoint = Duration.GetBoundingBox().LowPoint; // get lowest point of the mesh
+    var iPoint = IncrementX.GetBoundingBox().LowPoint; // get lowest point of the mesh
     var iVector = SVector.New(0, 0, 2); // vertical direction is defined
-    var sectionResult = Duration.SectionPlane(iVector, iPoint, -1, iStep); // function for planar section
+    var sectionResult = IncrementX.SectionPlane(iVector, iPoint, -1, iStep); // function for planar section
 ///////////////////////////////////
-    var myDialog = SDialog.New("IncrementY");
-    myDialog.AddLength({id: 'Y length', name: "Y Increment", value: 0, saveValue: true, readOnly: false});
-    var dialogResult = myDialog.Run();
+    // var myDialog = SDialog.New("IncrementY");
+    // myDialog.AddLength({id: 'Y length', name: "Y Increment", value: 0, saveValue: true, readOnly: false});
+    // var dialogResult = myDialog.Run();
 
-    if (dialogResult.ErrorCode == 0) 
-        var iStep = dialogResult.steplength; // get distance for step
+    // if (dialogResult.ErrorCode == 0) 
+    //     var iStep = dialogResult.steplength; // get distance for step
 
-    var iPoint = Duration.GetBoundingBox().LowPoint; // get lowest point of the mesh
-    var iVector = SVector.New(0, 0, 3); // vertical direction is defined
-    var sectionResult = Duration.SectionPlane(iVector, iPoint, -1, iStep); // function for planar section
-    /////////////////////////////////
-    var myDialog = SDialog.New("IncrementZ");
-    myDialog.AddLength({id: 'Z length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
-    var dialogResult = myDialog.Run();
+    // var iPoint = IncrementY.GetBoundingBox().LowPoint; // get lowest point of the mesh
+    // var iVector = SVector.New(0, 0, 3); // vertical direction is defined
+    // var sectionResult = IncrementY.SectionPlane(iVector, iPoint, -1, iStep); // function for planar section
+    // /////////////////////////////////
+    // var myDialog = SDialog.New("IncrementZ");
+    // myDialog.AddLength({id: 'Z length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
+    // var dialogResult = myDialog.Run();
 
-    if (dialogResult.ErrorCode == 0) 
-        var iStep = dialogResult.steplength; // get distance for step
+    // if (dialogResult.ErrorCode == 0) 
+    //     var iStep = dialogResult.steplength; // get distance for step
 
-    var iPoint = Duration.GetBoundingBox().LowPoint; // get lowest point of the mesh
-    var iVector = SVector.New(0, 0, 4); // vertical direction is defined
-    var sectionResult = Duration.SectionPlane(iVector, iPoint, -1, iStep); // function for planar section
+    // var iPoint = IncrementZ.GetBoundingBox().LowPoint; // get lowest point of the mesh
+    // var iVector = SVector.New(0, 0, 4); // vertical direction is defined
+    // var sectionResult = IncrementZ.SectionPlane(iVector, iPoint, -1, iStep); // function for planar section
 }
 
 // Adding point to position after incrementation
