@@ -26,7 +26,7 @@ function PointIncrementation(IncrementX, IncrementY, IncrementZ)
 {
     
 // X Direction
-    var myDialog = SDialog.New("Increment X, Y, Z");
+    var myDialog = SDialog.New("Increment X,Y,Z");
     myDialog.AddLength({id: 'X length', name: "X Increment", value: 0, saveValue: true, readOnly: false});
     var dialogResult = myDialog.Run();
 
