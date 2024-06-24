@@ -76,8 +76,8 @@ function SpotWait(Duration)
 }
 
 // MAIN
-
-SpotWait
+let Duration = 1;
+SpotWait(Duration);
 // Ask user initial x, y, z (fiducial)
 // let InitialX = parseFloat(print("Select starting x coordinate (Type with decimal): "));
 // let InitialY = parseFloat(print("Select starting y coordinate (Type with decimal): "));
