@@ -20,11 +20,12 @@ function NumWaypoints(NumPts)
 
 }
 
-// Determines increment between points. 
+// Define distance from one waypoint to the next (EX: InitialX+1)
+// Will need to know what units Cyclone use for "+1"
 function PointIncrementation(IncrementX, IncrementY, IncrementZ)
 {
 // X Direction
-    var IncrementationX = SDialog.New("Increment X,Y,Z");
+    var IncrementationX = SDialog.New("Increment X");
     IncrementationX.AddLength({id: 'X length', name: "X Increment", value: 0, saveValue: true, readOnly: false});
     
     var iVectorX = SVector.New(0, 0, 2); // Set X Position
@@ -38,10 +39,13 @@ function PointIncrementation(IncrementX, IncrementY, IncrementZ)
 // Z Direction
     var IncrementationZ = SDialog.New("IncrementZ");
     IncrementationZ.AddLength({id: 'Z length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
+   
+    // var dialogX = IncrementationX.Run();
+    // var dialogY = IncrementationY.Run();
+    // var dialogZ = IncrementationZ.Run();
 
     var iVectorZ = SVector.New(0, 0, 4); // Set Z Position 
 
-// Run Box User Input.
     var dialogX = IncrementationX.Run();
     var dialogY = IncrementationY.Run();
     var dialogZ = IncrementationZ.Run();
@@ -69,10 +73,10 @@ function AddWaypoint(AddPt)
 // Duration of wait time for spot at each point
 function SpotWait(Duration)
 {
-    var myDialog = SDialog.New("Spot Robot Step Distance");
-    myDialog.AddLength({id: 'Steplength', name: "Step Distance", value: 0, saveValue: true, readOnly: false});
-    var dialogResult = myDialog.Run();
-    var iVector = SVector.New(0, 0, 1); 
+    var SpotStop = SDialog.New("Spot Stop Time");
+    SpotStop.AddLength({id: 'Stop Time', name: "Time At Stop", value: 0, saveValue: true, readOnly: false});
+    var StopResult = SpotStop.Run();
+    var iVectorStep = SVector.New(0, 0, 1); 
 }
 
 // MAIN
