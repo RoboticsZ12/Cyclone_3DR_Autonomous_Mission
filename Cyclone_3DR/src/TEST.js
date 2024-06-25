@@ -6,47 +6,39 @@
 function InitialPt(InitialX, InitialY, InitialZ)
 {
 // Initial X
-    var X = SDialog.New("Initial X Value");    
-    X.AddLength({id: 'X', name: "Initial X Pos", value: 0, saveValue: true, readOnly: false});
+    var XYZ = SDialog.New("Initial X,Y,Z Values");    
+    XYZ.AddLength({id: 'X', name: "Initial X Pos", value: 0, saveValue: true, readOnly: false});
     
     var iVectoriniitialX = SVector.New(0, 0, 1);
 
 // Initial Y
-    var Y = SDialog.New("Initial Y Value");    
-    Y.AddLength({id: 'Y', name: "Initial Y Pos", value: 0, saveValue: true, readOnly: false});
+    XYZ.AddLength({id: 'Y', name: "Initial Y Pos", value: 0, saveValue: true, readOnly: false});
     
     var iVectorinitialY = SVector.New(0, 0, 1);
 
 // Initial Z
-    var Z = SDialog.New("Initial Z Pos");    
-    Z.AddLength({id: 'Z', name: "Initial Z Pos", value: 0, saveValue: true, readOnly: false});
+    XYZ.AddLength({id: 'Z', name: "Initial Z Pos", value: 0, saveValue: true, readOnly: false});
     
     var iVectorX = SVector.New(0, 0, 1);
 
-    var dialogInitialX = X.Run();
-    var dialogInitialY = Y.Run();
-    var dialogInitialZ = Z.Run();
-
+    var dialogInitialXYZ = XYZ.Run();
 }
 
 // Defining lattitude and longitude of map
 function LongLat(Long, Lat)
 {
 // Latitude
-    var LatLength = SDialog.New("Latitude Assingment");    
-    Lat.AddLength({id: 'Lat', name: "Latitidue Value", value: 0, saveValue: true, readOnly: false});
+    var LongLatLength = SDialog.New("Latitude Assingment");      
+    LongLatLength.AddLength({id: 'Lat', name: "Latitidue Value", value: 0, saveValue: true, readOnly: false});
     
     var iVectorLat = SVector.New(0, 0, 1);
 
 // Longitude
-    var LongLength = SDialog.New("Longitude Assingment");    
-    LongLength.AddLength({id: 'Long', name: "Longitude Value", value: 0, saveValue: true, readOnly: false});
+    LongLatLength.AddLength({id: 'Long', name: "Longitude Value", value: 0, saveValue: true, readOnly: false});
     
-    var iVectorX = SVector.New(0, 0, 1);
+    var iVectorLongLength = SVector.New(0, 0, 1);
 
-    
-    var dialogLat = LatLength.Run();
-    var dialogLong = LongLength.Run();
+    var dialogLongLat = LongLatLength.Run();
 }
 
 // Define number of waypoints wanted
@@ -58,31 +50,26 @@ function NumWaypoints(NumPts)
     var iVectorWaypoint = SVector.New(0, 0, 1);
 }
 
-// Define distance from one waypoint to the next (EX: InitialX+1)
-// Will need to know what units Cyclone use for "+1"
+// Define distance from one waypoint to the next 
 function PointIncrementation(IncrementX, IncrementY, IncrementZ)
 {
 // X Direction
-    var IncrementationX = SDialog.New("Increment X");
-    IncrementationX.AddLength({id: 'X length', name: "X Increment", value: 0, saveValue: true, readOnly: false});
+    var IncrementationXYZ = SDialog.New("Increment X,Y,Z");
+    IncrementationXYZ.AddLength({id: 'X length', name: "X Increment", value: 0, saveValue: true, readOnly: false});
     
     var iVectorX = SVector.New(0, 0, 2); // Set X Position
 
 // Y Drection 
-    var IncrementationY = SDialog.New("IncrementY");
-    IncrementationY.AddLength({id: 'Y length', name: "Y Increment", value: 0, saveValue: true, readOnly: false});
+    IncrementationXYZ.AddLength({id: 'Y length', name: "Y Increment", value: 0, saveValue: true, readOnly: false});
     
     var iVectorY = SVector.New(0, 0, 3); // Set Y Position
 
 // Z Direction
-    var IncrementationZ = SDialog.New("IncrementZ");
-    IncrementationZ.AddLength({id: 'Z length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
+    IncrementationXYZ.AddLength({id: 'Z length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
 
     var iVectorZ = SVector.New(0, 0, 4); // Set Z Position 
 
-    var dialogX = IncrementationX.Run();
-    var dialogY = IncrementationY.Run();
-    var dialogZ = IncrementationZ.Run();
+    var dialogXYZ = IncrementationXYZ.Run();
 }
 
 // Adding point to position after incrementation
@@ -114,13 +101,12 @@ function SpotWait(Duration)
 }
 
 // MAIN
-let Duration = 1;
-SpotWait(Duration);
-
-PointIncrementation(1,1,1);
-
 InitialPt();
 
 LongLat();
 
+PointIncrementation();
+
 NumWaypoints();
+
+SpotWait();
