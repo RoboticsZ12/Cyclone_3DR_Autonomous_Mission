@@ -20,3 +20,6 @@ This task will require our team to generate a design that will enable precise vo
 Due to spot being a closed loop system, our team must sovle the issue of creating two seperate closed loop systems that will have the ability of running in unison. With the aid of Leica BLK ARC and Spot core technology, we will be able to construct a payload consisting of solenoid foot actuation, Jetson Nano controller acquisition, and multimeter BLE logging communication capabilitites. 
 
 This document is up to date as of 6/22/2024. 
+
+The following repository has now been updated with new JavaScript code for Cyclone 3DR. The updated JavaScript file coded by, ZG, can by found by clicking the link below. 
+[Click me to download](Cyclone_3DR/src/TEST.js)
