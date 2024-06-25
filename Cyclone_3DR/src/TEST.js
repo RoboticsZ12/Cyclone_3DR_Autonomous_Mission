@@ -5,19 +5,57 @@
 // Define the initila x,y,z reference point (Fiducial)
 function InitialPt(InitialX, InitialY, InitialZ)
 {
+// Initial X
+    var X = SDialog.New("Initial X Value");    
+    X.AddLength({id: 'X', name: "Initial X Pos", value: 0, saveValue: true, readOnly: false});
+    
+    var iVectoriniitialX = SVector.New(0, 0, 1);
+
+// Initial Y
+    var Y = SDialog.New("Initial Y Value");    
+    Y.AddLength({id: 'Y', name: "Initial Y Pos", value: 0, saveValue: true, readOnly: false});
+    
+    var iVectorinitialY = SVector.New(0, 0, 1);
+
+// Initial Z
+    var Z = SDialog.New("Initial Z Pos");    
+    Z.AddLength({id: 'Z', name: "Initial Z Pos", value: 0, saveValue: true, readOnly: false});
+    
+    var iVectorX = SVector.New(0, 0, 1);
+
+    var dialogInitialX = X.Run();
+    var dialogInitialY = Y.Run();
+    var dialogInitialZ = Z.Run();
 
 }
 
 // Defining lattitude and longitude of map
 function LongLat(Long, Lat)
 {
+// Latitude
+    var LatLength = SDialog.New("Latitude Assingment");    
+    Lat.AddLength({id: 'Lat', name: "Latitidue Value", value: 0, saveValue: true, readOnly: false});
+    
+    var iVectorLat = SVector.New(0, 0, 1);
 
+// Longitude
+    var LongLength = SDialog.New("Longitude Assingment");    
+    LongLength.AddLength({id: 'Long', name: "Longitude Value", value: 0, saveValue: true, readOnly: false});
+    
+    var iVectorX = SVector.New(0, 0, 1);
+
+    
+    var dialogLat = LatLength.Run();
+    var dialogLong = LongLength.Run();
 }
 
 // Define number of waypoints wanted
 function NumWaypoints(NumPts)
 {
-
+    var WantedWaypoints = SDialog.New("Number Waypoint Mission Points");    
+    WantedWaypoints.AddLength({id: 'Waypoints', name: "# Waypoints", value: 0, saveValue: true, readOnly: false});
+    
+    var iVectorWaypoint = SVector.New(0, 0, 1);
 }
 
 // Define distance from one waypoint to the next (EX: InitialX+1)
@@ -39,10 +77,6 @@ function PointIncrementation(IncrementX, IncrementY, IncrementZ)
 // Z Direction
     var IncrementationZ = SDialog.New("IncrementZ");
     IncrementationZ.AddLength({id: 'Z length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
-   
-    // var dialogX = IncrementationX.Run();
-    // var dialogY = IncrementationY.Run();
-    // var dialogZ = IncrementationZ.Run();
 
     var iVectorZ = SVector.New(0, 0, 4); // Set Z Position 
 
@@ -85,33 +119,8 @@ SpotWait(Duration);
 
 PointIncrementation(1,1,1);
 
-// Ask user initial x, y, z (fiducial)
-// let InitialX = parseFloat(print("Select starting x coordinate (Type with decimal): "));
-// let InitialY = parseFloat(print("Select starting y coordinate (Type with decimal): "));
-// let InitialZ = parseFloat(print("Select starting z coordinate (Type with decimal): "));
-// InitialPt(InitialX, InitialY, InitialZ); // Call initial point function 
+InitialPt();
 
+LongLat();
 
-// let Long = parseFloat(print("Enter the Longitude of the station (Type with decimal): "));
-// let Lat = parseFloat(print("Enter the Latitude of the station (Type with decimal): "));
-// LongLat(Long, Lat); // Call Long/Lat function
-
-// let NumPts = parseInt(print("Enter number of waypoints for this mission: "));
-// NumWaypoints(NumPts); // Call Number of Waypoint function 
-
-// let IncrementX = parseInt(print("Enter incrementation in X: "));
-// let IncrementY = parseInt(print("Enter incrementation in Y: "));
-// let IncrementZ = parseInt(print("Enter incrementation in Z: "));
-// PointIncrementation(IncrementX, IncrementY, IncrementZ); // Call point of incrementation function
-
-// let AddPt = parseFloat(print("Select next waypoint mission"));
-// AddWaypoint(AddPt); // Call next waypoint function 
-
-// let Duration = parseInt(print("How long should spot wait between each point? (Seconds): "));
-// SpotWait(Duration); // call spot robot wait function
-
-// print("Your chosen values are respectively listed: ");
-// print("Initial X: " + InitialX + "\nInitial Y: " + InitialY + "\nInitial Z: " + InitialZ
-//     + "\nLongitude: " + Long + "\nLatitude: " + Lat + "\nNumber of Points: " + NumPts 
-//     + "\nIncrement X: " + IncrementX + "\nIncrement Y" + IncrementY + "\nIncrement Z" + IncrementZ
-//     + "\nSpot wait time: " + Duration); 
+NumWaypoints();
