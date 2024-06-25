@@ -2,6 +2,12 @@
 //**POSSIBLE EXAMPLE FUNCTIONS**//
 //******************************//
 
+// Global variables
+var XYZ;
+var dialogInitialXYZ;
+
+
+
 // Define the initila x,y,z reference point (Fiducial)
 function InitialPt(InitialX, InitialY, InitialZ) {
     // Create the dialog for Initial X, Y, Z Values
@@ -38,13 +44,8 @@ function InitialPt(InitialX, InitialY, InitialZ) {
         throw new Error("INVALID");
     }
 
-    // // Output the initial X, Y, Z values
-    // console.log("Initial X Value:", initialXValue);
-    // console.log("Initial Y Value:", initialYValue);
-    // console.log("Initial Z Value:", initialZValue);
-
-    // // Return the initial X value
-    // return initialXValue;
+    // Return the initial X, Y, Z values
+    return {initialXValue, initialYValue, initialZValue}; // Return an object containing all values
 }
 
 // Defining lattitude and longitude of map
@@ -180,6 +181,9 @@ function ErrorMessage(iMessage)
     SDialog.Message(iMessage,SDialog.EMessageSeverity.Error,"Error");
     throw new Error(iMessage);
 }
+// var imessage = "no";
+// ErrorMessage(imessage);
+
 
 // MAIN
 InitialPt(1,1,1);
