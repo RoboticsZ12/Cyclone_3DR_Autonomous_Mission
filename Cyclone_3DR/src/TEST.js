@@ -100,6 +100,13 @@ function SpotWait(Duration)
     var iVectorStep = SVector.New(0, 0, 1); 
 }
 
+// Error Message Function
+function ErrorMessage(iMessage) 
+{
+    SDialog.Message(iMessage,SDialog.EMessageSeverity.Error,"Error");
+    throw new Error(iMessage);
+}
+
 // MAIN
 InitialPt();
 
