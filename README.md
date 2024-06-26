@@ -27,4 +27,8 @@ The following repository has now been updated with new JavaScript code for Cyclo
 It can also be found within the same directory above, an example code given by Leica Cyclone 3DR. This script enables the user to create a waypoint mission utilizing a mouse and keyboard to assign waypoints to a point cloud image. This script can be found using the below link. 
 [Leica Provided Code HERE](Cyclone_3DR/src/Cyclone_Mission_script.js)
 
-```ThIS DOCUMENT IS UP TO DATE AS OF 6/24/2024.```
+```THIS DOCUMENT IS UP TO DATE AS OF 6/24/2024.```
+
+Two seperate branches have now been made. Branch two, which is named TEST2, so far utilizes two functions. The first function is the error message function and the second function is used to call the 3DR file from your own file system. The rest of the code represents the body of the code and is used to execute the variables for the main code. 
+
+```THIS DOCUMENT IS UP TO DATE AS OF 6/26/2024.```
