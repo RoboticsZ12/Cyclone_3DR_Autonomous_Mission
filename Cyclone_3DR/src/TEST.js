@@ -44,31 +44,40 @@ function openMyproject(iName)
     // Run the dialog to get user inputs
     var dialogInitialXYZ = XYZ.Run();
 
-    // Retrieve the initial X, Y, Z values entered by the user
-    var initialXValue = dialogInitialXYZ.X;
-    var initialYValue = dialogInitialXYZ.Y;
-    var initialZValue = dialogInitialXYZ.Z;
-
-    // Validate the initial X value 
-    if (initialXValue >= 90 || initialYValue < 0) 
+    // Check if "Cancel" button is pressed
+    if (dialogInitialXYZ.ErrorCode == 1) 
     {
-        var imessage = "Invalid X or Y Value";
+        var imessage = "User Has Terminated Sequence";
         ErrorMessage(imessage);
     }
-
-    // Validate the initial Y value 
-    if (initialYValue >= 90 || initialYValue < 0) 
+    else
     {
-        var imessage = "Invalid X or Y Value";
-        ErrorMessage(imessage);
-    }
+        // Retrieve the initial X, Y, Z values entered by the user
+        var initialXValue = dialogInitialXYZ.X;
+        var initialYValue = dialogInitialXYZ.Y;
+        var initialZValue = dialogInitialXYZ.Z;
 
-    // Validate the initial Z value 
-    if (initialZValue < 0) 
-    {
-        var imessage = "Invalid Z Value";
-        ErrorMessage(imessage);
-    }
+        // Validate the initial X value 
+        if (initialXValue >= 90 || initialYValue < 0) 
+        {
+            var imessage = "Invalid X or Y Value";
+            ErrorMessage(imessage);
+        }
+
+        // Validate the initial Y value 
+        if (initialYValue >= 90 || initialYValue < 0) 
+        {
+            var imessage = "Invalid X or Y Value";
+            ErrorMessage(imessage);
+        }
+
+        // Validate the initial Z value 
+        if (initialZValue < 0) 
+        {
+            var imessage = "Invalid Z Value";
+            ErrorMessage(imessage);
+        }
+    }   
 
 // Number of Waypoints
     var WantedWaypoints = SDialog.New("Number Waypoint Mission Points");
