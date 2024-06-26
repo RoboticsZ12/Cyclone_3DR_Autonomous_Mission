@@ -23,12 +23,63 @@ function openMyproject(iName)
     }
 }
 // MAIN
+// 4. Add waypoints
+	workflowStep++;
+	print("Step" + workflowStep + ": Add waypoints");
+	errorMsg = "";
+	count = 1 + myMission.WaypointsTbl.length;
+
+	if(ValidateAStep(
+		   "Add Waypoints",
+		   "Click to define Waypoint? (" + count + ") (Press ESC to stop)",
+		   "Yes=Continue / No=go to 'return' waypoints definition"))
+	{
+		var allOK = true;
+
+		do
+		{
+			var pointRes = SPoint.FromClick();
+			if(pointRes.ErrorCode == 0)
+			{ // point clicked by user
+				var newPoint = pointRes.Point;
+
+				//waypoint projection
+				newPoint = myMission.RefPlane.Proj3D(newPoint).Point;
+
+				//waypoint verification
+				var verified = IsWaypointAllowed(newPoint, [myMission.GoZone], myMission.NoGoZonesTbl);
+				if(verified)
+				{
+					newPoint.SetName(myMission.MissionName + "_" + count);
+
+					//Waypoint creation
+					var newWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, newPoint, "1", "None");
+
+					myMission.WaypointsTbl.push(newWayPoint1);
+					myMission.UpdateDummyPath();
+
+					count++;
+				}
+				else
+				{
+					ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
+				}
+			}
+			else // Escape or Enter -> stopping
+			{
+				allOK = false;
+			}
+        }
+        while(allOK);
+	}
+
+
 
 // Open an existing 3DR file
     var myfileName = GetOpenFileName("Select the file to open", "3DR files (*.3dr)", "C://"); // Define the path and the name of your file
     if (myfileName.length == 0)
     {
-        ErrorMessage("Operation canceled");
+        ErrorMessage("Operation cancelcyed");
     }
 
     openMyproject(myfileName);
@@ -164,60 +215,3 @@ function openMyproject(iName)
     print("Chosen # Waypoint: " + WayMission);
     print("XYZ Incrementation Values: " + NewXrecall + " X, " + NewYrecall + " Y, " + NewZrecall + " Z");
     print("Set Wait Time: " + SpotStepValue);
-
-    
-
-// Defining lattitude and longitude of map
-// function LongLat(Long, Lat)
-// {
-//     var LongLatLength = SDialog.New("Latitude/Longitude Assingment");      
-
-//     // Input Field Here
-//     LongLatLength.AddLength({id: 'Lat', name: "Latitidue Value", value: Lat, saveValue: true, readOnly: false});
-//     LongLatLength.AddLength({id: 'Long', name: "Longitude Value", value: Long, saveValue: true, readOnly: false});
-
-//     // User input
-//     var dialogLongLat = LongLatLength.Run();
-
-//     // Lat/Long value retrieval
-//     var Latitudinal = dialogLongLat.Lat;
-//     var Longitudinal = dialogLongLat.Long;
-
-//     // Validate Lat value of substation
-//     if (Latitudinal >= 90) 
-//     {
-//         throw new Error("Latitude value to large");
-//     }
-//     else if(Latitudinal < 0)
-//     {
-//         throw new Error("Latitude value to small");
-//     }
-
-//     // Validate Long value of substation
-//     if(Longitudinal >= 90)
-//     {
-//         throw new Error("Longitude value to large");
-//     }
-//     else if(Longitudinal < 0)
-//     {
-//         throw new Error("Longtitude value to small");
-//     }
-// }
-
-// Adding point to position after incrementation
-// function AddWaypoint(AddPt)
-// {
-//     var CurrentPoint = SPoint.New(InitialX, InitialY, InitialZ);
-//     if(CurrentPoint < Lat && CurrentPoint <= Long)
-//     {
-//         CurrentPoint = CurrentPoint.Add(SPoint.New(NumPts,0,0));
-//     }
-//     else if(CurrentPoint == Lat && CurrentPoint == Long)
-//     {
-//         CurrentPoint = CurrentPoint.Add(SPoint.New(0,NumPts,0));
-//     }
-//     else
-//     {
-//         ErrorMessage("Outside of Long and Lat boundry!");
-//     }
-// }
