@@ -87,14 +87,23 @@ function openMyproject(iName)
         
     // User input
     var dialogWaypoints = WantedWaypoints.Run();
-    
-    // Retrieve the initial X, Y, Z values entered by the user
-    var WayMission = dialogWaypoints.Waypoints;
-    
-    if(WayMission <= 0 || WayMission >= 5000)
+
+    // Check if "Cancel" button is pressed
+    if (dialogInitialXYZ.ErrorCode == 1) 
     {
-        var imessage = "Invalid Waypoint Value";
+        var imessage = "User Has Terminated Sequence";
         ErrorMessage(imessage);
+    }
+    else
+    {
+        // Retrieve the initial X, Y, Z values entered by the user
+        var WayMission = dialogWaypoints.Waypoints;
+        
+        if(WayMission <= 0 || WayMission >= 5000)
+        {
+            var imessage = "Invalid Waypoint Value";
+            ErrorMessage(imessage);
+        }
     }
 
 // Incrementation of new XYZ
@@ -107,12 +116,21 @@ function openMyproject(iName)
     
     // User input recorded
     var dialogNewXYZ = IncrementationXYZ.Run();
-    
-    // Recalling user inputs
-    var NewXrecall = dialogNewXYZ.X_length;
-    var NewYrecall = dialogNewXYZ.Y_length;
-    var NewZrecall = dialogNewXYZ.Z_length;
-    
+
+    // Check if "Cancel" button is pressed
+    if (dialogInitialXYZ.ErrorCode == 1) 
+    {
+        var imessage = "User Has Terminated Sequence";
+        ErrorMessage(imessage);
+    }
+    else
+    {
+        // Recalling user inputs
+        var NewXrecall = dialogNewXYZ.X_length;
+        var NewYrecall = dialogNewXYZ.Y_length;
+        var NewZrecall = dialogNewXYZ.Z_length;
+    }
+
 // Duration of wait time for spot at each point
     var SpotStop = SDialog.New("Spot Stop Time");
 
@@ -122,15 +140,24 @@ function openMyproject(iName)
     // User input recorded
     var StopResult = SpotStop.Run();
 
-    // Recalling user input
-    var SpotStepValue = StopResult.Stop_Time;
-
-    // Checking input value valid
-    if(SpotStepValue <= 0 || SpotStepValue > 10)
+    // Check if "Cancel" button is pressed
+    if (dialogInitialXYZ.ErrorCode == 1) 
     {
-        var imessage = "Invalid Spot Wait Time";
+        var imessage = "User Has Terminated Sequence";
         ErrorMessage(imessage);
-    }  
+    }
+    else
+    {
+        // Recalling user input
+        var SpotStepValue = StopResult.Stop_Time;
+    
+        // Checking input value valid
+        if(SpotStepValue <= 0 || SpotStepValue > 10)
+        {
+            var imessage = "Invalid Spot Wait Time";
+            ErrorMessage(imessage);
+        }  
+    }
     
     // Printing all Variables
     print("Chosen Reference Pts: " + initialXValue + " X, " + initialYValue + " Y, " + initialZValue + " Z");
