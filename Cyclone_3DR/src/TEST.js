@@ -89,7 +89,7 @@ function openMyproject(iName)
     var dialogWaypoints = WantedWaypoints.Run();
 
     // Check if "Cancel" button is pressed
-    if (dialogInitialXYZ.ErrorCode == 1) 
+    if (dialogWaypoints.ErrorCode == 1) 
     {
         var imessage = "User Has Terminated Sequence";
         ErrorMessage(imessage);
@@ -118,7 +118,7 @@ function openMyproject(iName)
     var dialogNewXYZ = IncrementationXYZ.Run();
 
     // Check if "Cancel" button is pressed
-    if (dialogInitialXYZ.ErrorCode == 1) 
+    if (dialogNewXYZ.ErrorCode == 1) 
     {
         var imessage = "User Has Terminated Sequence";
         ErrorMessage(imessage);
@@ -141,7 +141,7 @@ function openMyproject(iName)
     var StopResult = SpotStop.Run();
 
     // Check if "Cancel" button is pressed
-    if (dialogInitialXYZ.ErrorCode == 1) 
+    if (StopResult.ErrorCode == 1) 
     {
         var imessage = "User Has Terminated Sequence";
         ErrorMessage(imessage);
