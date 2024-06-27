@@ -222,7 +222,7 @@ function CreateUCS3Points()
 }
 
 /**
-* @typedef {Object} PlaneExtractObject
+* @typedef {Object} PlaneExtractObjects
 * @property {SPlane} ThePlane The plane extracted
 * @property {SPoint} TheClickedPoint The clicked point
 */
