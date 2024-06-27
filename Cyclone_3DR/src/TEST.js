@@ -1,5 +1,5 @@
 //*******************************************************************//
-//**	 THIS IS TEST SCRIPT. WILL BE REFORMATTED WITH TIME		   **//
+//**	 THIS IS TEST SCRIPT. WILL BE REFORMATTED WITH TIME        **//
 //**CURRENTLY THREE SEPERATE SCRIPTS HAVE BEEN COMBINED IN THIS DOC**//
 //*******************************************************************//
 
