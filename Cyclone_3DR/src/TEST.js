@@ -23,13 +23,7 @@ function openMyproject(iName)
     }
 }
 
-var myfileName = GetOpenFileName("Select the file to open", "3DR files (*.3dr)", "C://"); // Define the path and the name of your file
-if (myfileName.length == 0)
-{
-    ErrorMessage("Operation cancelcyed");
-}
 
-openMyproject(myfileName);
  /// <reference path="C:/Program Files/Leica Geosystems/Cyclone 3DR/Script/JsDoc/Reshaper.d.ts"/>
 
 // Context: The goal of this script is to position the Fiducial marker and create the associated UCS.
