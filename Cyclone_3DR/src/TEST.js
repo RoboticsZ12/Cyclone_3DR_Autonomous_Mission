@@ -215,3 +215,58 @@ function openMyproject(iName)
     print("Chosen # Waypoint: " + WayMission);
     print("XYZ Incrementation Values: " + NewXrecall + " X, " + NewYrecall + " Y, " + NewZrecall + " Z");
     print("Set Wait Time: " + SpotStepValue);
+
+
+
+// 	// 4. Add waypoints
+// var workflowStep = 1;
+// workflowStep++;
+// print("Step" + workflowStep + ": Add waypoints");
+// errorMsg = "";
+// count = 1 + myMission.WaypointsTbl.length;
+
+// if (ValidateAStep(
+//         "Add Waypoints",
+//         "Automatically defining waypoints",
+//         "Yes=Continue / No=go to 'return' waypoints definition")) {
+
+//     // Define the area for waypoint generation (example coordinates)
+//     var startX = 0;
+//     var startY = 0;
+//     var endX = 100;
+//     var endY = 100;
+//     var distanceBetweenPoints = 10; // distance between waypoints
+
+//     var allOK = true;
+
+//     for (var x = startX; x <= endX; x += distanceBetweenPoints) {
+//         for (var y = startY; y <= endY; y += distanceBetweenPoints) {
+//             var newPoint = new SPoint(x, y, 0); // assuming a flat plane with z=0
+
+//             // Waypoint projection
+//             newPoint = myMission.RefPlane.Proj3D(newPoint).Point;
+
+//             // Waypoint verification
+//             var verified = IsWaypointAllowed(newPoint, [myMission.GoZone], myMission.NoGoZonesTbl);
+//             if (verified) {
+//                 newPoint.SetName(myMission.MissionName + "_" + count);
+
+//                 // Waypoint creation
+//                 var newWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, newPoint, "1", "None");
+
+//                 myMission.WaypointsTbl.push(newWayPoint1);
+//                 myMission.UpdateDummyPath();
+
+//                 count++;
+//             } else {
+//                 ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
+//                 allOK = false;
+//                 break;
+//             }
+//         }
+//         if (!allOK) {
+//             break;
+//         }
+//     }
+// }
+
