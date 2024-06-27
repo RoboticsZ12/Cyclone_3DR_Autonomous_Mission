@@ -486,6 +486,15 @@ function scaleLoadedObjects(iComp)
  */
 function Main()
 {
+var myfileName = GetOpenFileName("Select the file to open", "3DR files (*.3dr)", "C://"); // Define the path and the name of your file
+if (myfileName.length == 0)
+{
+    ErrorMessage("Operation cancelcyed");
+}
+
+openMyproject(myfileName);
+
+
 	HideObjects();
 	var UCSCreationMethod = UCSMethod();
 
@@ -575,41 +584,38 @@ function Main()
 	}
 }
 
-// Main();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Main();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // MAIN
@@ -779,7 +785,11 @@ print("Set Wait Time: " + SpotStepValue);
 
 
 
-// <reference path="C:/Program Files/Leica Geosystems/Cyclone 3DR/Script/JsDoc/Reshaper.d.ts"/>
+
+
+
+
+/// <reference path="C:/Program Files/Leica Geosystems/Cyclone 3DR/Script/JsDoc/Reshaper.d.ts"/>
 
 // Context: This script is meant to be used to give instructions to the BLK ARC.
 // It defines a go zone, no-go zones and waypoints where scan is required.
@@ -1995,8 +2005,8 @@ function IsWaypointAllowed(iPoint, iGoZoneTbl, iNoGoZoneTbl)
 /**
  * Main Function
  */
-// function Main()
-// {
+function Main2()
+{
 	// 1.
 	var workflowStep = 1;
 	print("Step" + workflowStep + ": Define the mission");
@@ -2252,7 +2262,7 @@ function IsWaypointAllowed(iPoint, iGoZoneTbl, iNoGoZoneTbl)
 	SDialog.Message(duration.DurationString,SDialog.EMessageSeverity.Info,"Mission duration");
 
 	OpenUrl("file:///" + filepath);
-//}
+}
 
 // 0.
-//Main();
+Main2();
