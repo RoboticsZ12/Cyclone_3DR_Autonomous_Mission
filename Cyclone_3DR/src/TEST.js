@@ -29,7 +29,7 @@ if (myfileName.length == 0)
     ErrorMessage("Operation cancelcyed");
 }
 
-// openMyproject(myfileName);
+openMyproject(myfileName);
  /// <reference path="C:/Program Files/Leica Geosystems/Cyclone 3DR/Script/JsDoc/Reshaper.d.ts"/>
 
 // Context: The goal of this script is to position the Fiducial marker and create the associated UCS.
