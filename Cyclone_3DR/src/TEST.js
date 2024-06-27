@@ -2115,13 +2115,13 @@ function Main2()
 	//**RENOVATED BLOCK**//
 	// WayMission = user input for # of waypoints wanted
 	// initialXValue = user input for x fiducial point (same for Y and Z)
-		for(var x = initialXValue; x <= WayMission; x += NewXrecall)
+		for(var x = initialXValue; x <= Longitude; x += NewXrecall)
 			{
-				for(var y = initialYValue; y <= endy; y += NewYrecall)
+				for(var y = initialYValue; y <= Latitude; y += NewYrecall)
 					{
-						for(var z = initialZValue; z <= endz; z += NewZrecall)
-							{
-								var NewPoint = new SPoint(x,y,z);
+						// for(var z = initialZValue; z <= Height; z += NewZrecall)
+						// 	{
+								var NewPoint = new SPoint(x,y,initialZValue); // z should remain as Zero
 
 								// WayPoint Projection
 								NewPoint = myMission.RefPlane.Proj3D(NewPoint).Point;
@@ -2133,10 +2133,11 @@ function Main2()
 								myMission.UpdateDummyPath();
 				
 								count++;
-							}
-							if (!allOK) {
-								break;
-							}
+							// }
+					}
+					if (!allOK) 
+					{
+					break;
 					}
 			}
 
