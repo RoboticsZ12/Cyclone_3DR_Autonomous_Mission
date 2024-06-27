@@ -21,12 +21,12 @@ var initialXValue = 5;
 var initialYValue = 5;
 var initialZValue = 5;
 
-var Longitude = 25;
-var Latitude = 30;
+var Longitude = 100;
+var Latitude = 100;
 
-var NewXrecall = 10;
-var NewYrecall = 10;
-var NewZrecall = 10;
+var NewXrecall = 1;
+var NewYrecall = 1;
+var NewZrecall = 1;
 
 
 
