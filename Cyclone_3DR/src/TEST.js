@@ -1,6 +1,7 @@
-//******************************//
-//**POSSIBLE EXAMPLE FUNCTIONS**//
-//******************************//
+//*******************************************************************//
+//**	 THIS IS TEST SCRIPT. WILL BE REFORMATTED WITH TIME		   **//
+//**CURRENTLY THREE SEPERATE SCRIPTS HAVE BEEN COMBINED IN THIS DOC**//
+//*******************************************************************//
 
 // Error Message Function
 function ErrorMessage(iMessage) 
@@ -22,6 +23,9 @@ function openMyproject(iName)
         print("Your project " + iName + " has been opened."); // throw a message to inform the opening of the file
     }
 }
+
+
+// SCRIPT 1
 
 
  /// <reference path="C:/Program Files/Leica Geosystems/Cyclone 3DR/Script/JsDoc/Reshaper.d.ts"/>
@@ -618,7 +622,8 @@ Main();
 
 
 
-// MAIN
+// SCRIPT 2
+
 // // Open an existing 3DR file
 // var myfileName = GetOpenFileName("Select the file to open", "3DR files (*.3dr)", "C://"); // Define the path and the name of your file
 // if (myfileName.length == 0)
@@ -787,9 +792,9 @@ print("Set Wait Time: " + SpotStepValue);
 
 
 
+// SCRIPT 3
 
-
-/// <reference path="C:/Program Files/Leica Geosystems/Cyclone 3DR/Script/JsDoc/Reshaper.d.ts"/>
+// <reference path="C:/Program Files/Leica Geosystems/Cyclone 3DR/Script/JsDoc/Reshaper.d.ts"/>
 
 // Context: This script is meant to be used to give instructions to the BLK ARC.
 // It defines a go zone, no-go zones and waypoints where scan is required.
@@ -2012,82 +2017,86 @@ function Main2()
 	print("Step" + workflowStep + ": Define the mission");
 	var myMission = CreateMission();
 
-	// 2. Create the GO zone
-	workflowStep++;
-	if(myMission.GoZone == undefined)
-	{
-		print("Step" + workflowStep + ": Create the GO zone");
-		var errorMsg = "";
+//********************************************************************************//
+//************** CUTTING STEPS 2 AND 3 UNTIL 4 IS OPERATIONAL ********************//
+//********************************************************************************//
 
-		do
-		{
-            var goZoneValid=CreateZone(myMission, "BLK ARC mission planner: create the GO Zone", errorMsg, "Draw the GO Zone multiline", 0, 1, 0, true);
-			if(goZoneValid.ErrorCode > 0)
-			{
-				errorMsg = "ERROR: " + goZoneValid.ErrorMsg;
-				goZoneValid.Zone.RemoveFromDoc();
-			}
-			else
-			{
-				errorMsg = "";
-			}
-        }
-        while(goZoneValid.ErrorCode>0);
+	// //2. Create the GO zone (I do not think we need this right now)
+	// workflowStep++;
+	// if(myMission.GoZone == undefined)
+	// {
+	// 	print("Step" + workflowStep + ": Create the GO zone");
+	// 	var errorMsg = "";
 
-		myMission.GoZone = goZoneValid.Zone;
-	}
-	else
-	{
-		print("Step" + workflowStep + ": GO zone already defined");
-	}
+	// 	do
+	// 	{
+    //         var goZoneValid=CreateZone(myMission, "BLK ARC mission planner: create the GO Zone", errorMsg, "Draw the GO Zone multiline", 0, 1, 0, true);
+	// 		if(goZoneValid.ErrorCode > 0)
+	// 		{
+	// 			errorMsg = "ERROR: " + goZoneValid.ErrorMsg;
+	// 			goZoneValid.Zone.RemoveFromDoc();
+	// 		}
+	// 		else
+	// 		{
+	// 			errorMsg = "";
+	// 		}
+    //     }
+    //     while(goZoneValid.ErrorCode>0);
 
-	// 3. Create NO GO zones
-	workflowStep++;
-	if(myMission.NoGoZonesTbl.length == 0)
-	{
-		print("Step" + workflowStep + ": Create the NO GO zones");
-	}
-	else
-	{
-        print("Step"+workflowStep+": Create the NO GO zones ("+myMission.NoGoZonesTbl.length+" already defined)");
-	}
+	// 	myMission.GoZone = goZoneValid.Zone;
+	// }
+	// else
+	// {
+	// 	print("Step" + workflowStep + ": GO zone already defined");
+	// }
 
-	errorMsg = "";
-	var count = 1 + myMission.NoGoZonesTbl.length;
-	while(ValidateAStep(
-		"Create NO GO Zones",
-		"Do you want to add a NO GO Zone?(" + count + ")",
-		"OK=Yes / CANCEL=No, go to waypoint definition"))
-	{
-		do
-		{
-			var noGoZoneValid = CreateZone(
-				myMission,
-				"BLK ARC mission planner: create the NO GO Zones",
-				errorMsg,
-				"Draw the NO GO Zone multiline(" + count + ")",
-				1,
-				0,
-				0,
-				false);
-			if(noGoZoneValid.ErrorCode > 0)
-			{
-				errorMsg = "ERROR: " + noGoZoneValid.ErrorMsg;
-				noGoZoneValid.Zone.RemoveFromDoc();
-			}
-			else
-			{
-				errorMsg = "";
-			}
-        }
-        while(noGoZoneValid.ErrorCode>0);
+	//// 3. Create NO GO zones (I do not think we need this right now)
+	// workflowStep++;
+	// if(myMission.NoGoZonesTbl.length == 0)
+	// {
+	// 	print("Step" + workflowStep + ": Create the NO GO zones");
+	// }
+	// else
+	// {
+    //     print("Step"+workflowStep+": Create the NO GO zones ("+myMission.NoGoZonesTbl.length+" already defined)");
+	// }
 
-		if(noGoZoneValid.Zone != undefined)
-		{
-			myMission.NoGoZonesTbl.push(noGoZoneValid.Zone);
-			count++;
-		}
-	}
+	// errorMsg = "";
+	// var count = 1 + myMission.NoGoZonesTbl.length;
+	// while(ValidateAStep(
+	// 	"Create NO GO Zones",
+	// 	"Do you want to add a NO GO Zone?(" + count + ")",
+	// 	"OK=Yes / CANCEL=No, go to waypoint definition"))
+	// {
+	// 	do
+	// 	{
+	// 		var noGoZoneValid = CreateZone(
+	// 			myMission,
+	// 			"BLK ARC mission planner: create the NO GO Zones",
+	// 			errorMsg,
+	// 			"Draw the NO GO Zone multiline(" + count + ")",
+	// 			1,
+	// 			0,
+	// 			0,
+	// 			false);
+	// 		if(noGoZoneValid.ErrorCode > 0)
+	// 		{
+	// 			errorMsg = "ERROR: " + noGoZoneValid.ErrorMsg;
+	// 			noGoZoneValid.Zone.RemoveFromDoc();
+	// 		}
+	// 		else
+	// 		{
+	// 			errorMsg = "";
+	// 		}
+    //     }
+    //     while(noGoZoneValid.ErrorCode>0);
+
+	// 	if(noGoZoneValid.Zone != undefined)
+	// 	{
+	// 		myMission.NoGoZonesTbl.push(noGoZoneValid.Zone);
+	// 		count++;
+	// 	}
+	// }
 
 	// 4. Add waypoints
 	workflowStep++;
@@ -2102,166 +2111,203 @@ function Main2()
 	{
 		var allOK = true;
 
-		do
-		{
-			var pointRes = SPoint.FromClick();
-			if(pointRes.ErrorCode == 0)
-			{ // point clicked by user
-				var newPoint = pointRes.Point;
-
-				//waypoint projection
-				newPoint = myMission.RefPlane.Proj3D(newPoint).Point;
-
-				//waypoint verification
-				var verified = IsWaypointAllowed(newPoint, [myMission.GoZone], myMission.NoGoZonesTbl);
-				if(verified)
-				{
-					newPoint.SetName(myMission.MissionName + "_" + count);
-
-					//Waypoint creation
-					var newWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, newPoint, "1", "None");
-
-					myMission.WaypointsTbl.push(newWayPoint1);
-					myMission.UpdateDummyPath();
-
-					count++;
-				}
-				else
-				{
-					ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
-				}
-			}
-			else // Escape or Enter -> stopping
+		
+	//**RENOVATED BLOCK**//
+	// WayMission = user input for # of waypoints wanted
+	// initialXValue = user input for x fiducial point (same for Y and Z)
+		for(var x = initialXValue; x <= WayMission; x += NewXrecall)
 			{
-				allOK = false;
+				for(var y = initialYValue; y <= endy; y += NewYrecall)
+					{
+						for(var z = initialZValue; z <= endz; z += NewZrecall)
+							{
+								var NewPoint = new SPoint(x,y,z);
+
+								// WayPoint Projection
+								NewPoint = myMission.RefPlane.Proj3D(NewPoint).Point;
+
+								// Creation Waypoint
+								var NewWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, NewPoint, "1", "None");
+
+								myMission.WaypointsTbl.push(NewWayPoint1);
+								myMission.UpdateDummyPath();
+				
+								count++;
+							}
+							if (!allOK) {
+								break;
+							}
+					}
 			}
-        }
-        while(allOK);
+
+//********************************************************************************//
+//******************************** CYCLONE STEP 4 CODE ***************************//
+//********************************************************************************//
+
+		// do
+		// {
+		// 	var pointRes = SPoint.FromClick();
+		// 	if(pointRes.ErrorCode == 0)
+		// 	{ // point clicked by user
+		// 		var newPoint = pointRes.Point;
+
+		// 		//waypoint projection
+		// 		newPoint = myMission.RefPlane.Proj3D(newPoint).Point;
+
+		// 		//waypoint verification (Take out the check for now)
+		// 		// var verified = IsWaypointAllowed(newPoint, [myMission.GoZone], myMission.NoGoZonesTbl);
+		// 		// if(verified)
+		// 		// {
+		// 			newPoint.SetName(myMission.MissionName + "_" + count);
+
+		// 			//Waypoint creation
+		// 			var newWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, newPoint, "1", "None");
+
+		// 			myMission.WaypointsTbl.push(newWayPoint1);
+		// 			myMission.UpdateDummyPath();
+
+		// 			count++;
+		// 		// }
+		// 		// else
+		// 		// {
+		// 		// 	ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
+		// 		// }
+		// 	}
+		// 	else // Escape or Enter -> stopping
+		// 	{
+		// 		allOK = false;
+		// 	}
+        // }
+        // while(allOK);
 	}
 
-	// 5. if docking station: return path waypoints
-	workflowStep++;
-	print("Step" + workflowStep + ": add return waypoints");
-	if(myMission.IsDockingStation)
-	{
-		errorMsg = "";
-		count = 1 + myMission.WaypointsBackTbl.length;
+//********************************************************************************//
+//********************* HAVE NOT MADE IT THIS FAR YET! ***************************//
+//********************************************************************************//
 
-		if(ValidateAStep(
-			   "Add return to dock Waypoints",
-			   "Click to define return Waypoint? (" + count + ") (Press ESC to stop)",
-			   "Yes=Continue / No=go to change waypoints actions"))
-		{
-			var allOK = true;
-			do
-			{
-				var pointRes = SPoint.FromClick();
-                if(pointRes.ErrorCode == 0){ // point clicked by user
-					var newPoint = pointRes.Point;
+	//// 5. if docking station: return path waypoints 
+	// workflowStep++;
+	// print("Step" + workflowStep + ": add return waypoints");
+	// if(myMission.IsDockingStation)
+	// {
+	// 	errorMsg = "";
+	// 	count = 1 + myMission.WaypointsBackTbl.length;
 
-					//waypoint projection
-					newPoint = myMission.RefPlane.Proj3D(newPoint).Point;
+	// 	if(ValidateAStep(
+	// 		   "Add return to dock Waypoints",
+	// 		   "Click to define return Waypoint? (" + count + ") (Press ESC to stop)",
+	// 		   "Yes=Continue / No=go to change waypoints actions"))
+	// 	{
+	// 		var allOK = true;
+	// 		do
+	// 		{
+	// 			var pointRes = SPoint.FromClick();
+    //             if(pointRes.ErrorCode == 0){ // point clicked by user
+	// 				var newPoint = pointRes.Point;
 
-					//waypoint verification
-					var verif = IsWaypointAllowed(newPoint, [myMission.GoZone], myMission.NoGoZonesTbl);
-					if(verif)
-					{
-						newPoint.SetName(myMission.MissionName + "_" + count);
+	// 				//waypoint projection
+	// 				newPoint = myMission.RefPlane.Proj3D(newPoint).Point;
 
-						//Waypoint label creation
-						var newWayPoint2 = SWaypoint.CreateWayPoint(myMission, count, newPoint, "2", "None");
+	// 				//waypoint verification
+	// 				// var verif = IsWaypointAllowed(newPoint, [myMission.GoZone], myMission.NoGoZonesTbl);
+	// 				// if(verif)
+	// 				// {
+	// 					newPoint.SetName(myMission.MissionName + "_" + count);
 
-						myMission.WaypointsBackTbl.push(newWayPoint2);
-						myMission.UpdateDummyPath();
+	// 					//Waypoint label creation
+	// 					var newWayPoint2 = SWaypoint.CreateWayPoint(myMission, count, newPoint, "2", "None");
 
-						count++;
-					}
-					else
-					{
-						ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
-					}
-				}
-				else // Escape or Enter -> stopping
-				{
-					allOK = false;
-				}
-            }
-            while(allOK);
+	// 					myMission.WaypointsBackTbl.push(newWayPoint2);
+	// 					myMission.UpdateDummyPath();
 
-            //add or adjust the return point
-			if(myMission.WaypointDockingFinal == undefined && newPoint != undefined)
-			{
-                if(newPoint.Distance(myMission.FiducialReturnPoint)<0.5) 
-				{
+	// 					count++;
+	// 				// }
+	// 				// else
+	// 				// {
+	// 				// 	ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
+	// 				// }
+	// 			}
+	// 			else // Escape or Enter -> stopping
+	// 			{
+	// 				allOK = false;
+	// 			}
+    //         }
+    //         while(allOK);
+
+    //         //add or adjust the return point
+	// 		if(myMission.WaypointDockingFinal == undefined && newPoint != undefined)
+	// 		{
+    //             if(newPoint.Distance(myMission.FiducialReturnPoint)<0.5) 
+	// 			{
                 
-					newWayPoint2.TransformWaypointIntoDockingWaypoint(myMission);
-				}
-				else
-				{
-                    var newWayPointDocking=SWaypoint.CreateWayPoint(myMission, 1, myMission.FiducialReturnPoint, "D", 'None');
-					myMission.WaypointDockingFinal = newWayPointDocking;
-				}
-				myMission.UpdateDummyPath();
-			}
+	// 				newWayPoint2.TransformWaypointIntoDockingWaypoint(myMission);
+	// 			}
+	// 			else
+	// 			{
+    //                 var newWayPointDocking=SWaypoint.CreateWayPoint(myMission, 1, myMission.FiducialReturnPoint, "D", 'None');
+	// 				myMission.WaypointDockingFinal = newWayPointDocking;
+	// 			}
+	// 			myMission.UpdateDummyPath();
+	// 		}
 
-		}
-	}
+	// 	}
+	// }
 
-	// 6. change waypoints actions
-	workflowStep++;
-	print("Step" + workflowStep + ": Edit waypoints");
-	if(ValidateAStep(
-		   "Change waypoints actions",
-		   "Do you want to update action in a waypoint (click the corresponding labels)?",
-		   "Yes / No=go to json export"))
-	{
-		var allOK = true;
-		do
-		{
-			var labelRes = SLabel.FromClick();
-            if(labelRes.ErrorCode == 0){ // label clicked by user
-				if(labelRes.Label.GetPath().endsWith(myMission.GetWaypointsGroupPath())
-				   || labelRes.Label.GetPath().endsWith(myMission.GetWaypointsReturnGroupPath()))
-				{
-                    var actions = AddActionToWaypointDlg();
+// 	// 6. change waypoints actions
+// 	workflowStep++;
+// 	print("Step" + workflowStep + ": Edit waypoints");
+// 	if(ValidateAStep(
+// 		   "Change waypoints actions",
+// 		   "Do you want to update action in a waypoint (click the corresponding labels)?",
+// 		   "Yes / No=go to json export"))
+// 	{
+// 		var allOK = true;
+// 		do
+// 		{
+// 			var labelRes = SLabel.FromClick();
+//             if(labelRes.ErrorCode == 0){ // label clicked by user
+// 				if(labelRes.Label.GetPath().endsWith(myMission.GetWaypointsGroupPath())
+// 				   || labelRes.Label.GetPath().endsWith(myMission.GetWaypointsReturnGroupPath()))
+// 				{
+//                     var actions = AddActionToWaypointDlg();
 
-					var clickedWaypoint = SWaypoint.GetWaypointFromLabel(myMission, labelRes.Label);
-					clickedWaypoint.SetActions(actions);
-				}
-                else{
-					ErrorMessage("The clicked label is not in the current mission(or is the Docking waypoint).", false);
-				}
-			}
-			else // Escape or Enter -> stopping
-			{
-				allOK = false;
-			}
-        }
-        while(allOK);
-	}
+// 					var clickedWaypoint = SWaypoint.GetWaypointFromLabel(myMission, labelRes.Label);
+// 					clickedWaypoint.SetActions(actions);
+// 				}
+//                 else{
+// 					ErrorMessage("The clicked label is not in the current mission(or is the Docking waypoint).", false);
+// 				}
+// 			}
+// 			else // Escape or Enter -> stopping
+// 			{
+// 				allOK = false;
+// 			}
+//         }
+//         while(allOK);
+// 	}
 
-	// 7. write the json
-	workflowStep++;
-	print("Step" + workflowStep + ": Create the json");
-	var duration = myMission.ComputeMissionDuration();
-	var filename = myMission.ExportJson(duration.DurationValue);
+// 	// 7. write the json
+// 	workflowStep++;
+// 	print("Step" + workflowStep + ": Create the json");
+// 	var duration = myMission.ComputeMissionDuration();
+// 	var filename = myMission.ExportJson(duration.DurationValue);
 
-	// 8. Export a 3D model
-	workflowStep++;
-	print("Step" + workflowStep + ": Export a 3D model");
-	var filenameReferenceMeshTbl = filename.split("/");
-	filenameReferenceMeshTbl.pop();
-	var filenameReferenceMesh = filenameReferenceMeshTbl.join("/");
-	var filepath = filenameReferenceMesh;
-	filenameReferenceMesh = filenameReferenceMesh + "/" + myMission.MissionName + ".glb";
-	ExportReferenceModel(filenameReferenceMesh);
+// 	// 8. Export a 3D model
+// 	workflowStep++;
+// 	print("Step" + workflowStep + ": Export a 3D model");
+// 	var filenameReferenceMeshTbl = filename.split("/");
+// 	filenameReferenceMeshTbl.pop();
+// 	var filenameReferenceMesh = filenameReferenceMeshTbl.join("/");
+// 	var filepath = filenameReferenceMesh;
+// 	filenameReferenceMesh = filenameReferenceMesh + "/" + myMission.MissionName + ".glb";
+// 	ExportReferenceModel(filenameReferenceMesh);
 
-	// 9. Duration estimation
-	workflowStep++;
-	print("Step" + workflowStep + ": Duration estimation(" + duration.DurationString + ")");
-	SDialog.Message(duration.DurationString,SDialog.EMessageSeverity.Info,"Mission duration");
+// 	// 9. Duration estimation
+// 	workflowStep++;
+// 	print("Step" + workflowStep + ": Duration estimation(" + duration.DurationString + ")");
+// 	SDialog.Message(duration.DurationString,SDialog.EMessageSeverity.Info,"Mission duration");
 
-	OpenUrl("file:///" + filepath);
+// 	OpenUrl("file:///" + filepath);
 }
 
 // 0.
