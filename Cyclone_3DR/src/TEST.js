@@ -624,15 +624,28 @@ Main();
 
 // SCRIPT 2
 
-// // Open an existing 3DR file
-// var myfileName = GetOpenFileName("Select the file to open", "3DR files (*.3dr)", "C://"); // Define the path and the name of your file
-// if (myfileName.length == 0)
-// {
-//     ErrorMessage("Operation cancelcyed");
-// }
+// Creating dialog box for longitude and latitude
+var LongLat = SDialog.New("Longitude and Latitude");
 
-// openMyproject(myfileName);
+// Add input fields for X, Y, Z with initial values
+LongLat.AddLength({id: 'Long', name: "Click Longitude of Image", value: 0, saveValue: true, readOnly: false}); 
+LongLat.AddLength({id: 'Lat', name: "Click Latitude of Image", value: 0, saveValue: true, readOnly: false}); 
 
+// Get user inputs
+var dialogLongLat = LongLat.Run();
+
+// Check if "Cancel" button is pressed
+if (dialogInitialXYZ.ErrorCode == 1) 
+{
+	var imessage = "User Has Terminated Sequence";
+	ErrorMessage(imessage);
+}
+else
+{
+    // Retrieve the initial X, Y, Z values entered by the user
+    var ImageLat = dialogLongLat.Lat;
+    var ImageLong = dialogLongLat.Long;
+}
 // Create the dialog for Initial X, Y, Z Values
 var XYZ = SDialog.New("Initial X,Y,Z Values");
 
@@ -761,6 +774,7 @@ else
 
 // Printing all Variables
 print("Chosen Reference Pts: " + initialXValue + " X, " + initialYValue + " Y, " + initialZValue + " Z");
+print("The Longitude of Point Cloud: " + ImageLong + " The Latitude is: " + ImageLat);
 print("Chosen # Waypoint: " + WayMission);
 print("XYZ Incrementation Values: " + NewXrecall + " X, " + NewYrecall + " Y, " + NewZrecall + " Z");
 print("Set Wait Time: " + SpotStepValue);
@@ -2113,33 +2127,36 @@ function Main2()
 
 		
 	//**RENOVATED BLOCK**//
-	// WayMission = user input for # of waypoints wanted
-	// initialXValue = user input for x fiducial point (same for Y and Z)
-		for(var x = initialXValue; x <= Longitude; x += NewXrecall)
+	var CurrentWayPointCount = 0;
+	do
+	{
+		for(var x = initialXValue; x <= ImageLong; x += NewXrecall)
 			{
-				for(var y = initialYValue; y <= Latitude; y += NewYrecall)
-					{
-						// for(var z = initialZValue; z <= Height; z += NewZrecall)
-						// 	{
-								var NewPoint = new SPoint(x,y,initialZValue); // z should remain as Zero
+				if(x = ImageLong)
+				{
+					for(var y = initialYValue; y <= ImageLat; y += NewYrecall)
+						{
+							var NewPoint = new SPoint(x,y,initialZValue); // z should remain as Zero
 
-								// WayPoint Projection
-								NewPoint = myMission.RefPlane.Proj3D(NewPoint).Point;
+							// WayPoint Projection
+							NewPoint = myMission.RefPlane.Proj3D(NewPoint).Point;
 
-								// Creation Waypoint
-								var NewWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, NewPoint, "1", "None");
+							// Creation Waypoint
+							var NewWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, NewPoint, "1", "None");
 
-								myMission.WaypointsTbl.push(NewWayPoint1);
-								myMission.UpdateDummyPath();
-				
-								count++;
-							// }
-					}
-					if (!allOK) 
-					{
-					break;
-					}
+							myMission.WaypointsTbl.push(NewWayPoint1);
+							myMission.UpdateDummyPath();
+						}
+						if (!allOK) 
+						{
+							break;
+						}
+				}
 			}
+	CurrentWayPointCount++;
+	}
+	while(CurrentWayPointCount != WayMission);
+	
 
 //********************************************************************************//
 //******************************** CYCLONE STEP 4 CODE ***************************//
