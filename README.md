@@ -32,3 +32,9 @@ It can also be found within the same directory above, an example code given by L
 Two seperate branches have now been made. Branch two, which is named TEST2, so far utilizes two functions. The first function is the error message function and the second function is used to call the 3DR file from your own file system. The rest of the code represents the body of the code and is used to execute the variables for the main code. 
 
 ```THIS DOCUMENT IS UP TO DATE AS OF 6/26/2024.```
+
+The autonomous waypoint mission is now operational. 
+
+![image002](https://github.com/RoboticsZ12/Cyclone_3DR_Autonomous_Mission/assets/142946153/0f9ffb7d-51cf-4692-92b0-c339fdb770e2)
+![image001](https://github.com/RoboticsZ12/Cyclone_3DR_Autonomous_Mission/assets/142946153/0c41bc82-530e-4789-bd3c-7afb256e26d2)
+```THIS DOCUMENT IS UP TO DATE AS OF 6/28/2024.```
