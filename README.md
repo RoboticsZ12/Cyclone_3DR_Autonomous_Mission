@@ -33,7 +33,9 @@ Two seperate branches have now been made. Branch two, which is named TEST2, so f
 
 ```THIS DOCUMENT IS UP TO DATE AS OF 6/26/2024.```
 
-The autonomous waypoint mission is now operational. 
+The autonomous waypoint mission is now operational. As seen in the below images, it can clearly be seen the waypoint mission being constructed at the center point of 
+the designated fiducial image. Currently, the mission will prompt the user to input the longitude and latitude of the point cloud image.
+Once done, the script will ask the desired distance beteween the waypoints. only extends its mission along the X-axis and not the Y-axis. 
 
 ![image002](https://github.com/RoboticsZ12/Cyclone_3DR_Autonomous_Mission/assets/142946153/0f9ffb7d-51cf-4692-92b0-c339fdb770e2)
 ![image001](https://github.com/RoboticsZ12/Cyclone_3DR_Autonomous_Mission/assets/142946153/0c41bc82-530e-4789-bd3c-7afb256e26d2)
