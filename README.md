@@ -43,7 +43,7 @@ will stay within the bounds of the longitude and latitude previously described.
 
 As of now, the compiler only generates its mission along the X-axis, then terminates the program. This could be due to the fact of missing logic within the made script.
 The goal is to have the waypoint mission do either a zig zag of a waypoint mission, or have the mission generate a square on the image, then make it smaller in increments. 
-this has not been implemented yet, however in the workings. As seen in the next image, it can be seen that the waypoint mission begins at the point of origin of the fiducial marker. 
+this has not been implemented yet, however is in the workings. As seen in the next image, it can be seen that the waypoint mission begins at the point of origin of the fiducial marker. 
 This will serve as our reference (0,0,0) point on the point cloud data set. 
 
 ![image001](https://github.com/RoboticsZ12/Cyclone_3DR_Autonomous_Mission/assets/142946153/0c41bc82-530e-4789-bd3c-7afb256e26d2)
