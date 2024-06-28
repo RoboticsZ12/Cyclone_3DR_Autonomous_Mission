@@ -21,7 +21,7 @@ Due to spot being a closed loop system, our team must sovle the issue of creatin
 
 ```THIS DOCUMENT IS UP TO DATE AS OF 6/22/2024.```
 
-## Program Progress Updates
+### Program Progress Updates
 The following repository has now been updated with new JavaScript code for Cyclone 3DR. The updated JavaScript file coded by, ZG, can by found by clicking the link below. 
 [Click to view JS](Cyclone_3DR/src/TEST.js)
 
