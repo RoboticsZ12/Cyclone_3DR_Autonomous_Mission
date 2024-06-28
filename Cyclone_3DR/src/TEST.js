@@ -635,17 +635,18 @@ LongLat.AddLength({id: 'Lat', name: "Click Latitude of Image", value: 0, saveVal
 var dialogLongLat = LongLat.Run();
 
 // Check if "Cancel" button is pressed
-if (dialogInitialXYZ.ErrorCode == 1) 
+if (dialogLongLat.ErrorCode == 1) 
 {
 	var imessage = "User Has Terminated Sequence";
 	ErrorMessage(imessage);
 }
 else
 {
-    // Retrieve the initial X, Y, Z values entered by the user
+    // Retrieve the Long and Lat values entered by the user
     var ImageLat = dialogLongLat.Lat;
     var ImageLong = dialogLongLat.Long;
 }
+
 // Create the dialog for Initial X, Y, Z Values
 var XYZ = SDialog.New("Initial X,Y,Z Values");
 
@@ -2126,13 +2127,52 @@ function Main2()
 		var allOK = true;
 
 		
-	//**RENOVATED BLOCK**//
-	var CurrentWayPointCount = 0;
-	do
-	{
+	// //**RENOVATED BLOCK**//
+	// var CurrentWayPointCount = 0;
+	// do
+	// {
+	// 	for(var x = initialXValue; x <= ImageLong; x += NewXrecall)
+	// 		{
+	// 			if(x = ImageLong)
+	// 			{
+	// 				for(var y = initialYValue; y <= ImageLat; y += NewYrecall)
+	// 					{
+	// 						var NewPoint = new SPoint(x,y,initialZValue); // z should remain as Zero
+
+	// 						// WayPoint Projection
+	// 						NewPoint = myMission.RefPlane.Proj3D(NewPoint).Point;
+
+	// 						// Creation Waypoint
+	// 						var NewWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, NewPoint, "1", "None");
+
+	// 						myMission.WaypointsTbl.push(NewWayPoint1);
+	// 						myMission.UpdateDummyPath();
+	// 					}
+	// 					if (!allOK) 
+	// 					{
+	// 						break;
+	// 					}
+	// 			}
+	// 		}
+	// CurrentWayPointCount++;
+	// }
+	// while(CurrentWayPointCount != WayMission);
+
+		//**RENOVATED BLOCK**//
 		for(var x = initialXValue; x <= ImageLong; x += NewXrecall)
 			{
-				if(x = ImageLong)
+				var NewPointX = new SPoint(x,initialYValue,initialZValue); // z should remain as Zero
+
+				// WayPoint Projection
+				NewPoint = myMission.RefPlane.Proj3D(NewPointX).Point;
+
+				// Creation Waypoint
+				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+
+				myMission.WaypointsTbl.push(NewWayPoint1X);
+				myMission.UpdateDummyPath();
+				
+				if(x == ImageLong)
 				{
 					for(var y = initialYValue; y <= ImageLat; y += NewYrecall)
 						{
@@ -2153,9 +2193,6 @@ function Main2()
 						}
 				}
 			}
-	CurrentWayPointCount++;
-	}
-	while(CurrentWayPointCount != WayMission);
 	
 
 //********************************************************************************//
