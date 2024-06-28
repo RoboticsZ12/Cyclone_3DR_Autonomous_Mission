@@ -1378,24 +1378,26 @@ function Main2()
 				if(x == ImageLong)
 				{
 					for(var y = initialYValue; y <= ImageLat; y += NewYrecall)
-						{
-							var NewPoint = new SPoint(x,y,initialZValue); // z should remain as Zero
+					{
+						var NewPoint = new SPoint(x,y,initialZValue); // z should remain as Zero
 
-							// WayPoint Projection
-							NewPoint = myMission.RefPlane.Proj3D(NewPoint).Point;
+						// WayPoint Projection
+						NewPoint = myMission.RefPlane.Proj3D(NewPoint).Point;
 
-							// Creation Waypoint
-							var NewWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, NewPoint, "1", "None");
+						// Creation Waypoint
+						var NewWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, NewPoint, "1", "None");
 
-							myMission.WaypointsTbl.push(NewWayPoint1);
-							myMission.UpdateDummyPath();
-						}
-						if (!allOK) 
-						{
-							break;
-						}
+						myMission.WaypointsTbl.push(NewWayPoint1);
+						myMission.UpdateDummyPath();
+					}
+					if (!allOK) 
+					{
+						break;
+					}
 				}
+		
 			}
+	}
 
 //********************************************************************************//
 //******************************** CYCLONE STEP 4 CODE ***************************//
@@ -1436,7 +1438,7 @@ function Main2()
 		// 	}
         // }
         // while(allOK);
-	}
+	// }
 
 //********************************************************************************//
 //********************* HAVE NOT MADE IT THIS FAR YET! ***************************//
