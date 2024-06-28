@@ -9,6 +9,7 @@ This repository represents the senior design of Southern Illinois University Edw
 6) Alexancder Karnezis
 
 ## Project Description 
+
 Our senior design project consists of designing and implementing a payload for the Boston Dynamics Spot robot dog. 
 Our efforts are being supported by both our professor, Mingshoa Zhang and our sponsors at Ameren. 
 
