@@ -9,7 +9,6 @@ This repository represents the senior design of Southern Illinois University Edw
 6) Alexancder Karnezis
 
 ## Project Description 
-
 Our senior design project consists of designing and implementing a payload for the Boston Dynamics Spot robot dog. 
 Our efforts are being supported by both our professor, Mingshoa Zhang and our sponsors at Ameren. 
 
@@ -22,10 +21,10 @@ Due to spot being a closed loop system, our team must sovle the issue of creatin
 
 ```THIS DOCUMENT IS UP TO DATE AS OF 6/22/2024.```
 
+## Program Progress Updates
 The following repository has now been updated with new JavaScript code for Cyclone 3DR. The updated JavaScript file coded by, ZG, can by found by clicking the link below. 
 [Click to view JS](Cyclone_3DR/src/TEST.js)
 
-## Program Progress Updates
 It can also be found within the same directory above, an example code given by Leica Cyclone 3DR. This script enables the user to create a waypoint mission utilizing a mouse and keyboard to assign waypoints to a point cloud image. This script can be found using the below link. 
 [Leica Provided Code HERE](Cyclone_3DR/src/Cyclone_Mission_script.js)
 
