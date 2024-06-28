@@ -2126,38 +2126,6 @@ function Main2()
 	{
 		var allOK = true;
 
-		
-	// //**RENOVATED BLOCK**//
-	// var CurrentWayPointCount = 0;
-	// do
-	// {
-	// 	for(var x = initialXValue; x <= ImageLong; x += NewXrecall)
-	// 		{
-	// 			if(x = ImageLong)
-	// 			{
-	// 				for(var y = initialYValue; y <= ImageLat; y += NewYrecall)
-	// 					{
-	// 						var NewPoint = new SPoint(x,y,initialZValue); // z should remain as Zero
-
-	// 						// WayPoint Projection
-	// 						NewPoint = myMission.RefPlane.Proj3D(NewPoint).Point;
-
-	// 						// Creation Waypoint
-	// 						var NewWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, NewPoint, "1", "None");
-
-	// 						myMission.WaypointsTbl.push(NewWayPoint1);
-	// 						myMission.UpdateDummyPath();
-	// 					}
-	// 					if (!allOK) 
-	// 					{
-	// 						break;
-	// 					}
-	// 			}
-	// 		}
-	// CurrentWayPointCount++;
-	// }
-	// while(CurrentWayPointCount != WayMission);
-
 		//**RENOVATED BLOCK**//
 		for(var x = initialXValue; x <= ImageLong; x += NewXrecall)
 			{
@@ -2193,6 +2161,7 @@ function Main2()
 						}
 				}
 			}
+	}
 	
 
 //********************************************************************************//
@@ -2234,7 +2203,7 @@ function Main2()
 		// 	}
         // }
         // while(allOK);
-	}
+	// }
 
 //********************************************************************************//
 //********************* HAVE NOT MADE IT THIS FAR YET! ***************************//
