@@ -39,13 +39,13 @@ the designated fiducial image. Currently, the mission will prompt the user to in
 Once done, the script will ask the desired distance beteween the waypoints. Once these parameters are recieved, the compiler will generate a waypoint mission that 
 will stay within the bounds of the longitude and latitude previously described. 
 
-![image002](https://github.com/RoboticsZ12/Cyclone_3DR_Autonomous_Mission/assets/142946153/0f9ffb7d-51cf-4692-92b0-c339fdb770e2)
+![image001](https://github.com/RoboticsZ12/Cyclone_3DR_Autonomous_Mission/assets/142946153/0c41bc82-530e-4789-bd3c-7afb256e26d2)
 
 As of now, the compiler only generates its mission along the X-axis, then terminates the program. This could be due to the fact of missing logic within the made script.
 The goal is to have the waypoint mission do either a zig zag of a waypoint mission, or have the mission generate a square on the image, then make it smaller in increments. 
 this has not been implemented yet, however is in the workings. As seen in the next image, it can be seen that the waypoint mission begins at the point of origin of the fiducial marker. 
 This will serve as our reference (0,0,0) point on the point cloud data set. 
 
-![image001](https://github.com/RoboticsZ12/Cyclone_3DR_Autonomous_Mission/assets/142946153/0c41bc82-530e-4789-bd3c-7afb256e26d2)
+![image002](https://github.com/RoboticsZ12/Cyclone_3DR_Autonomous_Mission/assets/142946153/0f9ffb7d-51cf-4692-92b0-c339fdb770e2)
 
 ```THIS DOCUMENT IS UP TO DATE AS OF 6/28/2024.```
