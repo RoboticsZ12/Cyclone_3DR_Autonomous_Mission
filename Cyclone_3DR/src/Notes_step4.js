@@ -17,12 +17,12 @@
 // 8. Optionally, export a mesh in .GLB.
 // 9. The duration of the mission is then showed in minutes with intervals every 30 seconds.
 // in case of cancellation, check the corresponding mission folder and restart the script (Go, No Go zones and waypoints will be reused)
-var initialXValue = 5;
-var initialYValue = 5;
-var initialZValue = 5;
+var initialXValue = 0;
+var initialYValue = 6.2;
+var initialZValue = .5;
 
-var ImageLong = 10;
-var ImageLat = 10;
+var ImageLong = 7;
+var ImageLat = 5;
 
 var NewXrecall = 1;
 var NewYrecall = 1;
@@ -1318,86 +1318,42 @@ function Main2()
 	// }
 
 	// 4. Add waypoints
-	workflowStep++;
-	print("Step" + workflowStep + ": Add waypoints");
-	errorMsg = "";
-	count = 1 + myMission.WaypointsTbl.length;
+// 4. Add waypoints
+workflowStep++;
+print("Step" + workflowStep + ": Add waypoints");
+errorMsg = "";
+count = 1 + myMission.WaypointsTbl.length;
 
-	if(ValidateAStep(
-		   "Add Waypoints",
-		   "Click to define Waypoint? (" + count + ") (Press ESC to stop)",
-		   "Yes=Continue / No=go to 'return' waypoints definition"))
-	{
-		var allOK = true;
+if (ValidateAStep(
+    "Add Waypoints",
+    "Click to define Waypoint? (" + count + ") (Press ESC to stop)",
+    "Yes=Continue / No=go to 'return' waypoints definition")) 
+{
+    var allOK = true;
 
-		
-	//**RENOVATED BLOCK**//
-	// WayMission = user input for # of waypoints wanted
-	// initialXValue = user input for x fiducial point (same for Y and Z)
-		// for(var x = initialXValue; x <= Longitude; x += NewXrecall)
-		// 	{
-		// 		for(var y = initialYValue; y <= Latitude; y += NewYrecall)
-		// 			{
-		// 				// for(var z = initialZValue; z <= Height; z += NewZrecall)
-		// 				// 	{
-		// 						var NewPoint = new SPoint(x,y,initialZValue); // z should remain as Zero
+    //**RENOVATED BLOCK**//
+    for (var x = initialXValue; x <= ImageLong; x += NewXrecall) 
+    {
+        for (var y = initialYValue; y <= ImageLat; y += NewYrecall) 
+        {
+            var NewPoint = new SPoint(x, y, initialZValue); // z should remain as Zero
 
-		// 						// WayPoint Projection
-		// 						NewPoint = myMission.RefPlane.Proj3D(NewPoint).Point;
+            // WayPoint Projection
+            NewPoint = myMission.RefPlane.Proj3D(NewPoint).Point;
 
-		// 						// Creation Waypoint
-		// 						var NewWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, NewPoint, "1", "None");
+            // Creation Waypoint
+            var NewWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, NewPoint, "1", "None");
 
-		// 						myMission.WaypointsTbl.push(NewWayPoint1);
-		// 						myMission.UpdateDummyPath();
-				
-		// 						// count++;
-		// 					// }
-		// 			}
-		// 			if (!allOK) 
-		// 			{
-		// 			break;
-		// 			}
-		// 	}
+            myMission.WaypointsTbl.push(NewWayPoint1);
+            myMission.UpdateDummyPath();
+        }
+        if (!allOK) 
+        {
+            break;
+        }
+    }
+}
 
-
-		//**RENOVATED BLOCK**//
-		for(var x = initialXValue; x <= ImageLong; x += NewXrecall)
-			{
-				var NewPointX = new SPoint(x,initialYValue,initialZValue); // z should remain as Zero
-
-				// WayPoint Projection
-				NewPoint = myMission.RefPlane.Proj3D(NewPointX).Point;
-
-				// Creation Waypoint
-				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
-
-				myMission.WaypointsTbl.push(NewWayPoint1X);
-				myMission.UpdateDummyPath();
-				
-				if(x == ImageLong)
-				{
-					for(var y = initialYValue; y <= ImageLat; y += NewYrecall)
-					{
-						var NewPoint = new SPoint(x,y,initialZValue); // z should remain as Zero
-
-						// WayPoint Projection
-						NewPoint = myMission.RefPlane.Proj3D(NewPoint).Point;
-
-						// Creation Waypoint
-						var NewWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, NewPoint, "1", "None");
-
-						myMission.WaypointsTbl.push(NewWayPoint1);
-						myMission.UpdateDummyPath();
-					}
-					if (!allOK) 
-					{
-						break;
-					}
-				}
-		
-			}
-	}
 
 //********************************************************************************//
 //******************************** CYCLONE STEP 4 CODE ***************************//
