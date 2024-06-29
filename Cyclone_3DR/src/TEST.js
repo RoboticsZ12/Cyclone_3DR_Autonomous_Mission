@@ -694,31 +694,31 @@ else
 }   
 
 // Number of Waypoints
-var WantedWaypoints = SDialog.New("Number Waypoint Mission Points");
+// var WantedWaypoints = SDialog.New("Number Waypoint Mission Points");
 
-// Run the dialog to get user inputs
-WantedWaypoints.AddLength({id: 'Waypoints', name: "# Waypoints", value: 0, saveValue: true, readOnly: false});
+// // Run the dialog to get user inputs
+// WantedWaypoints.AddLength({id: 'Waypoints', name: "# Waypoints", value: 0, saveValue: true, readOnly: false});
     
-// User input
-var dialogWaypoints = WantedWaypoints.Run();
+// // User input
+// var dialogWaypoints = WantedWaypoints.Run();
 
-// Check if "Cancel" button is pressed
-if (dialogWaypoints.ErrorCode == 1) 
-{
-    var imessage = "User Has Terminated Sequence";
-    ErrorMessage(imessage);
-}
-else
-{
-    // Retrieve the initial X, Y, Z values entered by the user
-    var WayMission = dialogWaypoints.Waypoints;
+// // Check if "Cancel" button is pressed
+// if (dialogWaypoints.ErrorCode == 1) 
+// {
+//     var imessage = "User Has Terminated Sequence";
+//     ErrorMessage(imessage);
+// }
+// else
+// {
+//     // Retrieve the Waypoint
+//     var WayMission = dialogWaypoints.Waypoints;
     
-    if(WayMission <= 0 || WayMission >= 5000)
-    {
-        var imessage = "Invalid Waypoint Value";
-        ErrorMessage(imessage);
-    }
-}
+//     if(WayMission <= 0 || WayMission >= 5000)
+//     {
+//         var imessage = "Invalid Waypoint Value";
+//         ErrorMessage(imessage);
+//     }
+// }
 
 // Incrementation of new XYZ
 var IncrementationXYZ = SDialog.New("Increment X,Y,Z");
@@ -2200,9 +2200,9 @@ if (ValidateAStep(
 	// }
 	
 
-//********************************************************************************//
-//******************************** CYCLONE STEP 4 CODE ***************************//
-//********************************************************************************//
+				//********************************************************************************//
+				//******************************** CYCLONE STEP 4 CODE ***************************//
+				//********************************************************************************//
 
 		// do
 		// {
@@ -2241,9 +2241,9 @@ if (ValidateAStep(
         // while(allOK);
 	// }
 
-//********************************************************************************//
-//********************* HAVE NOT MADE IT THIS FAR YET! ***************************//
-//********************************************************************************//
+					//********************************************************************************//
+					//********************* HAVE NOT MADE IT THIS FAR YET! ***************************//
+					//********************************************************************************//
 
 	//// 5. if docking station: return path waypoints 
 	// workflowStep++;
