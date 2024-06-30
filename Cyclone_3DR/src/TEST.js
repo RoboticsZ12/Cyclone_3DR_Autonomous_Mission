@@ -2113,94 +2113,157 @@ function Main2()
 	// 	}
 	// }
 
-	// 4. Add waypoints
-	// 4. Add waypoints
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 4. Add waypoints
 // workflowStep++;
-// print("Step" + workflowStep + ": Add waypoints");
+// print("Step " + workflowStep + ": Add waypoints");
 // errorMsg = "";
 // count = 1 + myMission.WaypointsTbl.length;
+// var counter = 0; 
+
+// for (counter = 0; counter <= 1; counter++) {	
+// 	var x = initialXValue;
+// 	var y = initialYValue + counter * 0.3 * ImageLat; // Adjust the initial y for each iteration
+// 	var imageLat = ImageLat;
+// 	var imageLong = ImageLong;
+	
+// 	// First, move along the X-axis from initialXValue to ImageLong
+// 	for (; x <= imageLong; x += NewXrecall) {
+// 		var NewPointX = new SPoint(x, y, initialZValue); // z should remain as Zero
+
+// 		// WayPoint Projection
+// 		NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
+
+// 		// Creation Waypoint
+// 		var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+
+// 		myMission.WaypointsTbl.push(NewWayPoint1X);
+// 		myMission.UpdateDummyPath();
+// 		count++; // Increment the count for each waypoint
+// 	}
+
+// 	// Then, move along the Y-axis from y to y + 0.3 * ImageLat
+// 	for (var tempY = y; tempY <= y + 0.3 * imageLat; tempY += NewYrecall) {
+// 		var NewPointY = new SPoint(imageLong, tempY, initialZValue); // z should remain as Zero
+
+// 		// WayPoint Projection
+// 		NewPointY = myMission.RefPlane.Proj3D(NewPointY).Point;
+
+// 		// Creation Waypoint
+// 		var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
+
+// 		myMission.WaypointsTbl.push(NewWayPoint1Y);
+// 		myMission.UpdateDummyPath();
+// 		count++; // Increment the count for each waypoint
+// 	}
+
+// 	// Finally, move along the negative X-axis from ImageLong back to initialXValue
+// 	for (x = imageLong; x >= initialXValue; x -= NewXrecall) {
+// 		var NewPointX = new SPoint(x, y + 0.3 * imageLat, initialZValue); // z should remain as Zero
+
+// 		// WayPoint Projection
+// 		NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
+
+// 		// Creation Waypoint
+// 		var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+
+// 		myMission.WaypointsTbl.push(NewWayPoint1X);
+// 		myMission.UpdateDummyPath();
+// 		count++; // Increment the count for each waypoint
+// 	}	
+
+// 	// Move along the Y-axis again from y + 0.3 * ImageLat to y + 0.6 * ImageLat
+// 	for (tempY = y + 0.3 * imageLat; tempY <= y + 0.6 * imageLat; tempY += NewYrecall) {
+// 		var NewPointY = new SPoint(initialXValue, tempY, initialZValue); // z should remain as Zero
+		
+// 		// WayPoint Projection
+// 		NewPointY = myMission.RefPlane.Proj3D(NewPointY).Point;
+		
+// 		// Creation Waypoint
+// 		var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
+		
+// 		myMission.WaypointsTbl.push(NewWayPoint1Y);
+// 		myMission.UpdateDummyPath();
+// 		count++; // Increment the count for each waypoint
+// 	}
+// }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 4. Add waypoints
+workflowStep++;
+print("Step " + workflowStep + ": Add waypoints");
+errorMsg = "";
+count = 1 + myMission.WaypointsTbl.length;
 
 // if (ValidateAStep(
 //     "Add Waypoints",
 //     "Click to define Waypoint? (" + count + ") (Press ESC to stop)",
-//     "Yes=Continue / No=go to 'return' waypoints definition")) 
+//     "Yes=Continue / No=go to 'return' waypoints definition"))
 // {
-//     var allOK = true;
+    var allOK = true;
+	var counter = 10;
+	var multiplier = 1;
+	var x = initialXValue;
+	var y = initialYValue;
+	var imageLat = Math.round(ImageLat);
+	var imageLong = Math.round(ImageLong);
 
-    //**RENOVATED BLOCK zig zag**//
-//     for (var x = initialXValue; x <= ImageLong; x += NewXrecall) 
-//     {
-//         for (var y = initialYValue; y <= ImageLat; y += NewYrecall) 
-//         {
-//             var NewPoint = new SPoint(x, y, initialZValue); // z should remain as Zero
-
-//             // WayPoint Projection
-//             NewPoint = myMission.RefPlane.Proj3D(NewPoint).Point;
-
-//             // Creation Waypoint
-//             var NewWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, NewPoint, "1", "None");
-
-//             myMission.WaypointsTbl.push(NewWayPoint1);
-//             myMission.UpdateDummyPath();
-//         }
-//         if (!allOK) 
-//         {
-//             break;
-//         }
-//     }
-// }
-
-	workflowStep++;
-	print("Step" + workflowStep + ": Add waypoints");
-	errorMsg = "";
-	count = 1 + myMission.WaypointsTbl.length;
-
-	if(ValidateAStep(
-		   "Add Waypoints",
-		   "Click to define Waypoint? (" + count + ") (Press ESC to stop)",
-		   "Yes=Continue / No=go to 'return' waypoints definition"))
+	for(multiplier; multiplier < counter; multiplier++)
 	{
-		var allOK = true;
+		// First, move along the X-axis from initialXValue to ImageLong
+		for (x = initialXValue; x <= ImageLong; x += NewXrecall) 
+		{
+			var NewPointX = new SPoint(x, initialYValue*multiplier, initialZValue); // z should remain as Zero
 
-		//**RENOVATED BLOCK**//
-		for(var x = initialXValue; x <= ImageLong; x += NewXrecall)
-			{
-				var NewPointX = new SPoint(x,initialYValue,initialZValue); // z should remain as Zero
+			// WayPoint Projection
+			NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
 
-				// WayPoint Projection
-				NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
+			// Creation Waypoint
+			var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
 
-				// Creation Waypoint
-				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+			myMission.WaypointsTbl.push(NewWayPoint1X);
+			myMission.UpdateDummyPath();
+			count++; // Increment the count for each waypoint
+		}
 
-				myMission.WaypointsTbl.push(NewWayPoint1X);
-				myMission.UpdateDummyPath();
-				
-				var roundedX = Math.round(x);  // Round the input to the nearest whole number
-				var roundedLong = Math.round(ImageLong);  // Round the input to the nearest whole number
-				if(roundedX >= roundedLong)
-				{
-					for(var y = initialYValue; y <= ImageLat; y += NewYrecall)
-						{
-							var NewPointY = new SPoint(x,y,initialZValue); // z should remain as Zero
+		// Then, move along the Y-axis from initialYValue to 0.3 * ImageLat
+		for (y = initialYValue; y <= (0.3*multiplier) * ImageLat-1; y += NewYrecall) 
+		{
+			print("Y value: " + y);
+			var NewPointY = new SPoint(ImageLong, y, initialZValue); // z should remain as Zero
 
-							// WayPoint Projection
-							NewPointY = myMission.RefPlane.Proj3D(NewPointY).Point;
+			// WayPoint Projection
+			NewPointY = myMission.RefPlane.Proj3D(NewPointY).Point;
 
-							// Creation Waypoint
-							var NewWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
+			// Creation Waypoint
+			var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
 
-							myMission.WaypointsTbl.push(NewWayPoint1);
-							myMission.UpdateDummyPath();
-						}
-						if (!allOK) 
-						{
-							break;
-						}
-				}
-			}
+			myMission.WaypointsTbl.push(NewWayPoint1Y);
+			myMission.UpdateDummyPath();
+			count++; // Increment the count for each waypoint
+		}
+
+		// Finally, move along the negative X-axis from ImageLong back to initialXValue
+		for (x = ImageLong; x >= initialXValue; x -= NewXrecall) 
+		{
+			print("X value: " + x);
+			var NewPointX = new SPoint(x, (multiplier*0.3) * ImageLat, initialZValue); // z should remain as Zero
+
+			// WayPoint Projection
+			NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
+
+			// Creation Waypoint
+			var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+
+			myMission.WaypointsTbl.push(NewWayPoint1X);
+			myMission.UpdateDummyPath();
+			count++; // Increment the count for each waypoint
+		}
 	}
-	
+// }	
+
+
 
 				//********************************************************************************//
 				//******************************** CYCLONE STEP 4 CODE ***************************//
