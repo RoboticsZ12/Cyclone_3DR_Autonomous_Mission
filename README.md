@@ -49,3 +49,11 @@ This will serve as our reference (0,0,0) point on the point cloud data set.
 ![image002](https://github.com/RoboticsZ12/Cyclone_3DR_Autonomous_Mission/assets/142946153/0f9ffb7d-51cf-4692-92b0-c339fdb770e2)
 
 ```THIS DOCUMENT IS UP TO DATE AS OF 6/28/2024.```
+
+The updates done since previous update is generating a mission that can cycle through multiple missions depending on the Longitude and Latitude values. These values determine how far the mission is able to protrude in the vertical and horizontal directions. There is also a counter variable incorporated into the program to determine how many times the program will generate a rectangle. The image seen below is the result of a "counter" value of 10. 
+
+Later renovations of the script will have the ability to take the user inputs for the latitude and longitude, then generate the required "counter" variable that would be able to fit within the latitude and longitude parameters set by the user. 
+
+![alt text](image.png)
+
+```THIS DOCUMENT IS UP TO DATE AS OF 6/29/2024.```
