@@ -2202,7 +2202,7 @@ count = 1 + myMission.WaypointsTbl.length;
 //     "Yes=Continue / No=go to 'return' waypoints definition"))
 // {
     var allOK = true;
-	var counter = 10;
+	var counter = 2;
 	var multiplier = 1;
 	var x = initialXValue;
 	var y = initialYValue;
@@ -2259,6 +2259,14 @@ count = 1 + myMission.WaypointsTbl.length;
 			myMission.WaypointsTbl.push(NewWayPoint1X);
 			myMission.UpdateDummyPath();
 			count++; // Increment the count for each waypoint
+		}
+		if(counter < imageLat)
+		{
+			counter++;
+		}
+		else
+		{
+			break;
 		}
 	}
 // }	
