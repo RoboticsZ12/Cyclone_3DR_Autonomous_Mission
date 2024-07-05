@@ -2202,14 +2202,14 @@ count = 1 + myMission.WaypointsTbl.length;
 //     "Yes=Continue / No=go to 'return' waypoints definition"))
 // {
     var allOK = true;
-	var counter = 2;
+	var imageLat = Math.round(ImageLat);
+	var imageLong = Math.round(ImageLong);
 	var multiplier = 1;
 	var x = initialXValue;
 	var y = initialYValue;
-	var imageLat = Math.round(ImageLat);
-	var imageLong = Math.round(ImageLong);
+	var counter = Math.round(ImageLat);
 
-	for(multiplier; multiplier < counter; multiplier++)
+	for(multiplier; multiplier <= counter; multiplier++)
 	{
 		// First, move along the X-axis from initialXValue to ImageLong
 		for (x = initialXValue; x <= ImageLong; x += NewXrecall) 
@@ -2261,14 +2261,7 @@ count = 1 + myMission.WaypointsTbl.length;
 			myMission.UpdateDummyPath();
 			count++; // Increment the count for each waypoint
 		}
-		if(counter < imageLat)
-		{
-			counter++;
-		}
-		else
-		{
-			break;
-		}
+		print("counter: " + counter);
 	}
 // }	
 
