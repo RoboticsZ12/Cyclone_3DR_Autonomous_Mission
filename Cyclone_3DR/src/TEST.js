@@ -2229,8 +2229,9 @@ count = 1 + myMission.WaypointsTbl.length;
 		}
 
 		// Then, move along the Y-axis from initialYValue to 0.3 * ImageLat
-		for (y = initialYValue; y <= (0.3*multiplier) * ImageLat-1; y += NewYrecall) 
-		{
+			for (y = initialYValue; y <= (0.3*multiplier) * ImageLat-1; y += NewYrecall) 
+
+			{
 			print("Y value: " + y);
 			var NewPointY = new SPoint(ImageLong, y, initialZValue); // z should remain as Zero
 
