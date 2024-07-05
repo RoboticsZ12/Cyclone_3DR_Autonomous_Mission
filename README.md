@@ -54,6 +54,6 @@ The updates done since previous update is generating a mission that can cycle th
 
 Later renovations of the script will have the ability to take the user inputs for the latitude and longitude, then generate the required "counter" variable that would be able to fit within the latitude and longitude parameters set by the user. 
 
-![alt text](image.png)
+![image](https://github.com/RoboticsZ12/Cyclone_3DR_Autonomous_Mission/assets/142946153/2071d4cb-d47b-4692-bb15-b5c6a24d502d)
 
 ```THIS DOCUMENT IS UP TO DATE AS OF 6/29/2024.```
