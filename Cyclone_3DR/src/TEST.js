@@ -2214,6 +2214,7 @@ count = 1 + myMission.WaypointsTbl.length;
 		// First, move along the X-axis from initialXValue to ImageLong
 		for (x = initialXValue; x <= ImageLong; x += NewXrecall) 
 		{
+			print("X value: " + x)
 			var NewPointX = new SPoint(x, initialYValue*multiplier, initialZValue); // z should remain as Zero
 
 			// WayPoint Projection
