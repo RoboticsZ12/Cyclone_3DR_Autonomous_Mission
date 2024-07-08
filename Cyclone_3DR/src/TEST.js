@@ -621,8 +621,9 @@ function openMyproject(iName)
 
 
 
-
-// SCRIPT 2
+//*****************************************************************//
+//	 		SCRIPT 2 (ZG Script)                       //
+//*****************************************************************//
 
 // Creating dialog box for longitude and latitude
 var LongLat = SDialog.New("Longitude and Latitude");
@@ -779,6 +780,7 @@ print("The Longitude of Point Cloud: " + ImageLong + " The Latitude is: " + Imag
 // print("Chosen # Waypoint: " + WayMission);
 print("XYZ Incrementation Values: " + NewXrecall + " X, " + NewYrecall + " Y, " + NewZrecall + " Z");
 print("Set Wait Time: " + SpotStepValue);
+// END ZG SCRIPT
 
 
 
@@ -805,9 +807,9 @@ print("Set Wait Time: " + SpotStepValue);
 
 
 
-
-
-// SCRIPT 3
+//*****************************************************************//
+// SCRIPT 3 (AUTONOMOUS WAYPOINT AT SECTION 4. ZG IMPLEMENTED CODE)//
+//*****************************************************************//
 
 // <reference path="C:/Program Files/Leica Geosystems/Cyclone 3DR/Script/JsDoc/Reshaper.d.ts"/>
 
