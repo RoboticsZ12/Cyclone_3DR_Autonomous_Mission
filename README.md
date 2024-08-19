@@ -57,3 +57,9 @@ Later renovations of the script will have the ability to take the user inputs fo
 ![image](https://github.com/RoboticsZ12/Cyclone_3DR_Autonomous_Mission/assets/142946153/2071d4cb-d47b-4692-bb15-b5c6a24d502d)
 
 ```THIS DOCUMENT IS UP TO DATE AS OF 6/29/2024. (FINAL UPDATE OF SENIOR DESIGN 1)```
+
+The updates on the VScode copy has not been pushed to the main Github repository yet. Currently the new task is to incorporate the "GO/NO GO ZONES". These zones will be defined by the user and will enable the automated waypoint generation to avoid obstacles on the substations such as transformors. Currently, the zones operate as intended, but the automated waypoint generation stops entirely instead of finding a new avenue for waypoints. 
+
+This solution is currently being addressed and will be the main focus for this semesters project to perfect for our sponsors. 
+
+```THIS DOCUMENT IS UP TO DATE AS OF 8/19/2024. (START OF SENIOR DESIGN 2)```
