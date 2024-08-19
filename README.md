@@ -56,4 +56,4 @@ Later renovations of the script will have the ability to take the user inputs fo
 
 ![image](https://github.com/RoboticsZ12/Cyclone_3DR_Autonomous_Mission/assets/142946153/2071d4cb-d47b-4692-bb15-b5c6a24d502d)
 
-```THIS DOCUMENT IS UP TO DATE AS OF 6/29/2024.```
+```THIS DOCUMENT IS UP TO DATE AS OF 6/29/2024. (FINAL UPDATE OF SENIOR DESIGN 1)```
