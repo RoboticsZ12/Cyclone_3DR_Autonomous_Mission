@@ -2204,15 +2204,15 @@ count = 1 + myMission.WaypointsTbl.length;
     var allOK = true;
 	var imageLat = Math.round(ImageLat);
 	var imageLong = Math.round(ImageLong);
-	var multiplier = 1;
-	var x = initialXValue;
-	var y = initialYValue;
+	var x = Math.round(initialXValue);
+	var y = Math.round(initialYValue);
 	var counter = Math.round(ImageLat);
+	var multiplier = 1;
 
 	for(multiplier; multiplier <= counter; multiplier++)
 	{
 		// First, move along the X-axis from initialXValue to ImageLong
-		for (x = initialXValue; x <= ImageLong; x += NewXrecall) 
+		for (x = initialXValue; x <= imageLong; x += NewXrecall) 
 		{
 			print("X value: " + x)
 			var NewPointX = new SPoint(x, initialYValue*multiplier, initialZValue); // z should remain as Zero
@@ -2229,11 +2229,11 @@ count = 1 + myMission.WaypointsTbl.length;
 		}
 
 		// Then, move along the Y-axis from initialYValue to 0.3 * ImageLat
-			for (y = initialYValue; y <= (0.3*multiplier) * ImageLat-1; y += NewYrecall) 
+			for (y = initialYValue; y <= (0.3*multiplier) * imageLat; y += NewYrecall) // THIS IS PROBLEM LINE
 
 			{
 			print("Y value: " + y);
-			var NewPointY = new SPoint(ImageLong, y, initialZValue); // z should remain as Zero
+			var NewPointY = new SPoint(imageLong, y, initialZValue); // z should remain as Zero
 
 			// WayPoint Projection
 			NewPointY = myMission.RefPlane.Proj3D(NewPointY).Point;
@@ -2247,10 +2247,10 @@ count = 1 + myMission.WaypointsTbl.length;
 		}
 
 		// Finally, move along the negative X-axis from ImageLong back to initialXValue
-		for (x = ImageLong; x >= initialXValue; x -= NewXrecall) 
+		for (x = imageLong; x >= initialXValue-1; x -= NewXrecall) 
 		{
 			print("X value: " + x);
-			var NewPointX = new SPoint(x, (multiplier*0.3) * ImageLat, initialZValue); // z should remain as Zero
+			var NewPointX = new SPoint(x, (multiplier*0.3) * imageLat, initialZValue); // z should remain as Zero
 
 			// WayPoint Projection
 			NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
