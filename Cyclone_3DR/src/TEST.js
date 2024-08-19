@@ -51,7 +51,7 @@ function openMyproject(iName)
 // b) Enter the distance of it from the wall corner along Y direction and its height of the ground.
 // 5. The Fiducial marker is created from the .obj file and added to the document.
 
-/**
+// /**
 //  * Function to show an error message
 //  * @param {string} iMessage The message to display
 //  * @param {bool} iThrowError Should we throw an error (default value: true)
@@ -588,7 +588,6 @@ function openMyproject(iName)
 // 	}
 // }
 
-// Main();
 
 
 
@@ -622,7 +621,7 @@ function openMyproject(iName)
 
 
 //*****************************************************************//
-//	 		SCRIPT 2 (ZG Script)                       //
+//	 					SCRIPT 2 (ZG Script)                       //
 //*****************************************************************//
 
 // Creating dialog box for longitude and latitude
@@ -2035,85 +2034,85 @@ function Main2()
 	var myMission = CreateMission();
 
 //********************************************************************************//
-//************** CUTTING STEPS 2 AND 3 UNTIL 4 IS OPERATIONAL ********************//
+//************* STEPS 2 AND 3 ARE IN THE WORKING IN PROGRESS STAGE ***************//
 //********************************************************************************//
 
-	// //2. Create the GO zone (I do not think we need this right now)
-	// workflowStep++;
-	// if(myMission.GoZone == undefined)
-	// {
-	// 	print("Step" + workflowStep + ": Create the GO zone");
-	// 	var errorMsg = "";
+	//2. Create the GO zone (Currently in progress)
+	workflowStep++;
+	if(myMission.GoZone == undefined)
+	{
+		print("Step" + workflowStep + ": Create the GO zone");
+		var errorMsg = "";
 
-	// 	do
-	// 	{
-    //         var goZoneValid=CreateZone(myMission, "BLK ARC mission planner: create the GO Zone", errorMsg, "Draw the GO Zone multiline", 0, 1, 0, true);
-	// 		if(goZoneValid.ErrorCode > 0)
-	// 		{
-	// 			errorMsg = "ERROR: " + goZoneValid.ErrorMsg;
-	// 			goZoneValid.Zone.RemoveFromDoc();
-	// 		}
-	// 		else
-	// 		{
-	// 			errorMsg = "";
-	// 		}
-    //     }
-    //     while(goZoneValid.ErrorCode>0);
+		do
+		{
+            var goZoneValid=CreateZone(myMission, "BLK ARC mission planner: create the GO Zone", errorMsg, "Draw the GO Zone multiline", 0, 1, 0, true);
+			if(goZoneValid.ErrorCode > 0)
+			{
+				errorMsg = "ERROR: " + goZoneValid.ErrorMsg;
+				goZoneValid.Zone.RemoveFromDoc();
+			}
+			else
+			{
+				errorMsg = "";
+			}
+        }
+        while(goZoneValid.ErrorCode>0);
 
-	// 	myMission.GoZone = goZoneValid.Zone;
-	// }
-	// else
-	// {
-	// 	print("Step" + workflowStep + ": GO zone already defined");
-	// }
+		myMission.GoZone = goZoneValid.Zone;
+	}
+	else
+	{
+		print("Step" + workflowStep + ": GO zone already defined");
+	}
 
-	//// 3. Create NO GO zones (I do not think we need this right now)
-	// workflowStep++;
-	// if(myMission.NoGoZonesTbl.length == 0)
-	// {
-	// 	print("Step" + workflowStep + ": Create the NO GO zones");
-	// }
-	// else
-	// {
-    //     print("Step"+workflowStep+": Create the NO GO zones ("+myMission.NoGoZonesTbl.length+" already defined)");
-	// }
+	// 3. Create NO GO zones (Currently in progress)
+	workflowStep++;
+	if(myMission.NoGoZonesTbl.length == 0)
+	{
+		print("Step" + workflowStep + ": Create the NO GO zones");
+	}
+	else
+	{
+        print("Step"+workflowStep+": Create the NO GO zones ("+myMission.NoGoZonesTbl.length+" already defined)");
+	}
 
-	// errorMsg = "";
-	// var count = 1 + myMission.NoGoZonesTbl.length;
-	// while(ValidateAStep(
-	// 	"Create NO GO Zones",
-	// 	"Do you want to add a NO GO Zone?(" + count + ")",
-	// 	"OK=Yes / CANCEL=No, go to waypoint definition"))
-	// {
-	// 	do
-	// 	{
-	// 		var noGoZoneValid = CreateZone(
-	// 			myMission,
-	// 			"BLK ARC mission planner: create the NO GO Zones",
-	// 			errorMsg,
-	// 			"Draw the NO GO Zone multiline(" + count + ")",
-	// 			1,
-	// 			0,
-	// 			0,
-	// 			false);
-	// 		if(noGoZoneValid.ErrorCode > 0)
-	// 		{
-	// 			errorMsg = "ERROR: " + noGoZoneValid.ErrorMsg;
-	// 			noGoZoneValid.Zone.RemoveFromDoc();
-	// 		}
-	// 		else
-	// 		{
-	// 			errorMsg = "";
-	// 		}
-    //     }
-    //     while(noGoZoneValid.ErrorCode>0);
+	errorMsg = "";
+	var count = 1 + myMission.NoGoZonesTbl.length;
+	while(ValidateAStep(
+		"Create NO GO Zones",
+		"Do you want to add a NO GO Zone?(" + count + ")",
+		"OK=Yes / CANCEL=No, go to waypoint definition"))
+	{
+		do
+		{
+			var noGoZoneValid = CreateZone(
+				myMission,
+				"BLK ARC mission planner: create the NO GO Zones",
+				errorMsg,
+				"Draw the NO GO Zone multiline(" + count + ")",
+				1,
+				0,
+				0,
+				false);
+			if(noGoZoneValid.ErrorCode > 0)
+			{
+				errorMsg = "ERROR: " + noGoZoneValid.ErrorMsg;
+				noGoZoneValid.Zone.RemoveFromDoc();
+			}
+			else
+			{
+				errorMsg = "";
+			}
+        }
+        while(noGoZoneValid.ErrorCode>0);
 
-	// 	if(noGoZoneValid.Zone != undefined)
-	// 	{
-	// 		myMission.NoGoZonesTbl.push(noGoZoneValid.Zone);
-	// 		count++;
-	// 	}
-	// }
+		if(noGoZoneValid.Zone != undefined)
+		{
+			myMission.NoGoZonesTbl.push(noGoZoneValid.Zone);
+			count++;
+		}
+	}
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2211,6 +2210,7 @@ count = 1 + myMission.WaypointsTbl.length;
 	var counter = Math.round(ImageLat);
 	var multiplier = 1;
 
+	// Loop used for multiple executions. 
 	for(multiplier; multiplier <= counter; multiplier++)
 	{
 		// First, move along the X-axis from initialXValue to ImageLong
@@ -2219,33 +2219,74 @@ count = 1 + myMission.WaypointsTbl.length;
 			print("X value: " + x)
 			var NewPointX = new SPoint(x, initialYValue*multiplier, initialZValue); // z should remain as Zero
 
-			// WayPoint Projection
+			//WayPoint Projection
 			NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
 
-			// Creation Waypoint
-			var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+			// Trying to implement a check of each point if within the defined GO/NO GO zones. 
+			//////////////////////////////////////////////////////////////////////////////
+			//waypoint verification
+			var verified = IsWaypointAllowed(NewPointX, [myMission.GoZone], myMission.NoGoZonesTbl);
+			if(verified)
+			{
+				NewPointX.SetName(myMission.MissionName + "_" + count);
+				NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
 
-			myMission.WaypointsTbl.push(NewWayPoint1X);
-			myMission.UpdateDummyPath();
-			count++; // Increment the count for each waypoint
+				// Creation Waypoint
+				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+
+				myMission.WaypointsTbl.push(NewWayPoint1X);
+				myMission.UpdateDummyPath();
+				count++; // Increment the count for each waypoint
+			}
+			// else
+			// {
+			// 	ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
+			// }
+			///////////////////////////////////////////////////////////////////////////////////
+
+			// // Creation Waypoint
+			// var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+
+			// myMission.WaypointsTbl.push(NewWayPoint1X);
+			// myMission.UpdateDummyPath();
+			// count++; // Increment the count for each waypoint
 		}
 
 		// Then, move along the Y-axis from initialYValue to 0.3 * ImageLat
-			for (y = initialYValue; y <= (0.3*multiplier) * imageLat; y += NewYrecall) // THIS IS PROBLEM LINE
-
-			{
+		for (y = initialYValue; y <= (0.3*multiplier) * imageLat; y += NewYrecall) // THIS IS PROBLEM LINE
+		{
 			print("Y value: " + y);
 			var NewPointY = new SPoint(imageLong, y, initialZValue); // z should remain as Zero
 
 			// WayPoint Projection
 			NewPointY = myMission.RefPlane.Proj3D(NewPointY).Point;
 
-			// Creation Waypoint
-			var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
+			// Trying to implement a check of each point if within the defined GO/NO GO zones. 
+			//////////////////////////////////////////////////////////////////////////////
+			//waypoint verification
+			var verified = IsWaypointAllowed(NewPointY, [myMission.GoZone], myMission.NoGoZonesTbl);
+			if(verified)
+			{
+				NewPointY.SetName(myMission.MissionName + "_" + count);
 
-			myMission.WaypointsTbl.push(NewWayPoint1Y);
-			myMission.UpdateDummyPath();
-			count++; // Increment the count for each waypoint
+				//Waypoint creation
+				var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
+
+				myMission.WaypointsTbl.push(NewWayPoint1Y);
+				myMission.UpdateDummyPath();
+				count++; // Increment the count for each waypoint
+			}
+			// else
+			// {
+			// 	ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
+			// }
+			///////////////////////////////////////////////////////////////////////////////////
+			// Creation Waypoint
+			// var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
+
+			// myMission.WaypointsTbl.push(NewWayPoint1Y);
+			// myMission.UpdateDummyPath();
+			// count++; // Increment the count for each waypoint
 		}
 
 		// Finally, move along the negative X-axis from ImageLong back to initialXValue
@@ -2257,16 +2298,37 @@ count = 1 + myMission.WaypointsTbl.length;
 			// WayPoint Projection
 			NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
 
-			// Creation Waypoint
-			var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+			// Trying to implement a check of each point if within the defined GO/NO GO zones. 
+			//////////////////////////////////////////////////////////////////////////////
+			//waypoint verification
+			var verified = IsWaypointAllowed(NewPointX, [myMission.GoZone], myMission.NoGoZonesTbl);
+			if(verified)
+			{
+				NewPointX.SetName(myMission.MissionName + "_" + count);
 
-			myMission.WaypointsTbl.push(NewWayPoint1X);
-			myMission.UpdateDummyPath();
-			count++; // Increment the count for each waypoint
+				//Waypoint creation
+				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+
+				myMission.WaypointsTbl.push(NewWayPoint1X);
+				myMission.UpdateDummyPath();
+				count++; // Increment the count for each waypoint
+			}
+			else
+			{
+				ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
+			}
+			///////////////////////////////////////////////////////////////////////////////////
+
+			// Creation Waypoint (ORIGINAL CODE. COMMENTED FOR TEST!!!)
+			// var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+
+			// myMission.WaypointsTbl.push(NewWayPoint1X);
+			// myMission.UpdateDummyPath();
+			// count++; // Increment the count for each waypoint
 		}
 		print("counter: " + counter);
 	}
-// }	
+
 
 
 
