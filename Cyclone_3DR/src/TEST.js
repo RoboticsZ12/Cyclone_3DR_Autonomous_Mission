@@ -628,8 +628,8 @@ function openMyproject(iName)
 var LongLat = SDialog.New("Longitude and Latitude");
 
 // Add input fields for X, Y, Z with initial values
-LongLat.AddLength({id: 'Long', name: "Click Longitude of Image", value: 0, saveValue: true, readOnly: false}); 
-LongLat.AddLength({id: 'Lat', name: "Click Latitude of Image", value: 0, saveValue: true, readOnly: false}); 
+LongLat.AddLength({id: 'Long', name: "Click Longitude of Image (X)", value: 0, saveValue: true, readOnly: false}); 
+LongLat.AddLength({id: 'Lat', name: "Click Latitude of Image (Y)", value: 0, saveValue: true, readOnly: false}); 
 
 // Get user inputs
 var dialogLongLat = LongLat.Run();
@@ -651,9 +651,9 @@ else
 var XYZ = SDialog.New("Initial X,Y,Z Values");
 
 // Add input fields for X, Y, Z with initial values
-XYZ.AddLength({id: 'X', name: "Set as Fiducial X", value: 0, saveValue: true, readOnly: false});
-XYZ.AddLength({id: 'Y', name: "Set as Fiducial Y", value: 0, saveValue: true, readOnly: false});
-XYZ.AddLength({id: 'Z', name: "Set as Fiducial Z", value: 0, saveValue: true, readOnly: false});
+XYZ.AddLength({id: 'X', name: "Set X", value: 0, saveValue: true, readOnly: false});
+XYZ.AddLength({id: 'Y', name: "Set Y", value: 0, saveValue: true, readOnly: false});
+XYZ.AddLength({id: 'Z', name: "Set Z", value: 0, saveValue: true, readOnly: false});
 
 // Run the dialog to get user inputs
 var dialogInitialXYZ = XYZ.Run();
@@ -672,14 +672,16 @@ else
     var initialZValue = dialogInitialXYZ.Z;
 
     // Validate the initial X value 
-    if (initialXValue >= 90 || initialYValue < 0) 
+    // if (initialXValue >= 90 || initialYValue < 0) 
+	if (initialXValue >= 90) 
     {
         var imessage = "Invalid X or Y Value";
         ErrorMessage(imessage);
     }
 
     // Validate the initial Y value 
-    if (initialYValue >= 90 || initialYValue < 0) 
+    // if (initialYValue >= 90 || initialYValue < 0)
+	if (initialYValue >= 90) 
     {
         var imessage = "Invalid X or Y Value";
         ErrorMessage(imessage);
@@ -2250,6 +2252,8 @@ for(multiplier; multiplier <= counter; multiplier++)
 			// myMission.WaypointsTbl.push(NewWayPoint1X);
 			// myMission.UpdateDummyPath();
 			// count++; // Increment the count for each waypoint
+		Sleep(1000)
+
 	}
 
 	// Then, move along the Y-axis from initialYValue to 0.3 * ImageLat
@@ -2287,6 +2291,8 @@ for(multiplier; multiplier <= counter; multiplier++)
 			// myMission.WaypointsTbl.push(NewWayPoint1Y);
 			// myMission.UpdateDummyPath();
 			// count++; // Increment the count for each waypoint
+		Sleep(1000)
+
 	}
 
 	// Finally, move along the negative X-axis from ImageLong back to initialXValue
@@ -2313,10 +2319,10 @@ for(multiplier; multiplier <= counter; multiplier++)
 			myMission.UpdateDummyPath();
 			count++; // Increment the count for each waypoint
 		}
-		else
-		{
-			ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
-		}
+		// else
+		// {
+		// 	ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
+		// }
 		///////////////////////////////////////////////////////////////////////////////////
 
 		// Creation Waypoint (ORIGINAL CODE. COMMENTED FOR TEST!!!)
@@ -2325,7 +2331,9 @@ for(multiplier; multiplier <= counter; multiplier++)
 		// myMission.WaypointsTbl.push(NewWayPoint1X);
 		// myMission.UpdateDummyPath();
 		// count++; // Increment the count for each waypoint
+		Sleep(1000)
 	}
+
 	print("counter: " + counter);
 }
 
