@@ -2020,10 +2020,8 @@ function IsWaypointAllowed(iPoint, iGoZoneTbl, iNoGoZoneTbl)
 			}
 		}
 	}
-
 	return isAllowed;
 }
-
 
 /**
  * Main Function
@@ -2036,7 +2034,7 @@ function Main2()
 	var myMission = CreateMission();
 
 //********************************************************************************//
-//************* STEPS 2 AND 3 ARE IN THE WORKING IN PROGRESS STAGE ***************//
+//********************** STEPS 2 AND 3 ARE FOR GO/NO_GO_ZONES ********************//
 //********************************************************************************//
 
 	//2. Create the GO zone (Currently in progress)
@@ -2116,302 +2114,147 @@ function Main2()
 		}
 	}
 
+	// 4. Add waypoints
+	workflowStep++;
+	print("Step " + workflowStep + ": Add waypoints");
+	errorMsg = "";
+	count = 1 + myMission.WaypointsTbl.length;
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 4. Add waypoints
-// workflowStep++;
-// print("Step " + workflowStep + ": Add waypoints");
-// errorMsg = "";
-// count = 1 + myMission.WaypointsTbl.length;
-// var counter = 0; 
+	var allOK = true;
+	var imageLat = Math.round(ImageLat);
+	var imageLong = Math.round(ImageLong);
+	var x = Math.round(initialXValue);
+	var y = Math.round(initialYValue);
+	var counter = Math.round(ImageLat);
+	var multiplier = 1;
+	var Ycount = 0;
 
-// for (counter = 0; counter <= 1; counter++) {	
-// 	var x = initialXValue;
-// 	var y = initialYValue + counter * 0.3 * ImageLat; // Adjust the initial y for each iteration
-// 	var imageLat = ImageLat;
-// 	var imageLong = ImageLong;
-	
-// 	// First, move along the X-axis from initialXValue to ImageLong
-// 	for (; x <= imageLong; x += NewXrecall) {
-// 		var NewPointX = new SPoint(x, y, initialZValue); // z should remain as Zero
-
-// 		// WayPoint Projection
-// 		NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
-
-// 		// Creation Waypoint
-// 		var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
-
-// 		myMission.WaypointsTbl.push(NewWayPoint1X);
-// 		myMission.UpdateDummyPath();
-// 		count++; // Increment the count for each waypoint
-// 	}
-
-// 	// Then, move along the Y-axis from y to y + 0.3 * ImageLat
-// 	for (var tempY = y; tempY <= y + 0.3 * imageLat; tempY += NewYrecall) {
-// 		var NewPointY = new SPoint(imageLong, tempY, initialZValue); // z should remain as Zero
-
-// 		// WayPoint Projection
-// 		NewPointY = myMission.RefPlane.Proj3D(NewPointY).Point;
-
-// 		// Creation Waypoint
-// 		var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
-
-// 		myMission.WaypointsTbl.push(NewWayPoint1Y);
-// 		myMission.UpdateDummyPath();
-// 		count++; // Increment the count for each waypoint
-// 	}
-
-// 	// Finally, move along the negative X-axis from ImageLong back to initialXValue
-// 	for (x = imageLong; x >= initialXValue; x -= NewXrecall) {
-// 		var NewPointX = new SPoint(x, y + 0.3 * imageLat, initialZValue); // z should remain as Zero
-
-// 		// WayPoint Projection
-// 		NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
-
-// 		// Creation Waypoint
-// 		var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
-
-// 		myMission.WaypointsTbl.push(NewWayPoint1X);
-// 		myMission.UpdateDummyPath();
-// 		count++; // Increment the count for each waypoint
-// 	}	
-
-// 	// Move along the Y-axis again from y + 0.3 * ImageLat to y + 0.6 * ImageLat
-// 	for (tempY = y + 0.3 * imageLat; tempY <= y + 0.6 * imageLat; tempY += NewYrecall) {
-// 		var NewPointY = new SPoint(initialXValue, tempY, initialZValue); // z should remain as Zero
-		
-// 		// WayPoint Projection
-// 		NewPointY = myMission.RefPlane.Proj3D(NewPointY).Point;
-		
-// 		// Creation Waypoint
-// 		var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
-		
-// 		myMission.WaypointsTbl.push(NewWayPoint1Y);
-// 		myMission.UpdateDummyPath();
-// 		count++; // Increment the count for each waypoint
-// 	}
-// }
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 4. Add waypoints
-workflowStep++;
-print("Step " + workflowStep + ": Add waypoints");
-errorMsg = "";
-count = 1 + myMission.WaypointsTbl.length;
-
-// if (ValidateAStep(
-//     "Add Waypoints",
-//     "Click to define Waypoint? (" + count + ") (Press ESC to stop)",
-//     "Yes=Continue / No=go to 'return' waypoints definition"))
-// {
-var allOK = true;
-var imageLat = Math.round(ImageLat);
-var imageLong = Math.round(ImageLong);
-var x = Math.round(initialXValue);
-var y = Math.round(initialYValue);
-var counter = Math.round(ImageLat);
-var multiplier = 1;
-var Ycount = 0;
-
-// Loop used for multiple executions. 
-for(multiplier; multiplier <= counter; multiplier++)
-{
-	// First, move along the X-axis from initialXValue to ImageLong
-	for (x = initialXValue; x <= imageLong; x += NewXrecall) 
+	// Loop used for multiple executions. 
+	for(multiplier; multiplier <= counter; multiplier++)
 	{
-		print("X value: " + x)
-		print("Y vlaue: " + y)
-		var NewPointX = new SPoint(x, y, initialZValue); // z should remain as Zero
-
-		//WayPoint Projection
-		NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
-
-		// Trying to implement a check of each point if within the defined GO/NO GO zones. 
-		//////////////////////////////////////////////////////////////////////////////
-		//waypoint verification
-		var verified = IsWaypointAllowed(NewPointX, [myMission.GoZone], myMission.NoGoZonesTbl);
-		if(verified)
+		// First, move along the X-axis from initialXValue to ImageLong
+		for (x = initialXValue; x <= imageLong; x += NewXrecall) 
 		{
-			NewPointX.SetName(myMission.MissionName + "_" + count);
+			print("X value: " + x)
+			print("Y vlaue: " + y)
+			var NewPointX = new SPoint(x, y, initialZValue); // z should remain as Zero
+
+			//WayPoint Projection
 			NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
 
-			// Creation Waypoint
-			var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+			//waypoint verification (NO_GO/GO_ZONES)
+			var verified = IsWaypointAllowed(NewPointX, [myMission.GoZone], myMission.NoGoZonesTbl);
+			if(verified)
+			{
+				NewPointX.SetName(myMission.MissionName + "_" + count);
+				NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
 
-			myMission.WaypointsTbl.push(NewWayPoint1X);
-			myMission.UpdateDummyPath();
-			count++; // Increment the count for each waypoint
+				// Creation Waypoint
+				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+
+				myMission.WaypointsTbl.push(NewWayPoint1X);
+				myMission.UpdateDummyPath();
+				count++; // Increment the count for each waypoint
+			}
+				// else
+				// {
+				// 	ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
+				// }
+			Sleep(250)
 		}
+
+		// Then, move along the Y-axis from initialYValue to 0.3 * ImageLat
+		for (initialYValue = y + Ycount; y <= (0.3*multiplier) * imageLat; y += NewYrecall) // THIS IS PROBLEM LINE
+		{
+			print("Y value: " + y);
+			var NewPointY = new SPoint(imageLong, y, initialZValue); // z should remain as Zero
+
+			// WayPoint Projection
+			NewPointY = myMission.RefPlane.Proj3D(NewPointY).Point;
+
+			//waypoint verification (NO_GO/GO_ZONES)
+			var verified = IsWaypointAllowed(NewPointY, [myMission.GoZone], myMission.NoGoZonesTbl);
+			if(verified)
+			{
+				NewPointY.SetName(myMission.MissionName + "_" + count);
+
+				//Waypoint creation
+				var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
+
+				myMission.WaypointsTbl.push(NewWayPoint1Y);
+				myMission.UpdateDummyPath();
+				count++; // Increment the count for each waypoint
+			}
+				// else
+				// {
+				// 	ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
+				// }
+			Sleep(250)
+		}
+
+		Ycount = initialYValue + 2
+
+		// Finally, move along the negative X-axis from ImageLong back to initialXValue
+		for (x = imageLong; x >= initialXValue-1; x -= NewXrecall) 
+		{
+			print("X value: " + x);
+			var NewPointX = new SPoint(x, (multiplier*0.3) * imageLat, initialZValue); // z should remain as Zero
+
+			// WayPoint Projection
+			NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
+
+			//waypoint verification (NO_GO/GO_ZONES)
+			var verified = IsWaypointAllowed(NewPointX, [myMission.GoZone], myMission.NoGoZonesTbl);
+			if(verified)
+			{
+				NewPointX.SetName(myMission.MissionName + "_" + count);
+
+				//Waypoint creation
+				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+
+				myMission.WaypointsTbl.push(NewWayPoint1X);
+				myMission.UpdateDummyPath();
+				count++; // Increment the count for each waypoint
+			}
 			// else
 			// {
 			// 	ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
 			// }
-			///////////////////////////////////////////////////////////////////////////////////
-
-			// // Creation Waypoint
-			// var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
-
-			// myMission.WaypointsTbl.push(NewWayPoint1X);
-			// myMission.UpdateDummyPath();
-			// count++; // Increment the count for each waypoint
-		Sleep(250)
-
-	}
-
-	// Then, move along the Y-axis from initialYValue to 0.3 * ImageLat
-	for (initialYValue = y + Ycount; y <= (0.3*multiplier) * imageLat; y += NewYrecall) // THIS IS PROBLEM LINE
-	{
-		print("Y value: " + y);
-		var NewPointY = new SPoint(imageLong, y, initialZValue); // z should remain as Zero
-
-		// WayPoint Projection
-		NewPointY = myMission.RefPlane.Proj3D(NewPointY).Point;
-
-		// Trying to implement a check of each point if within the defined GO/NO GO zones. 
-		//////////////////////////////////////////////////////////////////////////////
-		//waypoint verification
-		var verified = IsWaypointAllowed(NewPointY, [myMission.GoZone], myMission.NoGoZonesTbl);
-		if(verified)
-		{
-			NewPointY.SetName(myMission.MissionName + "_" + count);
-
-			//Waypoint creation
-			var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
-
-			myMission.WaypointsTbl.push(NewWayPoint1Y);
-			myMission.UpdateDummyPath();
-			count++; // Increment the count for each waypoint
+			Sleep(250)
 		}
-			// else
-			// {
-			// 	ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
-			// }
-			///////////////////////////////////////////////////////////////////////////////////
-			// Creation Waypoint
-			// var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
+		print("counter: " + counter);
 
-			// myMission.WaypointsTbl.push(NewWayPoint1Y);
-			// myMission.UpdateDummyPath();
-			// count++; // Increment the count for each waypoint
-		Sleep(250)
-	}
-	Ycount = initialYValue + 2
-
-	// Finally, move along the negative X-axis from ImageLong back to initialXValue
-	for (x = imageLong; x >= initialXValue-1; x -= NewXrecall) 
-	{
-		print("X value: " + x);
-		var NewPointX = new SPoint(x, (multiplier*0.3) * imageLat, initialZValue); // z should remain as Zero
-
-		// WayPoint Projection
-		NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
-
-		//////////////////////////////////////////////////////////////////////////////
-		//waypoint verification
-		var verified = IsWaypointAllowed(NewPointX, [myMission.GoZone], myMission.NoGoZonesTbl);
-		if(verified)
+		// When loop is finished, then nxt waypoint will be at origin. 
+		if(multiplier == counter)
 		{
-			NewPointX.SetName(myMission.MissionName + "_" + count);
+			initialXValue == 0
+			initialYValue == 0
+			initialZValue == 0
 
-			//Waypoint creation
-			var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+			print("X value: " + x);
+			var NewPointXYZ = new SPoint(initialXValue, initialZValue, initialZValue); // z should remain as Zero
 
-			myMission.WaypointsTbl.push(NewWayPoint1X);
-			myMission.UpdateDummyPath();
-			count++; // Increment the count for each waypoint
-		}
-		// else
-		// {
-		// 	ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
-		// }
-		///////////////////////////////////////////////////////////////////////////////////
+			// WayPoint Projection
+			NewPointXYZ = myMission.RefPlane.Proj3D(NewPointXYZ).Point;
 
-		// Creation Waypoint (ORIGINAL CODE. COMMENTED FOR TEST!!!)
-		// var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+			//waypoint verification (NO_GO/GO_ZONES)
+			var verified = IsWaypointAllowed(NewPointXYZ, [myMission.GoZone], myMission.NoGoZonesTbl);
+			if(verified)
+			{
+				NewPointX.SetName(myMission.MissionName + "_" + count);
 
-		// myMission.WaypointsTbl.push(NewWayPoint1X);
-		// myMission.UpdateDummyPath();
-		// count++; // Increment the count for each waypoint
-		Sleep(250)
-	}
-	print("counter: " + counter);
+				//Waypoint creation
+				var NewWayPoint1XYZ = SWaypoint.CreateWayPoint(myMission, count, NewPointXYZ, "1", "None");
 
-	if(multiplier == counter)
-	{
-		initialXValue == 0
-		initialYValue == 0
-		initialZValue == 0
-
-		print("X value: " + x);
-		var NewPointXYZ = new SPoint(initialXValue, initialZValue, initialZValue); // z should remain as Zero
-
-		// WayPoint Projection
-		NewPointXYZ = myMission.RefPlane.Proj3D(NewPointXYZ).Point;
-
-		//////////////////////////////////////////////////////////////////////////////
-		//waypoint verification
-		var verified = IsWaypointAllowed(NewPointXYZ, [myMission.GoZone], myMission.NoGoZonesTbl);
-		if(verified)
-		{
-			NewPointX.SetName(myMission.MissionName + "_" + count);
-
-			//Waypoint creation
-			var NewWayPoint1XYZ = SWaypoint.CreateWayPoint(myMission, count, NewPointXYZ, "1", "None");
-
-			myMission.WaypointsTbl.push(NewWayPoint1XYZ);
-			myMission.UpdateDummyPath();
-			count++; // Increment the count for each waypoint
+				myMission.WaypointsTbl.push(NewWayPoint1XYZ);
+				myMission.UpdateDummyPath();
+				count++; // Increment the count for each waypoint
+			}
 		}
 	}
-}
-
-
-
-
-				//********************************************************************************//
-				//******************************** CYCLONE STEP 4 CODE ***************************//
-				//********************************************************************************//
-
-		// do
-		// {
-		// 	var pointRes = SPoint.FromClick();
-		// 	if(pointRes.ErrorCode == 0)
-		// 	{ // point clicked by user
-		// 		var newPoint = pointRes.Point;
-
-		// 		//waypoint projection
-		// 		newPoint = myMission.RefPlane.Proj3D(newPoint).Point;
-
-		// 		//waypoint verification (Take out the check for now)
-		// 		// var verified = IsWaypointAllowed(newPoint, [myMission.GoZone], myMission.NoGoZonesTbl);
-		// 		// if(verified)
-		// 		// {
-		// 			newPoint.SetName(myMission.MissionName + "_" + count);
-
-		// 			//Waypoint creation
-		// 			var newWayPoint1 = SWaypoint.CreateWayPoint(myMission, count, newPoint, "1", "None");
-
-		// 			myMission.WaypointsTbl.push(newWayPoint1);
-		// 			myMission.UpdateDummyPath();
-
-		// 			count++;
-		// 		// }
-		// 		// else
-		// 		// {
-		// 		// 	ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
-		// 		// }
-		// 	}
-		// 	else // Escape or Enter -> stopping
-		// 	{
-		// 		allOK = false;
-		// 	}
-        // }
-        // while(allOK);
-	// }
-
-					//********************************************************************************//
-					//********************* HAVE NOT MADE IT THIS FAR YET! ***************************//
-					//********************************************************************************//
+	//********************************************************************************//
+	//********************* HAVE NOT MADE IT THIS FAR YET! ***************************//
+	//********************************************************************************//
 
 	//// 5. if docking station: return path waypoints 
 	// workflowStep++;
@@ -2481,62 +2324,61 @@ for(multiplier; multiplier <= counter; multiplier++)
 	// 	}
 	// }
 
-// 	// 6. change waypoints actions
-// 	workflowStep++;
-// 	print("Step" + workflowStep + ": Edit waypoints");
-// 	if(ValidateAStep(
-// 		   "Change waypoints actions",
-// 		   "Do you want to update action in a waypoint (click the corresponding labels)?",
-// 		   "Yes / No=go to json export"))
-// 	{
-// 		var allOK = true;
-// 		do
-// 		{
-// 			var labelRes = SLabel.FromClick();
-//             if(labelRes.ErrorCode == 0){ // label clicked by user
-// 				if(labelRes.Label.GetPath().endsWith(myMission.GetWaypointsGroupPath())
-// 				   || labelRes.Label.GetPath().endsWith(myMission.GetWaypointsReturnGroupPath()))
-// 				{
-//                     var actions = AddActionToWaypointDlg();
+	// 	// 6. change waypoints actions
+	// 	workflowStep++;
+	// 	print("Step" + workflowStep + ": Edit waypoints");
+	// 	if(ValidateAStep(
+	// 		   "Change waypoints actions",
+	// 		   "Do you want to update action in a waypoint (click the corresponding labels)?",
+	// 		   "Yes / No=go to json export"))
+	// 	{
+	// 		var allOK = true;
+	// 		do
+	// 		{
+	// 			var labelRes = SLabel.FromClick();
+	//             if(labelRes.ErrorCode == 0){ // label clicked by user
+	// 				if(labelRes.Label.GetPath().endsWith(myMission.GetWaypointsGroupPath())
+	// 				   || labelRes.Label.GetPath().endsWith(myMission.GetWaypointsReturnGroupPath()))
+	// 				{
+	//                     var actions = AddActionToWaypointDlg();
 
-// 					var clickedWaypoint = SWaypoint.GetWaypointFromLabel(myMission, labelRes.Label);
-// 					clickedWaypoint.SetActions(actions);
-// 				}
-//                 else{
-// 					ErrorMessage("The clicked label is not in the current mission(or is the Docking waypoint).", false);
-// 				}
-// 			}
-// 			else // Escape or Enter -> stopping
-// 			{
-// 				allOK = false;
-// 			}
-//         }
-//         while(allOK);
-// 	}
+	// 					var clickedWaypoint = SWaypoint.GetWaypointFromLabel(myMission, labelRes.Label);
+	// 					clickedWaypoint.SetActions(actions);
+	// 				}
+	//                 else{
+	// 					ErrorMessage("The clicked label is not in the current mission(or is the Docking waypoint).", false);
+	// 				}
+	// 			}
+	// 			else // Escape or Enter -> stopping
+	// 			{
+	// 				allOK = false;
+	// 			}
+	//         }
+	//         while(allOK);
+	// 	}
 
-// 	// 7. write the json
-// 	workflowStep++;
-// 	print("Step" + workflowStep + ": Create the json");
-// 	var duration = myMission.ComputeMissionDuration();
-// 	var filename = myMission.ExportJson(duration.DurationValue);
+	// 	// 7. write the json
+	// 	workflowStep++;
+	// 	print("Step" + workflowStep + ": Create the json");
+	// 	var duration = myMission.ComputeMissionDuration();
+	// 	var filename = myMission.ExportJson(duration.DurationValue);
 
-// 	// 8. Export a 3D model
-// 	workflowStep++;
-// 	print("Step" + workflowStep + ": Export a 3D model");
-// 	var filenameReferenceMeshTbl = filename.split("/");
-// 	filenameReferenceMeshTbl.pop();
-// 	var filenameReferenceMesh = filenameReferenceMeshTbl.join("/");
-// 	var filepath = filenameReferenceMesh;
-// 	filenameReferenceMesh = filenameReferenceMesh + "/" + myMission.MissionName + ".glb";
-// 	ExportReferenceModel(filenameReferenceMesh);
+	// 	// 8. Export a 3D model
+	// 	workflowStep++;
+	// 	print("Step" + workflowStep + ": Export a 3D model");
+	// 	var filenameReferenceMeshTbl = filename.split("/");
+	// 	filenameReferenceMeshTbl.pop();
+	// 	var filenameReferenceMesh = filenameReferenceMeshTbl.join("/");
+	// 	var filepath = filenameReferenceMesh;
+	// 	filenameReferenceMesh = filenameReferenceMesh + "/" + myMission.MissionName + ".glb";
+	// 	ExportReferenceModel(filenameReferenceMesh);
 
-// 	// 9. Duration estimation
-// 	workflowStep++;
-// 	print("Step" + workflowStep + ": Duration estimation(" + duration.DurationString + ")");
-// 	SDialog.Message(duration.DurationString,SDialog.EMessageSeverity.Info,"Mission duration");
+	// 	// 9. Duration estimation
+	// 	workflowStep++;
+	// 	print("Step" + workflowStep + ": Duration estimation(" + duration.DurationString + ")");
+	// 	SDialog.Message(duration.DurationString,SDialog.EMessageSeverity.Info,"Mission duration");
 
-// 	OpenUrl("file:///" + filepath);
-}
+	// 	OpenUrl("file:///" + filepath);
 
-// 0.
+} // Main2() close
 Main2();
