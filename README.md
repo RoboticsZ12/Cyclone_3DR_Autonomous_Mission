@@ -63,3 +63,15 @@ The updates on the VScode copy has not been pushed to the main Github repository
 This solution is currently being addressed and will be the main focus for this semesters project to perfect for our sponsors. 
 
 ```THIS DOCUMENT IS UP TO DATE AS OF 8/19/2024. (START OF SENIOR DESIGN 2)```
+
+The updates have now been fully pushed to this GitHub for fixes to the waypoint generation. Before, the auto generation was creating waypoints on top of each other causing there to be quadruple the amount of points needed for the mission. The issue arose from vthe "for()" loop within the Y-axis point generation. The condition that was taken from user was flipped causing the generation to loop the same Y-axis values multiple times. 
+
+Another issue that was resolved was generation of waypoints outside the boundry of the point cloud given. This basically meant that the Spot would attempt to go to a point outside the boundry of the substation. To fix this, bounding boxes called "GO_Zones" and "NO_GO_ZONES" were added to ensure that the point generation does not exceed the boundry made by the user. 
+
+In the image below, you will be able to see the fixed waypoint generation along with two boudning boxes, green and red. The green represent the "GO_ZONES" and the red represents the "NO_GO_ZONES". You will also notice that there are no waypoints within the red box. Spot have on board cameras allowing the robot to navigate around these "NO_GO_ZONES" to the next waypoint vs going through the zone. 
+
+The final fix needed will be fixing the incrementation of the mission. It can be seen that the rectangles change in size upon each round of the mission generation. This is possibly due to the multiplier defined within the program, but this is currently being addressed. 
+
+![image](https://github.com/user-attachments/assets/cbcc0356-4864-4797-8413-3c6ad1277a2a)
+
+```THIS DOCUMENT IS UP TO DATE AS OF 8/27/2024.```
