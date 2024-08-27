@@ -2211,6 +2211,7 @@ var x = Math.round(initialXValue);
 var y = Math.round(initialYValue);
 var counter = Math.round(ImageLat);
 var multiplier = 1;
+var Ycount = 0;
 
 // Loop used for multiple executions. 
 for(multiplier; multiplier <= counter; multiplier++)
@@ -2219,7 +2220,8 @@ for(multiplier; multiplier <= counter; multiplier++)
 	for (x = initialXValue; x <= imageLong; x += NewXrecall) 
 	{
 		print("X value: " + x)
-		var NewPointX = new SPoint(x, initialYValue*multiplier, initialZValue); // z should remain as Zero
+		print("Y vlaue: " + y)
+		var NewPointX = new SPoint(x, y, initialZValue); // z should remain as Zero
 
 		//WayPoint Projection
 		NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
@@ -2252,12 +2254,12 @@ for(multiplier; multiplier <= counter; multiplier++)
 			// myMission.WaypointsTbl.push(NewWayPoint1X);
 			// myMission.UpdateDummyPath();
 			// count++; // Increment the count for each waypoint
-		Sleep(1000)
+		Sleep(250)
 
 	}
 
 	// Then, move along the Y-axis from initialYValue to 0.3 * ImageLat
-	for (y = initialYValue; y <= (0.3*multiplier) * imageLat; y += NewYrecall) // THIS IS PROBLEM LINE
+	for (initialYValue = y + Ycount; y <= (0.3*multiplier) * imageLat; y += NewYrecall) // THIS IS PROBLEM LINE
 	{
 		print("Y value: " + y);
 		var NewPointY = new SPoint(imageLong, y, initialZValue); // z should remain as Zero
@@ -2291,9 +2293,9 @@ for(multiplier; multiplier <= counter; multiplier++)
 			// myMission.WaypointsTbl.push(NewWayPoint1Y);
 			// myMission.UpdateDummyPath();
 			// count++; // Increment the count for each waypoint
-		Sleep(1000)
-
+		Sleep(250)
 	}
+	Ycount = initialYValue + 2
 
 	// Finally, move along the negative X-axis from ImageLong back to initialXValue
 	for (x = imageLong; x >= initialXValue-1; x -= NewXrecall) 
@@ -2304,7 +2306,6 @@ for(multiplier; multiplier <= counter; multiplier++)
 		// WayPoint Projection
 		NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
 
-		// Trying to implement a check of each point if within the defined GO/NO GO zones. 
 		//////////////////////////////////////////////////////////////////////////////
 		//waypoint verification
 		var verified = IsWaypointAllowed(NewPointX, [myMission.GoZone], myMission.NoGoZonesTbl);
@@ -2331,10 +2332,37 @@ for(multiplier; multiplier <= counter; multiplier++)
 		// myMission.WaypointsTbl.push(NewWayPoint1X);
 		// myMission.UpdateDummyPath();
 		// count++; // Increment the count for each waypoint
-		Sleep(1000)
+		Sleep(250)
 	}
-
 	print("counter: " + counter);
+
+	if(multiplier == counter)
+	{
+		initialXValue == 0
+		initialYValue == 0
+		initialZValue == 0
+
+		print("X value: " + x);
+		var NewPointXYZ = new SPoint(initialXValue, initialZValue, initialZValue); // z should remain as Zero
+
+		// WayPoint Projection
+		NewPointXYZ = myMission.RefPlane.Proj3D(NewPointXYZ).Point;
+
+		//////////////////////////////////////////////////////////////////////////////
+		//waypoint verification
+		var verified = IsWaypointAllowed(NewPointXYZ, [myMission.GoZone], myMission.NoGoZonesTbl);
+		if(verified)
+		{
+			NewPointX.SetName(myMission.MissionName + "_" + count);
+
+			//Waypoint creation
+			var NewWayPoint1XYZ = SWaypoint.CreateWayPoint(myMission, count, NewPointXYZ, "1", "None");
+
+			myMission.WaypointsTbl.push(NewWayPoint1XYZ);
+			myMission.UpdateDummyPath();
+			count++; // Increment the count for each waypoint
+		}
+	}
 }
 
 
