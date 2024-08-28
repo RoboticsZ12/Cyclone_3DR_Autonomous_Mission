@@ -624,6 +624,7 @@ function openMyproject(iName)
 //	 					SCRIPT 2 (ZG Script)                       //
 //*****************************************************************//
 
+//////////////////////////////////////////////////
 // Creating dialog box for longitude and latitude
 var LongLat = SDialog.New("Longitude and Latitude");
 
@@ -646,7 +647,9 @@ else
     var ImageLat = dialogLongLat.Lat;
     var ImageLong = dialogLongLat.Long;
 }
+//////////////////////////////////////////////////
 
+//////////////////////////////////////////////////
 // Create the dialog for Initial X, Y, Z Values
 var XYZ = SDialog.New("Initial X,Y,Z Values");
 
@@ -694,34 +697,9 @@ else
         ErrorMessage(imessage);
     }
 }   
+//////////////////////////////////////////////////
 
-// Number of Waypoints
-// var WantedWaypoints = SDialog.New("Number Waypoint Mission Points");
-
-// // Run the dialog to get user inputs
-// WantedWaypoints.AddLength({id: 'Waypoints', name: "# Waypoints", value: 0, saveValue: true, readOnly: false});
-    
-// // User input
-// var dialogWaypoints = WantedWaypoints.Run();
-
-// // Check if "Cancel" button is pressed
-// if (dialogWaypoints.ErrorCode == 1) 
-// {
-//     var imessage = "User Has Terminated Sequence";
-//     ErrorMessage(imessage);
-// }
-// else
-// {
-//     // Retrieve the Waypoint
-//     var WayMission = dialogWaypoints.Waypoints;
-    
-//     if(WayMission <= 0 || WayMission >= 5000)
-//     {
-//         var imessage = "Invalid Waypoint Value";
-//         ErrorMessage(imessage);
-//     }
-// }
-
+//////////////////////////////////////////////////
 // Incrementation of new XYZ
 var IncrementationXYZ = SDialog.New("Increment X,Y,Z");
 
@@ -746,70 +724,19 @@ else
     var NewYrecall = dialogNewXYZ.Y_length;
     var NewZrecall = dialogNewXYZ.Z_length;
 }
-
-// Duration of wait time for spot at each point
-var SpotStop = SDialog.New("Spot Stop Time");
-
-// Setting up user input
-SpotStop.AddLength({id: 'Stop_Time', name: "Time At Stop", value: 0, saveValue: true, readOnly: false});
-
-// User input recorded
-var StopResult = SpotStop.Run();
-
-// Check if "Cancel" button is pressed
-if (StopResult.ErrorCode == 1) 
-{
-    var imessage = "User Has Terminated Sequence";
-    ErrorMessage(imessage);
-}
-else
-{
-    // Recalling user input
-    var SpotStepValue = StopResult.Stop_Time;
-
-    // Checking input value valid
-    if(SpotStepValue <= 0 || SpotStepValue > 10)
-    {
-        var imessage = "Invalid Spot Wait Time";
-        ErrorMessage(imessage);
-    }  
-}
+//////////////////////////////////////////////////
 
 // Printing all Variables
 print("Chosen Reference Pts: " + initialXValue + " X, " + initialYValue + " Y, " + initialZValue + " Z");
 print("The Longitude of Point Cloud: " + ImageLong + " The Latitude is: " + ImageLat);
-// print("Chosen # Waypoint: " + WayMission);
 print("XYZ Incrementation Values: " + NewXrecall + " X, " + NewYrecall + " Y, " + NewZrecall + " Z");
-print("Set Wait Time: " + SpotStepValue);
 // END ZG SCRIPT
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //*****************************************************************//
+//																   //
 // SCRIPT 3 (AUTONOMOUS WAYPOINT AT SECTION 4. ZG IMPLEMENTED CODE)//
+//																   //
 //*****************************************************************//
 
 // <reference path="C:/Program Files/Leica Geosystems/Cyclone 3DR/Script/JsDoc/Reshaper.d.ts"/>
@@ -823,11 +750,11 @@ print("Set Wait Time: " + SpotStepValue);
 // 2. Create the go zone polyline representing the area where the BLK ARC is allowed. Press Enter at the end.
 // 3. Optionally, create the NO go zone polylines representing the area where the BLK ARC is NOT allowed. Press Enter at the end of each NO go zone.
 // 4. Optionally, add waypoints. Press Enter at the end.
+// 4. Optionally, modify the waypoints actions.
 // 5. When using a docking station, you can define return waypoints. Press Enter at the end. A waypoint will be added or moved next to the docking station.
-// 6. Optionally, modify the waypoints actions.
-// 7. Define the folder where to save the .json file. The name of the file will be named according to the name of the mission. This file contains instructions for the BLK ARC
-// 8. Optionally, export a mesh in .GLB.
-// 9. The duration of the mission is then showed in minutes with intervals every 30 seconds.
+// 6. Define the folder where to save the .json file. The name of the file will be named according to the name of the mission. This file contains instructions for the BLK ARC
+// 7. Optionally, export a mesh in .GLB.
+// 8. The duration of the mission is then showed in minutes with intervals every 30 seconds.
 // in case of cancellation, check the corresponding mission folder and restart the script (Go, No Go zones and waypoints will be reused)
 
 var addQuaternionDirectionToDoc = false;
@@ -1829,12 +1756,12 @@ function CreateZone(
   */
 function AddActionToWaypointDlg()
 {
-	var modes = ["None", "Low", "Medium", "High"];
+	var modes = ["None = 0s", "Low = 10s", "Medium = 30s", "High = 60s"];
     
     var myDialog = SDialog.New("Add actions to a waypoint");
     myDialog.AddChoices({
         id: "scanMode",
-        name: "Add a static scan",
+        name: "Add a stationary scan time",
         choices: modes,
         tooltip: "Choose between None, Low, Medium or High",
         value: 0, 
@@ -2023,9 +1950,11 @@ function IsWaypointAllowed(iPoint, iGoZoneTbl, iNoGoZoneTbl)
 	return isAllowed;
 }
 
-/**
- * Main Function
- */
+//******************************************//
+//										    //
+//                Main Function				//
+//										    //
+//******************************************//
 function Main2()
 {
 	// 1.
@@ -2034,10 +1963,16 @@ function Main2()
 	var myMission = CreateMission();
 
 //********************************************************************************//
-//********************** STEPS 2 AND 3 ARE FOR GO/NO_GO_ZONES ********************//
+//																				  //
+//						 STEPS 2 AND 3 ARE FOR GO/NO_GO_ZONES 					  //
+//																				  //
 //********************************************************************************//
 
-	//2. Create the GO zone (Currently in progress)
+	//********************************************************************************//
+	//																				  //
+	//                2. Create the GO zone (Currently in progress) 				  //
+	//																				  //
+	//********************************************************************************//
 	workflowStep++;
 	if(myMission.GoZone == undefined)
 	{
@@ -2065,8 +2000,12 @@ function Main2()
 	{
 		print("Step" + workflowStep + ": GO zone already defined");
 	}
-
-	// 3. Create NO GO zones (Currently in progress)
+	
+	//********************************************************************************//
+	//																				  //
+	//                3. Create NO GO zones (Currently in progress) 				  //
+	//																				  //
+	//********************************************************************************//
 	workflowStep++;
 	if(myMission.NoGoZonesTbl.length == 0)
 	{
@@ -2114,7 +2053,11 @@ function Main2()
 		}
 	}
 
-	// 4. Add waypoints
+	//********************************************************************************//
+	//																				  //
+	//                					4. Add waypoints			            	  //
+	//																				  //
+	//********************************************************************************//
 	workflowStep++;
 	print("Step " + workflowStep + ": Add waypoints");
 	errorMsg = "";
@@ -2128,7 +2071,8 @@ function Main2()
 	var counter = Math.round(ImageLat);
 	var multiplier = 1;
 	var Ycount = 0;
-
+	var actions = AddActionToWaypointDlg(); // GET ACTION FOR ALL WAYPOINTS AT ONCE
+	
 	// Loop used for multiple executions. 
 	for(multiplier; multiplier <= counter; multiplier++)
 	{
@@ -2151,16 +2095,13 @@ function Main2()
 
 				// Creation Waypoint
 				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+				NewWayPoint1X.SetActions(actions); // setting action
 
 				myMission.WaypointsTbl.push(NewWayPoint1X);
 				myMission.UpdateDummyPath();
 				count++; // Increment the count for each waypoint
 			}
-				// else
-				// {
-				// 	ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
-				// }
-			Sleep(250)
+			// Sleep(250)
 		}
 
 		// Then, move along the Y-axis from initialYValue to 0.3 * ImageLat
@@ -2180,16 +2121,13 @@ function Main2()
 
 				//Waypoint creation
 				var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
+				NewWayPoint1Y.SetActions(actions); // setting action
 
 				myMission.WaypointsTbl.push(NewWayPoint1Y);
 				myMission.UpdateDummyPath();
 				count++; // Increment the count for each waypoint
 			}
-				// else
-				// {
-				// 	ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
-				// }
-			Sleep(250)
+			// Sleep(250)
 		}
 
 		Ycount = initialYValue + 2
@@ -2211,16 +2149,13 @@ function Main2()
 
 				//Waypoint creation
 				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+				NewWayPoint1X.SetActions(actions); // setting action
 
 				myMission.WaypointsTbl.push(NewWayPoint1X);
 				myMission.UpdateDummyPath();
 				count++; // Increment the count for each waypoint
 			}
-			// else
-			// {
-			// 	ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
-			// }
-			Sleep(250)
+			// Sleep(250)
 		}
 		print("counter: " + counter);
 
@@ -2245,6 +2180,8 @@ function Main2()
 
 				//Waypoint creation
 				var NewWayPoint1XYZ = SWaypoint.CreateWayPoint(myMission, count, NewPointXYZ, "1", "None");
+				NewWayPoint1XYZ.SetActions(actions); // setting action
+
 
 				myMission.WaypointsTbl.push(NewWayPoint1XYZ);
 				myMission.UpdateDummyPath();
@@ -2252,11 +2189,12 @@ function Main2()
 			}
 		}
 	}
-	//********************************************************************************//
-	//***************************** WORK IN PROGRESS! ********************************//
-	//********************************************************************************//
 
-	// 5. if docking station: return path waypoints 
+	//********************************************************************************//
+	//																				  //
+	//                5. if docking station: return path waypoints	     			  //
+	//																				  //
+	//********************************************************************************//
 	workflowStep++;
 	print("Step" + workflowStep + ": add return waypoints");
 	if(myMission.IsDockingStation)
@@ -2280,23 +2218,21 @@ function Main2()
 					newPoint = myMission.RefPlane.Proj3D(newPoint).Point;
 
 					//waypoint verification
-					// var verif = IsWaypointAllowed(newPoint, [myMission.GoZone], myMission.NoGoZonesTbl);
-					// if(verif)
-					// {
+					var verif = IsWaypointAllowed(newPoint, [myMission.GoZone], myMission.NoGoZonesTbl);
+					if(verif)
+					{
 						newPoint.SetName(myMission.MissionName + "_" + count);
 
 						//Waypoint label creation
 						var newWayPoint2 = SWaypoint.CreateWayPoint(myMission, count, newPoint, "2", "None");
+						newWayPoint2.SetActions(actions); // setting action
+
 
 						myMission.WaypointsBackTbl.push(newWayPoint2);
 						myMission.UpdateDummyPath();
 
 						count++;
-					// }
-					// else
-					// {
-					// 	ErrorMessage("The point is not valid according to GO-NO GO Zones", false);
-					// }
+					}
 				}
 				else // Escape or Enter -> stopping
 				{
@@ -2324,61 +2260,40 @@ function Main2()
 		}
 	}
 
-		// 6. change waypoints actions
-		workflowStep++;
-		print("Step" + workflowStep + ": Edit waypoints");
-		if(ValidateAStep(
-			   "Change waypoints actions",
-			   "Do you want to update action in a waypoint (click the corresponding labels)?",
-			   "Yes / No=go to json export"))
-		{
-			var allOK = true;
-			do
-			{
-				var labelRes = SLabel.FromClick();
-	            if(labelRes.ErrorCode == 0){ // label clicked by user
-					if(labelRes.Label.GetPath().endsWith(myMission.GetWaypointsGroupPath())
-					   || labelRes.Label.GetPath().endsWith(myMission.GetWaypointsReturnGroupPath()))
-					{
-	                    var actions = AddActionToWaypointDlg();
+	//********************************************************************************//
+	//																				  //
+	//          				     6. write the json								  //
+	//																				  //
+	//********************************************************************************//
+	workflowStep++;
+	print("Step" + workflowStep + ": Create the json");
+	var duration = myMission.ComputeMissionDuration();
+	var filename = myMission.ExportJson(duration.DurationValue);
 
-						var clickedWaypoint = SWaypoint.GetWaypointFromLabel(myMission, labelRes.Label);
-						clickedWaypoint.SetActions(actions);
-					}
-	                else{
-						ErrorMessage("The clicked label is not in the current mission(or is the Docking waypoint).", false);
-					}
-				}
-				else // Escape or Enter -> stopping
-				{
-					allOK = false;
-				}
-	        }
-	        while(allOK);
-		}
+	//********************************************************************************//
+	//																				  //
+	//              			  7. Export a 3D model								  //
+	//																				  //
+	//********************************************************************************//
+	workflowStep++;
+	print("Step" + workflowStep + ": Export a 3D model");
+	var filenameReferenceMeshTbl = filename.split("/");
+	filenameReferenceMeshTbl.pop();
+	var filenameReferenceMesh = filenameReferenceMeshTbl.join("/");
+	var filepath = filenameReferenceMesh;
+	filenameReferenceMesh = filenameReferenceMesh + "/" + myMission.MissionName + ".glb";
+	ExportReferenceModel(filenameReferenceMesh);
 
-		// 7. write the json
-		workflowStep++;
-		print("Step" + workflowStep + ": Create the json");
-		var duration = myMission.ComputeMissionDuration();
-		var filename = myMission.ExportJson(duration.DurationValue);
+	//********************************************************************************//
+	//																				  //
+	//                			 8. Duration estimation 							  //
+	//																				  //
+	//********************************************************************************//
+	workflowStep++;
+	print("Step" + workflowStep + ": Duration estimation(" + duration.DurationString + ")");
+	SDialog.Message(duration.DurationString,SDialog.EMessageSeverity.Info,"Mission duration");
 
-		// 8. Export a 3D model
-		workflowStep++;
-		print("Step" + workflowStep + ": Export a 3D model");
-		var filenameReferenceMeshTbl = filename.split("/");
-		filenameReferenceMeshTbl.pop();
-		var filenameReferenceMesh = filenameReferenceMeshTbl.join("/");
-		var filepath = filenameReferenceMesh;
-		filenameReferenceMesh = filenameReferenceMesh + "/" + myMission.MissionName + ".glb";
-		ExportReferenceModel(filenameReferenceMesh);
-
-		// 9. Duration estimation
-		workflowStep++;
-		print("Step" + workflowStep + ": Duration estimation(" + duration.DurationString + ")");
-		SDialog.Message(duration.DurationString,SDialog.EMessageSeverity.Info,"Mission duration");
-
-		OpenUrl("file:///" + filepath);
+	OpenUrl("file:///" + filepath);
 
 } // Main2() close
 Main2();
