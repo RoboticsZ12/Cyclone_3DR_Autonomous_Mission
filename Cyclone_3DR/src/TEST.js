@@ -1916,15 +1916,15 @@ function CreateMission()
 	myMission.UCS = ucsMat;
 
 	myMission.IsDockingStation = dialogResult.isDocking;
-	// if(myMission.IsDockingStation)
-    // {
-    //     myMission.SetFiducialReturnPoint();
-    //     myMission.SetRefPlane(myMission.FiducialReturnPoint.GetZ());
-    // }
-    // else
-    // {
-    //     myMission.SetRefPlane(myMission.UCS.GetValue(2,3));
-    // }
+	if(myMission.IsDockingStation)
+    {
+        myMission.SetFiducialReturnPoint();
+        myMission.SetRefPlane(myMission.FiducialReturnPoint.GetZ());
+    }
+    else
+    {
+        myMission.SetRefPlane(myMission.UCS.GetValue(2,3));
+    }
 
 	myMission.InitMissionFromDoc();
 
