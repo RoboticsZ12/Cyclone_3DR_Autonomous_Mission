@@ -551,8 +551,6 @@ function Main()
 		inv.InitInverse(tMat);
 	}
 
-// Sleep(1000);
-
 	// adding the Fiducial marker
 	var objFile = CurrentScriptPath() + "/Fiducial.obj";
 	var fiMesh = SPoly.New();
@@ -590,7 +588,7 @@ function Main()
 }
 
 Main();
-
+Sleep(1000);
 
 
 
@@ -624,114 +622,6 @@ Main();
 //*****************************************************************//
 //	 					SCRIPT 2 (ZG Script)                       //
 //*****************************************************************//
-
-// //////////////////////////////////////////////////
-// // Creating dialog box for longitude and latitude
-// var LongLat = SDialog.New("Longitude and Latitude");
-
-// // Add input fields for X, Y, Z with initial values
-// LongLat.AddLength({id: 'Long', name: "Click Longitude of Image (X)", value: 0, saveValue: true, readOnly: false}); 
-// LongLat.AddLength({id: 'Lat', name: "Click Latitude of Image (Y)", value: 0, saveValue: true, readOnly: false}); 
-
-// // Get user inputs
-// var dialogLongLat = LongLat.Run();
-
-// // Check if "Cancel" button is pressed
-// if (dialogLongLat.ErrorCode == 1) 
-// {
-// 	var imessage = "User Has Terminated Sequence";
-// 	ErrorMessage(imessage);
-// }
-// else
-// {
-//     // Retrieve the Long and Lat values entered by the user
-//     var ImageLat = dialogLongLat.Lat;
-//     var ImageLong = dialogLongLat.Long;
-// }
-// //////////////////////////////////////////////////
-
-// //////////////////////////////////////////////////
-// // Create the dialog for Initial X, Y, Z Values
-// var XYZ = SDialog.New("Initial X,Y,Z Values");
-
-// // Add input fields for X, Y, Z with initial values
-// XYZ.AddLength({id: 'X', name: "Set X", value: 0, saveValue: true, readOnly: false});
-// XYZ.AddLength({id: 'Y', name: "Set Y", value: 0, saveValue: true, readOnly: false});
-// XYZ.AddLength({id: 'Z', name: "Set Z", value: 0, saveValue: true, readOnly: false});
-
-// // Run the dialog to get user inputs
-// var dialogInitialXYZ = XYZ.Run();
-
-// // Check if "Cancel" button is pressed
-// if (dialogInitialXYZ.ErrorCode == 1) 
-// {
-//     var imessage = "User Has Terminated Sequence";
-//     ErrorMessage(imessage);
-// }
-// else
-// {
-//     // Retrieve the initial X, Y, Z values entered by the user
-//     var initialXValue = dialogInitialXYZ.X;
-//     var initialYValue = dialogInitialXYZ.Y;
-//     var initialZValue = dialogInitialXYZ.Z;
-
-//     // Validate the initial X value 
-//     // if (initialXValue >= 90 || initialYValue < 0) 
-// 	if (initialXValue >= 90) 
-//     {
-//         var imessage = "Invalid X or Y Value";
-//         ErrorMessage(imessage);
-//     }
-
-//     // Validate the initial Y value 
-//     // if (initialYValue >= 90 || initialYValue < 0)
-// 	if (initialYValue >= 90) 
-//     {
-//         var imessage = "Invalid X or Y Value";
-//         ErrorMessage(imessage);
-//     }
-
-//     // Validate the initial Z value 
-//     if (initialZValue < 0) 
-//     {
-//         var imessage = "Invalid Z Value";
-//         ErrorMessage(imessage);
-//     }
-// }   
-// //////////////////////////////////////////////////
-
-// //////////////////////////////////////////////////
-// // Incrementation of new XYZ
-// var IncrementationXYZ = SDialog.New("Increment X,Y,Z");
-
-// // Setting up user input window
-// IncrementationXYZ.AddLength({id: 'X_length', name: "X Increment", value: 0, saveValue: true, readOnly: false});
-// IncrementationXYZ.AddLength({id: 'Y_length', name: "Y Increment", value: 0, saveValue: true, readOnly: false});
-// IncrementationXYZ.AddLength({id: 'Z_length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
-
-// // User input recorded
-// var dialogNewXYZ = IncrementationXYZ.Run();
-
-// // Check if "Cancel" button is pressed
-// if (dialogNewXYZ.ErrorCode == 1) 
-// {
-//     var imessage = "User Has Terminated Sequence";
-//     ErrorMessage(imessage);
-// }
-// else
-// {
-//     // Recalling user inputs
-//     var NewXrecall = dialogNewXYZ.X_length;
-//     var NewYrecall = dialogNewXYZ.Y_length;
-//     var NewZrecall = dialogNewXYZ.Z_length;
-// }
-// //////////////////////////////////////////////////
-
-// // Printing all Variables
-// print("Chosen Reference Pts: " + initialXValue + " X, " + initialYValue + " Y, " + initialZValue + " Z");
-// print("The Longitude of Point Cloud: " + ImageLong + " The Latitude is: " + ImageLat);
-// print("XYZ Incrementation Values: " + NewXrecall + " X, " + NewYrecall + " Y, " + NewZrecall + " Z");
-// // END ZG SCRIPT
 var myDialogFunc = SDialog.New("Waypoint INformation");
 	myDialogFunc.AddLength({ 
         id: "X", 
