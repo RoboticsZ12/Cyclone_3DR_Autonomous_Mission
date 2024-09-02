@@ -702,14 +702,13 @@ print("The Longitude of Point Cloud: " + ImageLong + " The Latitude is: " + Imag
 print("XYZ Incrementation Values: " + NewXrecall + " X, " + NewYrecall + " Y, " + NewZrecall + " Z");
 // END ZG SCRIPT
 	
-
-
 //*****************************************************************//
 //																   //
 // SCRIPT 3 (AUTONOMOUS WAYPOINT AT SECTION 4. ZG IMPLEMENTED CODE)//
 //																   //
 //*****************************************************************//
 
+// ACCESS TO GET FILES
 // <reference path="C:/Program Files/Leica Geosystems/Cyclone 3DR/Script/JsDoc/Reshaper.d.ts"/>
 
 // Context: This script is meant to be used to give instructions to the BLK ARC.
@@ -806,7 +805,7 @@ class SMission
 
 		this.DummyPath = dummyPath;
 		this.DummyPath.AddToDoc();
-		this.DummyPath.SetColors(0, 0, 0);
+		this.DummyPath.SetColors(0, 1, 1);
 		this.DummyPath.AddArrows(1, 1);
 		this.DummyPath.SetLineWidth(1);
 		this.DummyPath.SetName(this.MissionName + "_Trajectory");
