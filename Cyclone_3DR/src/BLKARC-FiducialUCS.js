@@ -549,5 +549,5 @@ function Main()
 	}
 }
 
-// Main();
-module.exports = { MAIN };
+Main();
+// module.exports = { MAIN };
