@@ -1001,8 +1001,10 @@ class SMission
      */
     SetFiducialReturnPoint()
 	{
+		// var returnPointPath = "C:/path/to/your/return_point.asc"; // Update to your actual file path
+		// var returnPointImportation = SPoint.FromFile(returnPointPath);
         // var returnPointPath= CurrentScriptPath() + "/../BLK ARC Common/return_point.asc";
-		var returnPointPath= CurrentScriptPath() + "/return_point.asc";
+		var returnPointPath= CurrentScriptPath() + "BLK ARC Common/return_point.asc";
         var returnPointImportation=SPoint.FromFile(returnPointPath);
         if(returnPointImportation.ErrorCode)
             ErrorMessage("return_point.asc not found");
