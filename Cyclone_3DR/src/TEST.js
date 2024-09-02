@@ -805,7 +805,7 @@ class SMission
 
 		this.DummyPath = dummyPath;
 		this.DummyPath.AddToDoc();
-		this.DummyPath.SetColors(0, 1, 1);
+		this.DummyPath.SetColors(0, 0, 0);
 		this.DummyPath.AddArrows(1, 1);
 		this.DummyPath.SetLineWidth(1);
 		this.DummyPath.SetName(this.MissionName + "_Trajectory");
