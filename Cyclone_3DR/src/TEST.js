@@ -3,6 +3,7 @@
 //**CURRENTLY THREE SEPERATE SCRIPTS HAVE BEEN COMBINED IN THIS DOC**//
 //*******************************************************************//
 
+var ZValue = .309;
 // Error Message Function
 function ErrorMessage(iMessage) 
 {
@@ -28,7 +29,7 @@ function openMyproject(iName)
 // SCRIPT 1
 
 
- /// <reference path="C:/Program Files/Leica Geosystems/Cyclone 3DR/Script/JsDoc/Reshaper.d.ts"/>
+//  <reference path="C:/Program Files/Leica Geosystems/Cyclone 3DR/Script/JsDoc/Reshaper.d.ts"/>
 
 // Context: The goal of this script is to position the Fiducial marker and create the associated UCS.
 // This script is meant to be used to position the QR Code needed for the BLK ARC.
@@ -116,22 +117,22 @@ function openMyproject(iName)
 //  */
 // function FiducialPositionDlg(iMat)
 // {
-// 	var dist = 0;
-// 	var height = 0;
-// 	var myDialog1=SDialog.Question("Do you want to click a point (Yes) or enter a value (No)?","Fiducial marker position");  
+// 	// var dist = 0;
+// 	// var height = 0;
+// 	// var myDialog1=SDialog.Question("Do you want to click a point (Yes) or enter a value (No)?","Fiducial marker position");  
 
-// 	if(myDialog1) // dist and height must be calculated from user click
-// 	{
-// 		var clickP = SPoint.FromClick();
-// 		if(clickP.ErrorCode != 0)
-// 			ErrorMessage("Canceled by user");
-// 		var thePnt = clickP.Point;
-// 		thePnt.ApplyTransformation(iMat);
-// 		dist = thePnt.GetY();
-// 		height = thePnt.GetZ();
-// 	}
-// 	else // dist and height are user input
-// 	{
+// 	// if(myDialog1) // dist and height must be calculated from user click
+// 	// {
+// 	// 	var clickP = SPoint.FromClick();
+// 	// 	if(clickP.ErrorCode != 0)
+// 	// 		ErrorMessage("Canceled by user");
+// 	// 	var thePnt = clickP.Point;
+// 	// 	thePnt.ApplyTransformation(iMat);
+// 	// 	dist = thePnt.GetY();
+// 	// 	height = thePnt.GetZ() + .309;
+// 	// }
+// 	// else // dist and height are user input
+// 	// {
 // 		var myDialog = SDialog.New("Fiducial marker position");
 // 		myDialog.AddLength({ 
 //             id: "dY", 
@@ -154,9 +155,16 @@ function openMyproject(iName)
 // 		if(dialogResult.ErrorCode != 0)
 // 			ErrorMessage("Operation canceled");
 
-// 		dist = dialogResult.dY;
-// 		height = dialogResult.dZ;
+// 		var dist = dialogResult.dY;
+// 		var height = dialogResult.dZ;
+// 	//}
+// 	if(height < .308 || height > .308)
+// 	{
+// 		var imessage = "Please keep height at .308m ";
+// 	    ErrorMessage(imessage);
 // 	}
+// 	print("Height: " + height)
+// 	print("Y Distance: " + dist)
 
 // 	return { 'UCSDistance': dist, 'UCSHeight': height };
 // }
@@ -226,7 +234,7 @@ function openMyproject(iName)
 // }
 
 // /**
-// * @typedef {Object} PlaneExtractObjects
+// * @typedef {Object} PlaneExtractObject
 // * @property {SPlane} ThePlane The plane extracted
 // * @property {SPoint} TheClickedPoint The clicked point
 // */
@@ -490,15 +498,6 @@ function openMyproject(iName)
 //  */
 // function Main()
 // {
-// var myfileName = GetOpenFileName("Select the file to open", "3DR files (*.3dr)", "C://"); // Define the path and the name of your file
-// if (myfileName.length == 0)
-// {
-//     ErrorMessage("Operation cancelcyed");
-// }
-
-// openMyproject(myfileName);
-
-
 // 	HideObjects();
 // 	var UCSCreationMethod = UCSMethod();
 
@@ -552,6 +551,8 @@ function openMyproject(iName)
 // 		inv.InitInverse(tMat);
 // 	}
 
+// // Sleep(1000);
+
 // 	// adding the Fiducial marker
 // 	var objFile = CurrentScriptPath() + "/Fiducial.obj";
 // 	var fiMesh = SPoly.New();
@@ -588,7 +589,10 @@ function openMyproject(iName)
 // 	}
 // }
 
+// Main();
+const { MAIN } = require('./BLKARC-FiducialUCS.js');
 
+MAIN();  // Call the function
 
 
 
@@ -624,113 +628,193 @@ function openMyproject(iName)
 //	 					SCRIPT 2 (ZG Script)                       //
 //*****************************************************************//
 
-//////////////////////////////////////////////////
-// Creating dialog box for longitude and latitude
-var LongLat = SDialog.New("Longitude and Latitude");
+// //////////////////////////////////////////////////
+// // Creating dialog box for longitude and latitude
+// var LongLat = SDialog.New("Longitude and Latitude");
 
-// Add input fields for X, Y, Z with initial values
-LongLat.AddLength({id: 'Long', name: "Click Longitude of Image (X)", value: 0, saveValue: true, readOnly: false}); 
-LongLat.AddLength({id: 'Lat', name: "Click Latitude of Image (Y)", value: 0, saveValue: true, readOnly: false}); 
+// // Add input fields for X, Y, Z with initial values
+// LongLat.AddLength({id: 'Long', name: "Click Longitude of Image (X)", value: 0, saveValue: true, readOnly: false}); 
+// LongLat.AddLength({id: 'Lat', name: "Click Latitude of Image (Y)", value: 0, saveValue: true, readOnly: false}); 
 
-// Get user inputs
-var dialogLongLat = LongLat.Run();
+// // Get user inputs
+// var dialogLongLat = LongLat.Run();
 
-// Check if "Cancel" button is pressed
-if (dialogLongLat.ErrorCode == 1) 
-{
-	var imessage = "User Has Terminated Sequence";
-	ErrorMessage(imessage);
-}
-else
-{
-    // Retrieve the Long and Lat values entered by the user
-    var ImageLat = dialogLongLat.Lat;
-    var ImageLong = dialogLongLat.Long;
-}
-//////////////////////////////////////////////////
+// // Check if "Cancel" button is pressed
+// if (dialogLongLat.ErrorCode == 1) 
+// {
+// 	var imessage = "User Has Terminated Sequence";
+// 	ErrorMessage(imessage);
+// }
+// else
+// {
+//     // Retrieve the Long and Lat values entered by the user
+//     var ImageLat = dialogLongLat.Lat;
+//     var ImageLong = dialogLongLat.Long;
+// }
+// //////////////////////////////////////////////////
 
-//////////////////////////////////////////////////
-// Create the dialog for Initial X, Y, Z Values
-var XYZ = SDialog.New("Initial X,Y,Z Values");
+// //////////////////////////////////////////////////
+// // Create the dialog for Initial X, Y, Z Values
+// var XYZ = SDialog.New("Initial X,Y,Z Values");
 
-// Add input fields for X, Y, Z with initial values
-XYZ.AddLength({id: 'X', name: "Set X", value: 0, saveValue: true, readOnly: false});
-XYZ.AddLength({id: 'Y', name: "Set Y", value: 0, saveValue: true, readOnly: false});
-XYZ.AddLength({id: 'Z', name: "Set Z", value: 0, saveValue: true, readOnly: false});
+// // Add input fields for X, Y, Z with initial values
+// XYZ.AddLength({id: 'X', name: "Set X", value: 0, saveValue: true, readOnly: false});
+// XYZ.AddLength({id: 'Y', name: "Set Y", value: 0, saveValue: true, readOnly: false});
+// XYZ.AddLength({id: 'Z', name: "Set Z", value: 0, saveValue: true, readOnly: false});
 
-// Run the dialog to get user inputs
-var dialogInitialXYZ = XYZ.Run();
+// // Run the dialog to get user inputs
+// var dialogInitialXYZ = XYZ.Run();
 
-// Check if "Cancel" button is pressed
-if (dialogInitialXYZ.ErrorCode == 1) 
-{
-    var imessage = "User Has Terminated Sequence";
-    ErrorMessage(imessage);
-}
-else
-{
-    // Retrieve the initial X, Y, Z values entered by the user
-    var initialXValue = dialogInitialXYZ.X;
-    var initialYValue = dialogInitialXYZ.Y;
-    var initialZValue = dialogInitialXYZ.Z;
+// // Check if "Cancel" button is pressed
+// if (dialogInitialXYZ.ErrorCode == 1) 
+// {
+//     var imessage = "User Has Terminated Sequence";
+//     ErrorMessage(imessage);
+// }
+// else
+// {
+//     // Retrieve the initial X, Y, Z values entered by the user
+//     var initialXValue = dialogInitialXYZ.X;
+//     var initialYValue = dialogInitialXYZ.Y;
+//     var initialZValue = dialogInitialXYZ.Z;
 
-    // Validate the initial X value 
-    // if (initialXValue >= 90 || initialYValue < 0) 
-	if (initialXValue >= 90) 
-    {
-        var imessage = "Invalid X or Y Value";
-        ErrorMessage(imessage);
-    }
+//     // Validate the initial X value 
+//     // if (initialXValue >= 90 || initialYValue < 0) 
+// 	if (initialXValue >= 90) 
+//     {
+//         var imessage = "Invalid X or Y Value";
+//         ErrorMessage(imessage);
+//     }
 
-    // Validate the initial Y value 
-    // if (initialYValue >= 90 || initialYValue < 0)
-	if (initialYValue >= 90) 
-    {
-        var imessage = "Invalid X or Y Value";
-        ErrorMessage(imessage);
-    }
+//     // Validate the initial Y value 
+//     // if (initialYValue >= 90 || initialYValue < 0)
+// 	if (initialYValue >= 90) 
+//     {
+//         var imessage = "Invalid X or Y Value";
+//         ErrorMessage(imessage);
+//     }
 
-    // Validate the initial Z value 
-    if (initialZValue < 0) 
-    {
-        var imessage = "Invalid Z Value";
-        ErrorMessage(imessage);
-    }
-}   
-//////////////////////////////////////////////////
+//     // Validate the initial Z value 
+//     if (initialZValue < 0) 
+//     {
+//         var imessage = "Invalid Z Value";
+//         ErrorMessage(imessage);
+//     }
+// }   
+// //////////////////////////////////////////////////
 
-//////////////////////////////////////////////////
-// Incrementation of new XYZ
-var IncrementationXYZ = SDialog.New("Increment X,Y,Z");
+// //////////////////////////////////////////////////
+// // Incrementation of new XYZ
+// var IncrementationXYZ = SDialog.New("Increment X,Y,Z");
 
-// Setting up user input window
-IncrementationXYZ.AddLength({id: 'X_length', name: "X Increment", value: 0, saveValue: true, readOnly: false});
-IncrementationXYZ.AddLength({id: 'Y_length', name: "Y Increment", value: 0, saveValue: true, readOnly: false});
-IncrementationXYZ.AddLength({id: 'Z_length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
+// // Setting up user input window
+// IncrementationXYZ.AddLength({id: 'X_length', name: "X Increment", value: 0, saveValue: true, readOnly: false});
+// IncrementationXYZ.AddLength({id: 'Y_length', name: "Y Increment", value: 0, saveValue: true, readOnly: false});
+// IncrementationXYZ.AddLength({id: 'Z_length', name: "Z Increment", value: 0, saveValue: true, readOnly: false});
 
-// User input recorded
-var dialogNewXYZ = IncrementationXYZ.Run();
+// // User input recorded
+// var dialogNewXYZ = IncrementationXYZ.Run();
 
-// Check if "Cancel" button is pressed
-if (dialogNewXYZ.ErrorCode == 1) 
-{
-    var imessage = "User Has Terminated Sequence";
-    ErrorMessage(imessage);
-}
-else
-{
-    // Recalling user inputs
-    var NewXrecall = dialogNewXYZ.X_length;
-    var NewYrecall = dialogNewXYZ.Y_length;
-    var NewZrecall = dialogNewXYZ.Z_length;
-}
-//////////////////////////////////////////////////
+// // Check if "Cancel" button is pressed
+// if (dialogNewXYZ.ErrorCode == 1) 
+// {
+//     var imessage = "User Has Terminated Sequence";
+//     ErrorMessage(imessage);
+// }
+// else
+// {
+//     // Recalling user inputs
+//     var NewXrecall = dialogNewXYZ.X_length;
+//     var NewYrecall = dialogNewXYZ.Y_length;
+//     var NewZrecall = dialogNewXYZ.Z_length;
+// }
+// //////////////////////////////////////////////////
+
+// // Printing all Variables
+// print("Chosen Reference Pts: " + initialXValue + " X, " + initialYValue + " Y, " + initialZValue + " Z");
+// print("The Longitude of Point Cloud: " + ImageLong + " The Latitude is: " + ImageLat);
+// print("XYZ Incrementation Values: " + NewXrecall + " X, " + NewYrecall + " Y, " + NewZrecall + " Z");
+// // END ZG SCRIPT
+var myDialogFunc = SDialog.New("Waypoint INformation");
+	myDialogFunc.AddLength({ 
+        id: "X", 
+        name: "Initial X Value", 
+        tooltip: "Set close to 0", 
+        saveValue: true, 
+        // value: SPoint.New(0,0,0), 
+        readOnly: false});
+	myDialogFunc.AddLength({ 
+		id: "Y", 
+		name: "Initial Y Value", 
+		tooltip: "Set close to 0", 
+		saveValue: true, 
+		// value: SPoint.New(0,0,0), 
+		readOnly: false});
+	myDialogFunc.AddLength({ 
+		id: "Z", 
+		name: "Initial Z Value", 
+		tooltip: "Set close to 0", 
+		saveValue: true, 
+		// value: SPoint.New(0,0,0), 
+		readOnly: false});
+	myDialogFunc.AddLength({ 
+        id: "Long", 
+        name: "Longitude (X)",
+        tooltip: "Click Width of layout", 
+        saveValue: true, 
+        // value: SPoint.New(0,0,0), 
+        readOnly: false});
+	myDialogFunc.AddLength({ 
+		id: "Lat", 
+		name: "Latitutde (Y)", 
+		tooltip: "Click Length of layout", 
+		saveValue: true, 
+		// value: SPoint.New(0,0,0), 
+		readOnly: false});
+    myDialogFunc.AddLength({ 
+        id: "X_length", 
+        name: "X Increment", 
+        tooltip: "Distance between two points", 
+        saveValue: true, 
+        // value: SPoint.New(0,0,0), 
+        readOnly: false});    
+    myDialogFunc.AddLength({ 
+        id: "Y_length", 
+        name: "Y Increment", 
+        tooltip: "Distance between two points", 
+        saveValue: true, 
+        // value: SPoint.New(0,0,0), 
+        readOnly: false}); 
+    myDialogFunc.AddLength({ 
+        id: "Z_length", 
+        name: "Z Increment", 
+        tooltip: "Distance between two points", 
+        saveValue: true, 
+        // value: SPoint.New(0,0,0), 
+        readOnly: false}); 
+
+	var dlgResult=myDialogFunc.Run();
+
+	if(dlgResult.ErrorCode != 0)
+		ErrorMessage("Canceled by user");
+
+    var initialXValue = dlgResult.X
+    var initialYValue = dlgResult.Y
+    var initialZValue = dlgResult.Z
+
+    var ImageLat = dlgResult.Lat
+    var ImageLong = dlgResult.Long
+
+    var NewXrecall = dlgResult.X_length
+    var NewYrecall = dlgResult.Y_length
+    var NewZrecall = dlgResult.Z_length
 
 // Printing all Variables
 print("Chosen Reference Pts: " + initialXValue + " X, " + initialYValue + " Y, " + initialZValue + " Z");
 print("The Longitude of Point Cloud: " + ImageLong + " The Latitude is: " + ImageLat);
 print("XYZ Incrementation Values: " + NewXrecall + " X, " + NewYrecall + " Y, " + NewZrecall + " Z");
 // END ZG SCRIPT
+	
 
 
 //*****************************************************************//
@@ -1569,7 +1653,8 @@ function CreateZone(
     iOutputColorR, 
     iOutputColorG, 
     iOutputColorB,
-    checkGoOrNoGo)
+    checkGoOrNoGo,
+	auto)
 {
 	var errorCode = 0;
 	var errorMsg = "";
@@ -1587,10 +1672,12 @@ function CreateZone(
 
 	var dialogResult = SDialog.Question("<span style='color:red;font-weight: bold;'>"+iOptionalMsg+"</span><br>"+iDialogInstruction+"<br>"+buttonInstructions,iDialogTitle);
 
+	/////////////////////////////////////////////////////////////////////
 	if(dialogResult)
 	{
 		//draw the temp polylines
 		var temp3DZone = SMultiline.New();
+		// var temp3DZone = 
 		temp3DZone.SetColors(0, 0, 1); //temp color
 		temp3DZone.SetLineWidth(3);
 		temp3DZone.SetName(iMission.MissionName + "_Zone(3D)");
@@ -1748,7 +1835,6 @@ function CreateZone(
         
 	}
 }
-
 
 /**
   * Function to display a dialog whose goal is to set actions in a given waypoint
@@ -1950,6 +2036,7 @@ function IsWaypointAllowed(iPoint, iGoZoneTbl, iNoGoZoneTbl)
 	return isAllowed;
 }
 
+
 //******************************************//
 //										    //
 //                Main Function				//
@@ -1970,12 +2057,22 @@ function Main2()
 
 	//********************************************************************************//
 	//																				  //
-	//                2. Create the GO zone (Currently in progress) 				  //
+	//                				2. Create the GO zone 			                  //
 	//																				  //
 	//********************************************************************************//
 	workflowStep++;
+if (myMission.GoZone == undefined) 
+{
+    print("Step" + workflowStep + ": Create the GO zone");
+    var errorMsg = "";
+
+// working code
+	workflowStep++;
 	if(myMission.GoZone == undefined)
 	{
+		ValidateAStep(
+			"Stay within", 
+			"latitude and longitude values greater than ( Latitude = " + Math.round(ImageLong) + ") (Longitude = " + Math.round(ImageLat) + ")")
 		print("Step" + workflowStep + ": Create the GO zone");
 		var errorMsg = "";
 
@@ -2000,10 +2097,11 @@ function Main2()
 	{
 		print("Step" + workflowStep + ": GO zone already defined");
 	}
+}
 	
 	//********************************************************************************//
 	//																				  //
-	//                3. Create NO GO zones (Currently in progress) 				  //
+	//             					  3. Create NO GO zones 						  //
 	//																				  //
 	//********************************************************************************//
 	workflowStep++;
@@ -2055,7 +2153,7 @@ function Main2()
 
 	//********************************************************************************//
 	//																				  //
-	//                					4. Add waypoints			            	  //
+	//                				4. Add waypoints				            	  //
 	//																				  //
 	//********************************************************************************//
 	workflowStep++;
@@ -2071,7 +2169,8 @@ function Main2()
 	var counter = Math.round(ImageLat);
 	var multiplier = 1;
 	var Ycount = 0;
-	var actions = AddActionToWaypointDlg(); // GET ACTION FOR ALL WAYPOINTS AT ONCE
+	var initialYTrack = initialYValue;
+	// var actions = AddActionToWaypointDlg(); // GET ACTION FOR ALL WAYPOINTS AT ONCE
 	
 	// Loop used for multiple executions. 
 	for(multiplier; multiplier <= counter; multiplier++)
@@ -2094,8 +2193,9 @@ function Main2()
 				NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
 
 				// Creation Waypoint
-				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
-				NewWayPoint1X.SetActions(actions); // setting action
+				// var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "Medium");
+				// NewWayPoint1X.SetActions(actions); // setting action
 
 				myMission.WaypointsTbl.push(NewWayPoint1X);
 				myMission.UpdateDummyPath();
@@ -2120,8 +2220,9 @@ function Main2()
 				NewPointY.SetName(myMission.MissionName + "_" + count);
 
 				//Waypoint creation
-				var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
-				NewWayPoint1Y.SetActions(actions); // setting action
+				// var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
+				var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "Medium");
+				// NewWayPoint1Y.SetActions(actions); // setting action
 
 				myMission.WaypointsTbl.push(NewWayPoint1Y);
 				myMission.UpdateDummyPath();
@@ -2148,8 +2249,9 @@ function Main2()
 				NewPointX.SetName(myMission.MissionName + "_" + count);
 
 				//Waypoint creation
-				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
-				NewWayPoint1X.SetActions(actions); // setting action
+				// var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
+				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "Medium");
+				// NewWayPoint1X.SetActions(actions); // setting action
 
 				myMission.WaypointsTbl.push(NewWayPoint1X);
 				myMission.UpdateDummyPath();
@@ -2159,15 +2261,15 @@ function Main2()
 		}
 		print("counter: " + counter);
 
-		// When loop is finished, then nxt waypoint will be at origin. 
+		// This will take you back to initial point 
 		if(multiplier == counter)
 		{
-			initialXValue == 0
-			initialYValue == 0
+			initialXValue == initialXValue
+			initialYValue == initialYTrack
 			initialZValue == 0
 
 			print("X value: " + x);
-			var NewPointXYZ = new SPoint(initialXValue, initialZValue, initialZValue); // z should remain as Zero
+			var NewPointXYZ = new SPoint(initialXValue, initialYTrack, initialZValue); // z should remain as Zero
 
 			// WayPoint Projection
 			NewPointXYZ = myMission.RefPlane.Proj3D(NewPointXYZ).Point;
@@ -2179,8 +2281,8 @@ function Main2()
 				NewPointX.SetName(myMission.MissionName + "_" + count);
 
 				//Waypoint creation
-				var NewWayPoint1XYZ = SWaypoint.CreateWayPoint(myMission, count, NewPointXYZ, "1", "None");
-				NewWayPoint1XYZ.SetActions(actions); // setting action
+				var NewWayPoint1XYZ = SWaypoint.CreateWayPoint(myMission, count, NewPointXYZ, "1", "Medium");
+				// NewWayPoint1XYZ.SetActions(actions); // setting action
 
 
 				myMission.WaypointsTbl.push(NewWayPoint1XYZ);
@@ -2189,6 +2291,8 @@ function Main2()
 			}
 		}
 	}
+	print("initialX: " + initialXValue)
+    print("initialYtrack: " + initialYTrack)
 
 	//********************************************************************************//
 	//																				  //
@@ -2225,7 +2329,7 @@ function Main2()
 
 						//Waypoint label creation
 						var newWayPoint2 = SWaypoint.CreateWayPoint(myMission, count, newPoint, "2", "None");
-						newWayPoint2.SetActions(actions); // setting action
+						// newWayPoint2.SetActions(actions); // setting action
 
 
 						myMission.WaypointsBackTbl.push(newWayPoint2);
@@ -2242,20 +2346,20 @@ function Main2()
             while(allOK);
 
             //add or adjust the return point
-			if(myMission.WaypointDockingFinal == undefined && newPoint != undefined)
-			{
-                if(newPoint.Distance(myMission.FiducialReturnPoint)<0.5) 
-				{
+			// if(myMission.WaypointDockingFinal == undefined && newPoint != undefined)
+			// {
+            //     if(newPoint.Distance(myMission.FiducialReturnPoint)<0.5) 
+			// 	{
                 
-					newWayPoint2.TransformWaypointIntoDockingWaypoint(myMission);
-				}
-				else
-				{
-                    var newWayPointDocking=SWaypoint.CreateWayPoint(myMission, 1, myMission.FiducialReturnPoint, "D", 'None');
-					myMission.WaypointDockingFinal = newWayPointDocking;
-				}
-				myMission.UpdateDummyPath();
-			}
+			// 		newWayPoint2.TransformWaypointIntoDockingWaypoint(myMission);
+			// 	}
+			// 	else
+			// 	{
+            //         var newWayPointDocking=SWaypoint.CreateWayPoint(myMission, 1, myMission.FiducialReturnPoint, "D", 'None');
+			// 		myMission.WaypointDockingFinal = newWayPointDocking;
+			// 	}
+			// 	myMission.UpdateDummyPath();
+			// }
 
 		}
 	}
@@ -2275,14 +2379,14 @@ function Main2()
 	//              			  7. Export a 3D model								  //
 	//																				  //
 	//********************************************************************************//
-	workflowStep++;
-	print("Step" + workflowStep + ": Export a 3D model");
-	var filenameReferenceMeshTbl = filename.split("/");
-	filenameReferenceMeshTbl.pop();
-	var filenameReferenceMesh = filenameReferenceMeshTbl.join("/");
-	var filepath = filenameReferenceMesh;
-	filenameReferenceMesh = filenameReferenceMesh + "/" + myMission.MissionName + ".glb";
-	ExportReferenceModel(filenameReferenceMesh);
+	// workflowStep++;
+	// print("Step" + workflowStep + ": Export a 3D model");
+	// var filenameReferenceMeshTbl = filename.split("/");
+	// filenameReferenceMeshTbl.pop();
+	// var filenameReferenceMesh = filenameReferenceMeshTbl.join("/");
+	// var filepath = filenameReferenceMesh;
+	// filenameReferenceMesh = filenameReferenceMesh + "/" + myMission.MissionName + ".glb";
+	// ExportReferenceModel(filenameReferenceMesh);
 
 	//********************************************************************************//
 	//																				  //
@@ -2297,3 +2401,4 @@ function Main2()
 
 } // Main2() close
 Main2();
+

@@ -1,0 +1,3 @@
+newmtl Mesh_0
+map_Ka ./Fiducial.png
+map_Kd ./Fiducial.png
