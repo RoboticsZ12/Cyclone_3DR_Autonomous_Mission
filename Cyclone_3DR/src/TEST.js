@@ -1715,15 +1715,15 @@ function CreateZone(
 				}
 
 				temp3DZone.InsertLast(pointRes.Point);
-				var pointProjection = iMission.RefPlane.Proj3D(pointRes.Point);
-				if(!pointProjection.ErrorCode)
-				{
-					temp2DZone.InsertLast(pointProjection.Point);
-				}
-				else
-				{
-					ErrorMessage("The point cannot be projected");
-				}
+				// var pointProjection = iMission.RefPlane.Proj3D(pointRes.Point);
+				// if(!pointProjection.ErrorCode)
+				// {
+				// 	temp2DZone.InsertLast(pointProjection.Point);
+				// }
+				// else
+				// {
+				// 	ErrorMessage("The point cannot be projected");
+				// }
 			}
 			else // Escape or Enter -> stopping
 			{
