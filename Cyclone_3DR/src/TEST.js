@@ -592,29 +592,28 @@ function Main()
 Main();
 // Sleep(1000);
 
-var modes = ["YES" , "NO"];
+var modes = ["YES"];
 
-var myDialogFiducialCheck = SDialog.New("Do you want Docking Station AND/OR Fiducial?");
-	myDialog.AddChoices({
+var myDialogFiducialCheck = SDialog.New("Docking Station AND/OR Fiducial");
+	myDialogFiducialCheck.AddChoices({
         id: "Decision",
-        name: "Decide",
+        name: "Yes to continue program with current selection, cancel to end program for re-run",
         choices: modes,
         tooltip: "Second feducial?",
         value: 0, 
-        saveValue: true, 
+        saveValue: false, 
         readOnly: false,
         style: SDialog.ChoiceRepresentationMode.RadioButtons});
-    myDialog.SetButtons(["Validate","Cancel"]);
+    myDialogFiducialCheck.SetButtons(["Validate","Cancel"]);
 
-	var dialogResult = myDialog.Run();
+	// var dialogResult = myDialogFiducialCheck.Run();
 
-    var scanMode = modes[0];
-	if(dialogResult.ErrorCode == 0)
-	{
-		scanMode = modes[dialogResult.scanMode];
-	}
+   	var dialogResult = myDialogFiducialCheck.Run();
+
+	if(dialogResult.ErrorCode != 0)
+		ErrorMessage("Canceled by user");
     
-	return scanMode
+	// return scanMode
 
 
 
