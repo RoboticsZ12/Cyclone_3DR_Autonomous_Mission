@@ -1974,7 +1974,7 @@ if (myMission.GoZone == undefined)
 	workflowStep++;
 	if(myMission.GoZone == undefined)
 	{
-		var myDialogText = SDialog.New("IMPORTANT!!!");
+		var myDialogText = SDialog.New("BLK ARC mission planner: overwrite the result");
 		myDialogText.AddText("Ensure the 'NO GO/GO ZONES' are just outside the Latitude value " + ImageLat + " and Longitude value " + ImageLong + ". Example: Go zone set at [-.1,0,0] for first point.");
 		do
 		{
