@@ -590,10 +590,31 @@ function Main()
 }
 
 Main();
-Sleep(1000);
+// Sleep(1000);
 
+var modes = ["YES" , "NO"];
 
+var myDialogFiducialCheck = SDialog.New("Do you want Docking Station AND/OR Fiducial?");
+	myDialog.AddChoices({
+        id: "Decision",
+        name: "Decide",
+        choices: modes,
+        tooltip: "Second feducial?",
+        value: 0, 
+        saveValue: true, 
+        readOnly: false,
+        style: SDialog.ChoiceRepresentationMode.RadioButtons});
+    myDialog.SetButtons(["Validate","Cancel"]);
 
+	var dialogResult = myDialog.Run();
+
+    var scanMode = modes[0];
+	if(dialogResult.ErrorCode == 0)
+	{
+		scanMode = modes[dialogResult.scanMode];
+	}
+    
+	return scanMode
 
 
 
@@ -624,7 +645,7 @@ Sleep(1000);
 //*****************************************************************//
 //	 					SCRIPT 2 (ZG Script)                       //
 //*****************************************************************//
-var modes = ["None = 0s", "Low = 10s", "Medium = 30s", "High = 60s"];
+// var modes = ["None = 0s", "Low = 10s", "Medium = 30s", "High = 60s"];
 
 var myDialogFunc = SDialog.New("Waypoint INformation");
 	myDialogFunc.AddLength({ 
@@ -683,7 +704,7 @@ var myDialogFunc = SDialog.New("Waypoint INformation");
         saveValue: true, 
         // value: SPoint.New(0,0,0), 
         readOnly: false});
-	// myDialogFunc.AddChoices({
+	// myDialogFunc.Add({
 	// 	id: "scanMode",
 	// 	name: "Add a stationary scan time",
 	// 	choices: modes,
