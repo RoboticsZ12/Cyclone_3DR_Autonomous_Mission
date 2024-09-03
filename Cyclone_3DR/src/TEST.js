@@ -1992,7 +1992,7 @@ if (myMission.GoZone == undefined)
 	workflowStep++;
 	if(myMission.GoZone == undefined)
 	{
-		SDialog.Message("<span style='color:red;font-weight: bold;'>X Axis</span> should be oriented external to the wall. <br><span style='color:green;font-weight: bold;'>Y Axis</span> should be horizontal, aligned to the wall and pointing right. <br><span style='color:blue;font-weight: bold;'>Z Axis</span> should be oriented vertically (upward). <br>After closing this dialog, look at the alignment and check if it is correctly oriented.<br>Then press Enter if everything is fine or Escape if you want to restart from beginning.",SDialog.EMessageSeverity.Instruction, "UCS Creation for BLK ARC");
+		SDialog.Message("<span style='color:red;font-weight: bold;'>IMPORTANT:</span> Ensure that the 'GO/NO GO ZONES' are positioned just beyond Latitude, " + Math.round(ImageLat) + ", and Longitude, " + Math.round(ImageLong) + ", specified earlier. Example: [-.1,0,0]",SDialog.EMessageSeverity.Instruction, "IMPORTANT!!!");
 		do
 		{
             var goZoneValid=CreateZone(myMission, "BLK ARC mission planner: create the GO Zone", errorMsg, "Draw the GO Zone multiline", 0, 1, 0, true);
