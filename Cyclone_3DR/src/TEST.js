@@ -578,7 +578,7 @@ function Main()
 		dockMesh.AddToDoc();
 		dockMesh.MoveToGroup("Fiducials", false);
 
-		var returnPointPath = CurrentScriptPath() + "/../BLK ARC Common/return_point.asc";
+		var returnPointPath = CurrentScriptPath() + "/BLK ARC Common/return_point.asc";
         var returnPoint=SPoint.FromFile(returnPointPath).PointTbl[0];
         returnPoint=scaleLoadedObjects(returnPoint);
 		returnPoint.ApplyTransformation(inv); 
