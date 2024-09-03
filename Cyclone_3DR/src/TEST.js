@@ -81,7 +81,8 @@ function UCSMethod()
 	myDialog.AddChoices({
     	id: "method",
     	name: "List of methods",
-    	choices: ["Three points (CAD/BIM drawing)","Three planes (Point Cloud)","Active UCS","Docking station"],
+    	// choices: ["Three points (CAD/BIM drawing)","Three planes (Point Cloud)","Active UCS","Docking station"],
+		choices: ["Three points (CAD/BIM drawing)","Docking station"],
     	tooltip: "Choose between the methods",
     	value: 0, 
     	saveValue: true, 
