@@ -492,13 +492,17 @@ function scaleLoadedObjects(iComp)
 	return iComp;
 }
 
+
+var isFiducialCreated = false;
 /**
  * Main Function
  */
 function Main()
 {
-	// if(UCSMethod == undefined)
-	// {
+	if(isFiducialCreated)
+	{
+		return;	
+	}
 	HideObjects();
 	var UCSCreationMethod = UCSMethod();
 
@@ -562,6 +566,7 @@ function Main()
 	fiMesh.SetPolyRepresentation(SPoly.POLY_TEXTURE);
 	fiMesh.AddToDoc();
 	fiMesh.MoveToGroup("Fiducials", false);
+	var isFiducialCreated = true;
 
 	// adding the Docking Station
 	if(UCSCreationMethod == 4)
@@ -586,7 +591,6 @@ function Main()
         returnPoint.MoveToGroup("Fiducials",false);
 
 	}
-// }
 }
 
 Main();
@@ -1992,7 +1996,7 @@ if (myMission.GoZone == undefined)
 	workflowStep++;
 	if(myMission.GoZone == undefined)
 	{
-		SDialog.Message("<span style='color:red;font-weight: bold;'>IMPORTANT:</span> Ensure that the 'GO/NO GO ZONES' are positioned just beyond Latitude <br>, " + Math.round(ImageLat) + ", and Longitude, " + Math.round(ImageLong) + ", specified earlier <br>. Example: [-.1,0,0]",SDialog.EMessageSeverity.Instruction, "IMPORTANT!!!");
+		SDialog.Message("<span style='color:red;font-weight: bold;'>IMPORTANT:</span> Ensure that the 'GO/NO GO ZONES'<br> are positioned just beyond Latitude, " + Math.round(ImageLat) + ", and Longitude, " + Math.round(ImageLong) + ", specified earlier <br>. Example: [-.1,0,0]",SDialog.EMessageSeverity.Instruction, "IMPORTANT!!!");
 		do
 		{
             var goZoneValid=CreateZone(myMission, "BLK ARC mission planner: create the GO Zone", errorMsg, "Draw the GO Zone multiline", 0, 1, 0, true);
