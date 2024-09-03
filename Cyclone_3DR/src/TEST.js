@@ -492,12 +492,15 @@ function scaleLoadedObjects(iComp)
 	return iComp;
 }
 
+
+var isFiducialCreated = 1
 /**
  * Main Function
  */
 function Main()
 {
-	for(var Fiducial = 0; Fiducial < isFiducialCreated; Fiducial++)
+	var fiducial = 0
+	do
 	{
 	HideObjects();
 	var UCSCreationMethod = UCSMethod();
@@ -587,42 +590,67 @@ function Main()
         returnPoint.MoveToGroup("Fiducials",false);
 
 	}
+	Fiducial++
+	print("Fiducial, " + Fiducial)
+	print("isFiducialcreated: " + isFiducialCreated)
+} while(Fiducial < isFiducialCreated)
 }
-}
-var isFiducialCreated = 1
-var modes = ["YES"];
 
-var myDialogFiducialCheck = SDialog.New("Docking Station AND/OR Fiducial");
-	myDialogFiducialCheck.AddChoices({
-        id: "Decision",
-        name: "Yes to continue program with current selection, cancel to end program for re-run",
+// var modes = ["YES"];
+
+// var myDialogFiducialCheck = SDialog.New("Docking Station AND/OR Fiducial");
+// 	myDialogFiducialCheck.AddChoices({
+//         id: "Decision",
+//         name: "Yes to continue program with current selection, cancel to end program for re-run",
+//         choices: modes,
+//         tooltip: "Second feducial?",
+//         value: 0, 
+//         saveValue: true, 
+//         readOnly: false,
+//         style: SDialog.ChoiceRepresentationMode.RadioButtons});
+//     myDialogFiducialCheck.SetButtons(["Validate","Cancel"]);
+
+//    	var dialogResult = myDialogFiducialCheck.Run();
+
+// 	if(dialogResult.ErrorCode != 0)
+// 		ErrorMessage("Canceled by user");
+
+// 	var yes = dialogResult.Decision
+
+
+	var modes = ["1 Fiducial", "Fiducial & Docking Bay"];
+    
+    var myDialogFiducialCheck = SDialog.New("Fiducial program run how many times?");
+    myDialogFiducialCheck.AddChoices({
+        id: "Fiducialpts",
+        name: "How many fiducials?",
         choices: modes,
-        tooltip: "Second feducial?",
+        tooltip: "Choose number of fiducials",
         value: 0, 
         saveValue: true, 
         readOnly: false,
         style: SDialog.ChoiceRepresentationMode.RadioButtons});
     myDialogFiducialCheck.SetButtons(["Validate","Cancel"]);
 
-   	var dialogResult = myDialogFiducialCheck.Run();
+	var dialogResult = myDialogFiducialCheck.Run();
 
-	var yes = dialogResult.Decision
-	   if(yes)
-		{
-			isFiducialCreatedFiducail = 2
-		}
-		else
-		{
-			isFiducialCreatedFiducial = 1
-			if(dialogResult.ErrorCode != 0)
-				ErrorMessage("Canceled by user");
-		}
-	// if(dialogResult.ErrorCode != 0)
-	// 	ErrorMessage("Canceled by user");
-	// // return scanMode
+    var scanMode = modes[0];
+	if(dialogResult.ErrorCode == 0)
+	{
+		scanMode = modes[dialogResult.scanMode];
+	}
+	// return scanMode
+	if(scanMode == 0)
+	{
+		isFiducialCreated = 2
+	}
+	else
+	{
+		isFiducialCreated = 1
+	}
+
 
 Main();
-// Sleep(1000);
 
 
 
