@@ -683,7 +683,7 @@ var myDialogFunc = SDialog.New("Waypoint INformation");
         saveValue: true, 
         // value: SPoint.New(0,0,0), 
         readOnly: false});
-	myDialog.AddChoices({
+	myDialogFunc.AddChoices({
 		id: "scanMode",
 		name: "Add a stationary scan time",
 		choices: modes,
@@ -692,7 +692,7 @@ var myDialogFunc = SDialog.New("Waypoint INformation");
 		saveValue: true, 
 		readOnly: false,
 		style: SDialog.ChoiceRepresentationMode.RadioButtons});
-		myDialog.SetButtons(["Validate","Cancel"]);
+		myDialogFunc.SetButtons(["Validate","Cancel"]);
 
 	var dlgResult=myDialogFunc.Run();
 
@@ -1974,7 +1974,8 @@ if (myMission.GoZone == undefined)
 	workflowStep++;
 	if(myMission.GoZone == undefined)
 	{
-		myDialog.AddText("Ensure the 'NO GO/GO ZONES' are just outside the Latitude value " + ImageLat + " and Longitude value " + ImageLong + ". Example: Go zone set at [-.1,0,0] for first point.");
+		var myDialogText = SDialog.New("IMPORTANT!!!");
+		myDialogText.AddText("Ensure the 'NO GO/GO ZONES' are just outside the Latitude value " + ImageLat + " and Longitude value " + ImageLong + ". Example: Go zone set at [-.1,0,0] for first point.");
 		do
 		{
             var goZoneValid=CreateZone(myMission, "BLK ARC mission planner: create the GO Zone", errorMsg, "Draw the GO Zone multiline", 0, 1, 0, true);
