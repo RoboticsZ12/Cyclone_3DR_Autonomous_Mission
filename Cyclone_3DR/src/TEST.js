@@ -497,7 +497,7 @@ function scaleLoadedObjects(iComp)
  */
 function Main()
 {
-	if(UCSCreationMethod == undefined)
+	if(UCSMethod == undefined)
 	{
 	HideObjects();
 	var UCSCreationMethod = UCSMethod();
