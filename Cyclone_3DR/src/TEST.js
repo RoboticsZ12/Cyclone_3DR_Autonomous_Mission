@@ -624,6 +624,8 @@ Sleep(1000);
 //*****************************************************************//
 //	 					SCRIPT 2 (ZG Script)                       //
 //*****************************************************************//
+var modes = ["None = 0s", "Low = 10s", "Medium = 30s", "High = 60s"];
+
 var myDialogFunc = SDialog.New("Waypoint INformation");
 	myDialogFunc.AddLength({ 
         id: "X", 
@@ -680,7 +682,17 @@ var myDialogFunc = SDialog.New("Waypoint INformation");
         tooltip: "Distance between two points", 
         saveValue: true, 
         // value: SPoint.New(0,0,0), 
-        readOnly: false}); 
+        readOnly: false});
+	myDialog.AddChoices({
+		id: "scanMode",
+		name: "Add a stationary scan time",
+		choices: modes,
+		tooltip: "Choose between None, Low, Medium or High",
+		value: 0, 
+		saveValue: true, 
+		readOnly: false,
+		style: SDialog.ChoiceRepresentationMode.RadioButtons});
+		myDialog.SetButtons(["Validate","Cancel"]);
 
 	var dlgResult=myDialogFunc.Run();
 
@@ -697,6 +709,8 @@ var myDialogFunc = SDialog.New("Waypoint INformation");
     var NewXrecall = dlgResult.X_length
     var NewYrecall = dlgResult.Y_length
     var NewZrecall = dlgResult.Z_length
+
+	var 
 
 // Printing all Variables
 print("Chosen Reference Pts: " + initialXValue + " X, " + initialYValue + " Y, " + initialZValue + " Z");
@@ -1960,12 +1974,7 @@ if (myMission.GoZone == undefined)
 	workflowStep++;
 	if(myMission.GoZone == undefined)
 	{
-		ValidateAStep(
-			"Stay within", 
-			"latitude and longitude values greater than ( Latitude = " + Math.round(ImageLong) + ") (Longitude = " + Math.round(ImageLat) + ")")
-		print("Step" + workflowStep + ": Create the GO zone");
-		var errorMsg = "";
-
+		myDialog.AddText("Ensure the 'NO GO/GO ZONES' are just outside the Latitude value " + ImageLat + " and Longitude value " + ImageLong + ". Example: Go zone set at [-.1,0,0] for first point.");
 		do
 		{
             var goZoneValid=CreateZone(myMission, "BLK ARC mission planner: create the GO Zone", errorMsg, "Draw the GO Zone multiline", 0, 1, 0, true);
