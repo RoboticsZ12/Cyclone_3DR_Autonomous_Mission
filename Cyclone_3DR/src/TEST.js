@@ -3,7 +3,7 @@
 //**CURRENTLY THREE SEPERATE SCRIPTS HAVE BEEN COMBINED IN THIS DOC**//
 //*******************************************************************//
 
-// var ZValue = .309;
+var ZValue = .309;
 // Error Message Function
 function ErrorMessage(iMessage) 
 {
@@ -497,7 +497,7 @@ function scaleLoadedObjects(iComp)
  */
 function Main()
 {
-	if (UCSCreationMethod == undefined) 
+	if(UCSCreationMethod == undefined)
 	{
 	HideObjects();
 	var UCSCreationMethod = UCSMethod();
@@ -2269,14 +2269,14 @@ if (myMission.GoZone == undefined)
 	//              			  7. Export a 3D model								  //
 	//																				  //
 	//********************************************************************************//
-	workflowStep++;
-	print("Step" + workflowStep + ": Export a 3D model");
-	var filenameReferenceMeshTbl = filename.split("/");
-	filenameReferenceMeshTbl.pop();
-	var filenameReferenceMesh = filenameReferenceMeshTbl.join("/");
-	var filepath = filenameReferenceMesh;
-	filenameReferenceMesh = filenameReferenceMesh + "/" + myMission.MissionName + ".glb";
-	ExportReferenceModel(filenameReferenceMesh);
+	// workflowStep++;
+	// print("Step" + workflowStep + ": Export a 3D model");
+	// var filenameReferenceMeshTbl = filename.split("/");
+	// filenameReferenceMeshTbl.pop();
+	// var filenameReferenceMesh = filenameReferenceMeshTbl.join("/");
+	// var filepath = filenameReferenceMesh;
+	// filenameReferenceMesh = filenameReferenceMesh + "/" + myMission.MissionName + ".glb";
+	// ExportReferenceModel(filenameReferenceMesh);
 
 	//********************************************************************************//
 	//																				  //
