@@ -593,7 +593,7 @@ function Main()
 	// print("Fiducial, " + fiducial)
 	// print("isFiducialcreated: " + isFiducialCreated)
 	// print("scanmode " + modes[0])
-} while(fiducial < isFiducialCreated)
+// } while(fiducial < isFiducialCreated)
 }
 
 	// var modes = ["1 Fiducial", "Fiducial & Docking Bay"];
