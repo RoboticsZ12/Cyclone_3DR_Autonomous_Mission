@@ -493,15 +493,15 @@ function scaleLoadedObjects(iComp)
 }
 
 
-var isFiducialCreated = 1
+// var isFiducialCreated = 1
 /**
  * Main Function
  */
 function Main()
 {
-	var fiducial = 0
-	do
-	{
+	// var fiducial = 0
+	// do
+	// {
 	HideObjects();
 	var UCSCreationMethod = UCSMethod();
 
@@ -565,7 +565,6 @@ function Main()
 	fiMesh.SetPolyRepresentation(SPoly.POLY_TEXTURE);
 	fiMesh.AddToDoc();
 	fiMesh.MoveToGroup("Fiducials", false);
-	var isFiducialCreated = true;
 
 	// adding the Docking Station
 	if(UCSCreationMethod == 4)
@@ -590,64 +589,44 @@ function Main()
         returnPoint.MoveToGroup("Fiducials",false);
 
 	}
-	Fiducial++
-	print("Fiducial, " + Fiducial)
-	print("isFiducialcreated: " + isFiducialCreated)
-} while(Fiducial < isFiducialCreated)
+	// fiducial = fiducial + 1
+	// print("Fiducial, " + fiducial)
+	// print("isFiducialcreated: " + isFiducialCreated)
+	// print("scanmode " + modes[0])
+} while(fiducial < isFiducialCreated)
 }
 
-// var modes = ["YES"];
-
-// var myDialogFiducialCheck = SDialog.New("Docking Station AND/OR Fiducial");
-// 	myDialogFiducialCheck.AddChoices({
-//         id: "Decision",
-//         name: "Yes to continue program with current selection, cancel to end program for re-run",
-//         choices: modes,
-//         tooltip: "Second feducial?",
-//         value: 0, 
-//         saveValue: true, 
-//         readOnly: false,
-//         style: SDialog.ChoiceRepresentationMode.RadioButtons});
-//     myDialogFiducialCheck.SetButtons(["Validate","Cancel"]);
-
-//    	var dialogResult = myDialogFiducialCheck.Run();
-
-// 	if(dialogResult.ErrorCode != 0)
-// 		ErrorMessage("Canceled by user");
-
-// 	var yes = dialogResult.Decision
-
-
-	var modes = ["1 Fiducial", "Fiducial & Docking Bay"];
+	// var modes = ["1 Fiducial", "Fiducial & Docking Bay"];
     
-    var myDialogFiducialCheck = SDialog.New("Fiducial program run how many times?");
-    myDialogFiducialCheck.AddChoices({
-        id: "Fiducialpts",
-        name: "How many fiducials?",
-        choices: modes,
-        tooltip: "Choose number of fiducials",
-        value: 0, 
-        saveValue: true, 
-        readOnly: false,
-        style: SDialog.ChoiceRepresentationMode.RadioButtons});
-    myDialogFiducialCheck.SetButtons(["Validate","Cancel"]);
+    // var myDialogFiducialCheck = SDialog.New("Fiducial program run how many times?");
+    // myDialogFiducialCheck.AddChoices({
+    //     id: "Fiducialpts",
+    //     name: "How many fiducials?",
+    //     choices: modes,
+    //     tooltip: "Choose number of fiducials",
+    //     value: 0, 
+    //     saveValue: true, 
+    //     readOnly: false,
+    //     style: SDialog.ChoiceRepresentationMode.RadioButtons});
+    // myDialogFiducialCheck.SetButtons(["Validate","Cancel"]);
 
-	var dialogResult = myDialogFiducialCheck.Run();
+	// var dialogResult = myDialogFiducialCheck.Run();
 
-    var scanMode = modes[0];
-	if(dialogResult.ErrorCode == 0)
-	{
-		scanMode = modes[dialogResult.scanMode];
-	}
-	// return scanMode
-	if(scanMode == 0)
-	{
-		isFiducialCreated = 2
-	}
-	else
-	{
-		isFiducialCreated = 1
-	}
+    // var scanMode = modes[0];
+	// var scanMode2 = modes[1];
+	// if(dialogResult.ErrorCode == 0)
+	// {
+	// 	scanMode = modes[dialogResult.scanMode];
+	// }
+	// // return scanMode
+	// if(modes[0])
+	// {
+	// 	isFiducialCreated = 1
+	// }
+	// else if(modes[1])
+	// {
+	// 	isFiducialCreated = 2
+	// }
 
 
 Main();
