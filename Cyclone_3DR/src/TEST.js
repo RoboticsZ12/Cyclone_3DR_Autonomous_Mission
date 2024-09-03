@@ -497,8 +497,8 @@ function scaleLoadedObjects(iComp)
  */
 function Main()
 {
-	if(UCSMethod == undefined)
-	{
+	// if(UCSMethod == undefined)
+	// {
 	HideObjects();
 	var UCSCreationMethod = UCSMethod();
 
@@ -586,7 +586,7 @@ function Main()
         returnPoint.MoveToGroup("Fiducials",false);
 
 	}
-}
+// }
 }
 
 Main();
@@ -710,7 +710,7 @@ var myDialogFunc = SDialog.New("Waypoint INformation");
     var NewYrecall = dlgResult.Y_length
     var NewZrecall = dlgResult.Z_length
 
-	var 
+	var Choice = dlgResult.scanMode
 
 // Printing all Variables
 print("Chosen Reference Pts: " + initialXValue + " X, " + initialYValue + " Y, " + initialZValue + " Z");
@@ -2093,7 +2093,7 @@ if (myMission.GoZone == undefined)
 
 				// Creation Waypoint
 				// var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
-				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "Medium");
+				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", choice);
 				// NewWayPoint1X.SetActions(actions); // setting action
 
 				myMission.WaypointsTbl.push(NewWayPoint1X);
