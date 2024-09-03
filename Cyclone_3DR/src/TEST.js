@@ -492,17 +492,13 @@ function scaleLoadedObjects(iComp)
 	return iComp;
 }
 
-
-var isFiducialCreated = false;
 /**
  * Main Function
  */
 function Main()
 {
-	if(isFiducialCreated)
+	for(var Fiducial = 0; Fiducial < isFiducialCreated; Fiducial++)
 	{
-		return;	
-	}
 	HideObjects();
 	var UCSCreationMethod = UCSMethod();
 
@@ -592,10 +588,8 @@ function Main()
 
 	}
 }
-
-Main();
-// Sleep(1000);
-
+}
+var isFiducialCreated = 1
 var modes = ["YES"];
 
 var myDialogFiducialCheck = SDialog.New("Docking Station AND/OR Fiducial");
@@ -605,17 +599,31 @@ var myDialogFiducialCheck = SDialog.New("Docking Station AND/OR Fiducial");
         choices: modes,
         tooltip: "Second feducial?",
         value: 0, 
-        saveValue: false, 
+        saveValue: true, 
         readOnly: false,
         style: SDialog.ChoiceRepresentationMode.RadioButtons});
     myDialogFiducialCheck.SetButtons(["Validate","Cancel"]);
 
    	var dialogResult = myDialogFiducialCheck.Run();
 
-	if(dialogResult.ErrorCode != 0)
-		ErrorMessage("Canceled by user");
-    
-	// return scanMode
+	var yes = dialogResult.Decision
+	   if(yes)
+		{
+			isFiducialCreatedFiducail = 2
+		}
+		else
+		{
+			isFiducialCreatedFiducial = 1
+			if(dialogResult.ErrorCode != 0)
+				ErrorMessage("Canceled by user");
+		}
+	// if(dialogResult.ErrorCode != 0)
+	// 	ErrorMessage("Canceled by user");
+	// // return scanMode
+
+Main();
+// Sleep(1000);
+
 
 
 
