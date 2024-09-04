@@ -2198,34 +2198,34 @@ if (myMission.GoZone == undefined)
 		print("counter: " + counter);
 
 		// This will take you back to initial point 
-		if(multiplier == counter)
-		{
-			initialXValue == initialXValue
-			initialYValue == initialYTrack
-			initialZValue == 0
+		// if(multiplier == counter)
+		// {
+		// 	initialXValue == initialXValue
+		// 	initialYValue == initialYTrack
+		// 	initialZValue == 0
 
-			print("X value: " + x);
-			var NewPointXYZ = new SPoint(initialXValue, initialYTrack, initialZValue); // z should remain as Zero
+		// 	print("X value: " + x);
+		// 	var NewPointXYZ = new SPoint(initialXValue, initialYTrack, initialZValue); // z should remain as Zero
 
-			// WayPoint Projection
-			NewPointXYZ = myMission.RefPlane.Proj3D(NewPointXYZ).Point;
+		// 	// WayPoint Projection
+		// 	NewPointXYZ = myMission.RefPlane.Proj3D(NewPointXYZ).Point;
 
-			//waypoint verification (NO_GO/GO_ZONES)
-			var verified = IsWaypointAllowed(NewPointXYZ, [myMission.GoZone], myMission.NoGoZonesTbl);
-			if(verified)
-			{
-				NewPointX.SetName(myMission.MissionName + "_" + count);
+		// 	//waypoint verification (NO_GO/GO_ZONES)
+		// 	var verified = IsWaypointAllowed(NewPointXYZ, [myMission.GoZone], myMission.NoGoZonesTbl);
+		// 	if(verified)
+		// 	{
+		// 		NewPointX.SetName(myMission.MissionName + "_" + count);
 
-				//Waypoint creation
-				var NewWayPoint1XYZ = SWaypoint.CreateWayPoint(myMission, count, NewPointXYZ, "1", "Medium");
-				// NewWayPoint1XYZ.SetActions(actions); // setting action
+		// 		//Waypoint creation
+		// 		var NewWayPoint1XYZ = SWaypoint.CreateWayPoint(myMission, count, NewPointXYZ, "1", "Medium");
+		// 		// NewWayPoint1XYZ.SetActions(actions); // setting action
 
 
-				myMission.WaypointsTbl.push(NewWayPoint1XYZ);
-				myMission.UpdateDummyPath();
-				count++; // Increment the count for each waypoint
-			}
-		}
+		// 		myMission.WaypointsTbl.push(NewWayPoint1XYZ);
+		// 		myMission.UpdateDummyPath();
+		// 		count++; // Increment the count for each waypoint
+		// 	}
+		// }
 	}
 	print("initialX: " + initialXValue)
     print("initialYtrack: " + initialYTrack)
