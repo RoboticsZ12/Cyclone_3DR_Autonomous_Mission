@@ -2281,21 +2281,21 @@ if (myMission.GoZone == undefined)
             }
             while(allOK);
 
-            //add or adjust the return point
-			// if(myMission.WaypointDockingFinal == undefined && newPoint != undefined)
-			// {
-            //     if(newPoint.Distance(myMission.FiducialReturnPoint)<0.5) 
-			// 	{
+            // add or adjust the return point
+			if(myMission.WaypointDockingFinal == undefined && newPoint != undefined)
+			{
+                if(newPoint.Distance(myMission.FiducialReturnPoint)<0.5) 
+				{
                 
-			// 		newWayPoint2.TransformWaypointIntoDockingWaypoint(myMission);
-			// 	}
-			// 	else
-			// 	{
-            //         var newWayPointDocking=SWaypoint.CreateWayPoint(myMission, 1, myMission.FiducialReturnPoint, "D", 'None');
-			// 		myMission.WaypointDockingFinal = newWayPointDocking;
-			// 	}
-			// 	myMission.UpdateDummyPath();
-			// }
+					newWayPoint2.TransformWaypointIntoDockingWaypoint(myMission);
+				}
+				else
+				{
+                    var newWayPointDocking=SWaypoint.CreateWayPoint(myMission, 1, myMission.FiducialReturnPoint, "D", 'None');
+					myMission.WaypointDockingFinal = newWayPointDocking;
+				}
+				myMission.UpdateDummyPath();
+			}
 
 		}
 	}
@@ -2315,14 +2315,14 @@ if (myMission.GoZone == undefined)
 	//              			  7. Export a 3D model								  //
 	//																				  //
 	//********************************************************************************//
-	// workflowStep++;
-	// print("Step" + workflowStep + ": Export a 3D model");
-	// var filenameReferenceMeshTbl = filename.split("/");
-	// filenameReferenceMeshTbl.pop();
-	// var filenameReferenceMesh = filenameReferenceMeshTbl.join("/");
-	// var filepath = filenameReferenceMesh;
-	// filenameReferenceMesh = filenameReferenceMesh + "/" + myMission.MissionName + ".glb";
-	// ExportReferenceModel(filenameReferenceMesh);
+	workflowStep++;
+	print("Step" + workflowStep + ": Export a 3D model");
+	var filenameReferenceMeshTbl = filename.split("/");
+	filenameReferenceMeshTbl.pop();
+	var filenameReferenceMesh = filenameReferenceMeshTbl.join("/");
+	var filepath = filenameReferenceMesh;
+	filenameReferenceMesh = filenameReferenceMesh + "/" + myMission.MissionName + ".glb";
+	ExportReferenceModel(filenameReferenceMesh);
 
 	//********************************************************************************//
 	//																				  //
