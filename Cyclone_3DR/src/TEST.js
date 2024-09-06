@@ -80,7 +80,7 @@ function UCSMethod()
 	myDialog.AddChoices({
     	id: "method",
     	name: "List of methods",
-    	choices: ["Three points (CAD/BIM drawing)","Three planes (Point Cloud)","Active UCS","Docking station"],
+    	choices: ["Three points (CAD/BIM drawing)","Docking station"],
     	tooltip: "Choose between the methods",
     	value: 0, 
     	saveValue: true, 
@@ -115,47 +115,31 @@ function UCSMethod()
  */
 function FiducialPositionDlg(iMat)
 {
-	// var dist = 0;
-	// var height = 0;
-	// var myDialog1=SDialog.Question("Do you want to click a point (Yes) or enter a value (No)?","Fiducial marker position");  
+	var myDialog = SDialog.New("Fiducial marker position");
+	myDialog.AddLength({ 
+		id: "dY", 
+        name: "Distance along Y",
+        tooltip: "Distance of the Fiducial marker to wall corner along Y direction (can be negative!)" , 
+        value: 1, 
+        min: -Number.MAX_VALUE,
+        saveValue: true, 
+        readOnly: false});
+    myDialog.AddLength({ 
+        id: "dZ", 
+        name: "Height",
+        tooltip: "Height of the Fiducial marker to ground", 
+        value: 0.3, 
+        saveValue: true, 
+        readOnly: false});
 
-	// if(myDialog1) // dist and height must be calculated from user click
-	// {
-	// 	var clickP = SPoint.FromClick();
-	// 	if(clickP.ErrorCode != 0)
-	// 		ErrorMessage("Canceled by user");
-	// 	var thePnt = clickP.Point;
-	// 	thePnt.ApplyTransformation(iMat);
-	// 	dist = thePnt.GetY();
-	// 	height = thePnt.GetZ() + .309;
-	// }
-	// else // dist and height are user input
-	// {
-		var myDialog = SDialog.New("Fiducial marker position");
-		myDialog.AddLength({ 
-            id: "dY", 
-            name: "Distance along Y",
-            tooltip: "Distance of the Fiducial marker to wall corner along Y direction (can be negative!)" , 
-            value: 1, 
-            min: -Number.MAX_VALUE,
-            saveValue: true, 
-            readOnly: false});
-        myDialog.AddLength({ 
-            id: "dZ", 
-            name: "Height",
-            tooltip: "Height of the Fiducial marker to ground", 
-            value: 0.3, 
-            saveValue: true, 
-            readOnly: false});
+	var dialogResult = myDialog.Run();
 
-		var dialogResult = myDialog.Run();
+	if(dialogResult.ErrorCode != 0)
+	ErrorMessage("Operation canceled");
 
-		if(dialogResult.ErrorCode != 0)
-			ErrorMessage("Operation canceled");
+	var dist = dialogResult.dY;
+	var height = dialogResult.dZ;
 
-		var dist = dialogResult.dY;
-		var height = dialogResult.dZ;
-	//}
 	if(height < .308 || height > .308)
 	{
 		var imessage = "Please keep height at .308m ";
@@ -498,23 +482,20 @@ function scaleLoadedObjects(iComp)
  */
 function Main()
 {
-	// var fiducial = 0
-	// do
-	// {
 	HideObjects();
 	var UCSCreationMethod = UCSMethod();
 
 	var theMat = SMatrix.New();
 	if(UCSCreationMethod == 1)
 		theMat = CreateUCS3Points();
+	// else if(UCSCreationMethod == 2)
+	// {
+	// 	var allCloudsNb = SCloud.All(1).length + SCwCloud.All(1).length;
+	// 	if(allCloudsNb != 1)
+	// 		ErrorMessage("One single cloud should be visible in order to run this method");
+	// 	theMat = CreateUCSPointCloud();
+	// }
 	else if(UCSCreationMethod == 2)
-	{
-		var allCloudsNb = SCloud.All(1).length + SCwCloud.All(1).length;
-		if(allCloudsNb != 1)
-			ErrorMessage("One single cloud should be visible in order to run this method");
-		theMat = CreateUCSPointCloud();
-	}
-	else if(UCSCreationMethod == 4)
 	{
 		theMat = CreateUCSDock();
 	}
@@ -537,11 +518,11 @@ function Main()
 		inv.InitInverse(tMat);
 		AddLabels(fidPos, inv);
 	}
-	else if(UCSCreationMethod == 3)
-	{
-		tMat = SMatrix.FromActiveCS();
-		inv.InitInverse(tMat);
-	}
+	// else if(UCSCreationMethod == 3)
+	// {
+	// 	tMat = SMatrix.FromActiveCS();
+	// 	inv.InitInverse(tMat);
+	// }
 	else if(UCSCreationMethod == 4)
 	{
 		var offsetX = -0.183 * 1000 / GetScaleFactor().Value;
@@ -588,45 +569,7 @@ function Main()
         returnPoint.MoveToGroup("Fiducials",false);
 
 	}
-	// fiducial = fiducial + 1
-	// print("Fiducial, " + fiducial)
-	// print("isFiducialcreated: " + isFiducialCreated)
-	// print("scanmode " + modes[0])
-// } while(fiducial < isFiducialCreated)
 }
-
-	// var modes = ["1 Fiducial", "Fiducial & Docking Bay"];
-    
-    // var myDialogFiducialCheck = SDialog.New("Fiducial program run how many times?");
-    // myDialogFiducialCheck.AddChoices({
-    //     id: "Fiducialpts",
-    //     name: "How many fiducials?",
-    //     choices: modes,
-    //     tooltip: "Choose number of fiducials",
-    //     value: 0, 
-    //     saveValue: true, 
-    //     readOnly: false,
-    //     style: SDialog.ChoiceRepresentationMode.RadioButtons});
-    // myDialogFiducialCheck.SetButtons(["Validate","Cancel"]);
-
-	// var dialogResult = myDialogFiducialCheck.Run();
-
-    // var scanMode = modes[0];
-	// var scanMode2 = modes[1];
-	// if(dialogResult.ErrorCode == 0)
-	// {
-	// 	scanMode = modes[dialogResult.scanMode];
-	// }
-	// // return scanMode
-	// if(modes[0])
-	// {
-	// 	isFiducialCreated = 1
-	// }
-	// else if(modes[1])
-	// {
-	// 	isFiducialCreated = 2
-	// }
-
 
 Main();
 
@@ -660,75 +603,55 @@ Main();
 //*****************************************************************//
 //	 					SCRIPT 2 (ZG Script)                       //
 //*****************************************************************//
-// var modes = ["None = 0s", "Low = 10s", "Medium = 30s", "High = 60s"];
-
 var myDialogFunc = SDialog.New("Waypoint INformation");
 	myDialogFunc.AddLength({ 
         id: "X", 
         name: "Initial X Value", 
         tooltip: "Set close to 0", 
         saveValue: true, 
-        // value: SPoint.New(0,0,0), 
         readOnly: false});
 	myDialogFunc.AddLength({ 
 		id: "Y", 
 		name: "Initial Y Value", 
 		tooltip: "Set close to 0", 
 		saveValue: true, 
-		// value: SPoint.New(0,0,0), 
 		readOnly: false});
 	myDialogFunc.AddLength({ 
 		id: "Z", 
 		name: "Initial Z Value", 
 		tooltip: "Set close to 0", 
 		saveValue: true, 
-		// value: SPoint.New(0,0,0), 
 		readOnly: false});
 	myDialogFunc.AddLength({ 
         id: "Long", 
         name: "Longitude (X)",
         tooltip: "Click Width of layout", 
         saveValue: true, 
-        // value: SPoint.New(0,0,0), 
         readOnly: false});
 	myDialogFunc.AddLength({ 
 		id: "Lat", 
 		name: "Latitutde (Y)", 
 		tooltip: "Click Length of layout", 
 		saveValue: true, 
-		// value: SPoint.New(0,0,0), 
 		readOnly: false});
     myDialogFunc.AddLength({ 
         id: "X_length", 
         name: "X Increment", 
         tooltip: "Distance between two points", 
         saveValue: true, 
-        // value: SPoint.New(0,0,0), 
         readOnly: false});    
     myDialogFunc.AddLength({ 
         id: "Y_length", 
         name: "Y Increment", 
         tooltip: "Distance between two points", 
         saveValue: true, 
-        // value: SPoint.New(0,0,0), 
         readOnly: false}); 
     myDialogFunc.AddLength({ 
         id: "Z_length", 
         name: "Z Increment", 
         tooltip: "Distance between two points", 
         saveValue: true, 
-        // value: SPoint.New(0,0,0), 
         readOnly: false});
-	// myDialogFunc.Add({
-	// 	id: "scanMode",
-	// 	name: "Add a stationary scan time",
-	// 	choices: modes,
-	// 	tooltip: "Choose between None, Low, Medium or High",
-	// 	value: 0, 
-	// 	saveValue: true, 
-	// 	readOnly: false,
-	// 	style: SDialog.ChoiceRepresentationMode.RadioButtons});
-	// 	myDialogFunc.SetButtons(["Validate","Cancel"]);
 
 	var dlgResult=myDialogFunc.Run();
 
@@ -1976,7 +1899,6 @@ function IsWaypointAllowed(iPoint, iGoZoneTbl, iNoGoZoneTbl)
 	return isAllowed;
 }
 
-
 //******************************************//
 //										    //
 //                Main Function				//
@@ -2105,7 +2027,6 @@ if (myMission.GoZone == undefined)
 	var multiplier = 1;
 	var Ycount = 0;
 	var initialYTrack = initialYValue;
-	// var actions = AddActionToWaypointDlg(); // GET ACTION FOR ALL WAYPOINTS AT ONCE
 	
 	// Loop used for multiple executions. 
 	for(multiplier; multiplier <= counter; multiplier++)
@@ -2128,15 +2049,12 @@ if (myMission.GoZone == undefined)
 				NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
 
 				// Creation Waypoint
-				// var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
 				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "Medium");
-				// NewWayPoint1X.SetActions(actions); // setting action
 
 				myMission.WaypointsTbl.push(NewWayPoint1X);
 				myMission.UpdateDummyPath();
 				count++; // Increment the count for each waypoint
 			}
-			// Sleep(250)
 		}
 
 		// Then, move along the Y-axis from initialYValue to 0.3 * ImageLat
@@ -2155,15 +2073,12 @@ if (myMission.GoZone == undefined)
 				NewPointY.SetName(myMission.MissionName + "_" + count);
 
 				//Waypoint creation
-				// var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "None");
 				var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "Medium");
-				// NewWayPoint1Y.SetActions(actions); // setting action
 
 				myMission.WaypointsTbl.push(NewWayPoint1Y);
 				myMission.UpdateDummyPath();
 				count++; // Increment the count for each waypoint
 			}
-			// Sleep(250)
 		}
 
 		Ycount = initialYValue + 2
@@ -2184,9 +2099,7 @@ if (myMission.GoZone == undefined)
 				NewPointX.SetName(myMission.MissionName + "_" + count);
 
 				//Waypoint creation
-				// var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "None");
 				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "Medium");
-				// NewWayPoint1X.SetActions(actions); // setting action
 
 				myMission.WaypointsTbl.push(NewWayPoint1X);
 				myMission.UpdateDummyPath();
@@ -2195,37 +2108,8 @@ if (myMission.GoZone == undefined)
 			// Sleep(250)
 		}
 		print("counter: " + counter);
-
-		// This will take you back to initial point 
-		// if(multiplier == counter)
-		// {
-		// 	initialXValue == initialXValue
-		// 	initialYValue == initialYTrack
-		// 	initialZValue == 0
-
-		// 	print("X value: " + x);
-		// 	var NewPointXYZ = new SPoint(initialXValue, initialYTrack, initialZValue); // z should remain as Zero
-
-		// 	// WayPoint Projection
-		// 	NewPointXYZ = myMission.RefPlane.Proj3D(NewPointXYZ).Point;
-
-		// 	//waypoint verification (NO_GO/GO_ZONES)
-		// 	var verified = IsWaypointAllowed(NewPointXYZ, [myMission.GoZone], myMission.NoGoZonesTbl);
-		// 	if(verified)
-		// 	{
-		// 		NewPointX.SetName(myMission.MissionName + "_" + count);
-
-		// 		//Waypoint creation
-		// 		var NewWayPoint1XYZ = SWaypoint.CreateWayPoint(myMission, count, NewPointXYZ, "1", "Medium");
-		// 		// NewWayPoint1XYZ.SetActions(actions); // setting action
-
-
-		// 		myMission.WaypointsTbl.push(NewWayPoint1XYZ);
-		// 		myMission.UpdateDummyPath();
-		// 		count++; // Increment the count for each waypoint
-		// 	}
-		// }
 	}
+
 	print("initialX: " + initialXValue)
     print("initialYtrack: " + initialYTrack)
 
