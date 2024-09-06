@@ -1852,6 +1852,7 @@ function IsWaypointAllowed(iPoint, iGoZoneTbl, iNoGoZoneTbl)
 //                Main Function				//
 //										    //
 //******************************************//
+
 function Main2()
 {
 	// 1.
@@ -1870,6 +1871,7 @@ function Main2()
 //                				2. Create the GO zone 			                  //
 //																				  //
 //********************************************************************************//
+
 	workflowStep++;
 if (myMission.GoZone == undefined) 
 {
@@ -1909,6 +1911,7 @@ if (myMission.GoZone == undefined)
 //             					  3. Create NO GO zones 						  //
 //																				  //
 //********************************************************************************//
+
 	workflowStep++;
 	if(myMission.NoGoZonesTbl.length == 0)
 	{
@@ -1961,6 +1964,7 @@ if (myMission.GoZone == undefined)
 //                				4. Add waypoints				            	  //
 //																				  //
 //********************************************************************************//
+
 	workflowStep++;
 	print("Step " + workflowStep + ": Add waypoints");
 	errorMsg = "";
@@ -2066,6 +2070,7 @@ if (myMission.GoZone == undefined)
 //                5. if docking station: return path waypoints	     			  //
 //																				  //
 //********************************************************************************//
+
 	workflowStep++;
 	print("Step" + workflowStep + ": add return waypoints");
 	if(myMission.IsDockingStation)
@@ -2136,6 +2141,7 @@ if (myMission.GoZone == undefined)
 //          				     6. write the json								  //
 //																				  //
 //********************************************************************************//
+
 	workflowStep++;
 	print("Step" + workflowStep + ": Create the json");
 	var duration = myMission.ComputeMissionDuration();
@@ -2146,6 +2152,7 @@ if (myMission.GoZone == undefined)
 //              			  7. Export a 3D model								  //
 //																				  //
 //********************************************************************************//
+
 	workflowStep++;
 	print("Step" + workflowStep + ": Export a 3D model");
 	var filenameReferenceMeshTbl = filename.split("/");
@@ -2160,6 +2167,7 @@ if (myMission.GoZone == undefined)
 //                			 8. Duration estimation 							  //
 //																				  //
 //********************************************************************************//
+
 	workflowStep++;
 	print("Step" + workflowStep + ": Duration estimation(" + duration.DurationString + ")");
 	SDialog.Message(duration.DurationString,SDialog.EMessageSeverity.Info,"Mission duration");
