@@ -502,22 +502,25 @@ function Main()
 	else if(UCSCreationMethod != 3)
 		ErrorMessage("Wrong method defined to create a UCS");
 
-	var inv = SMatrix.New();
-	if(UCSCreationMethod < 3)
-	{
-		var FakeUCS = CreateTempUCS(theMat);
-		CheckAlignment(FakeUCS);
-		for(var iM = 0; iM < FakeUCS.length; iM++)
-			FakeUCS[iM].RemoveFromDoc();
+	// var inv = SMatrix.New();
+	// if(UCSCreationMethod < 3)
+	// {
+	// 	var FakeUCS = CreateTempUCS(theMat);
+	// 	CheckAlignment(FakeUCS);
+	// 	for(var iM = 0; iM < FakeUCS.length; iM++)
+	// 		FakeUCS[iM].RemoveFromDoc();
 
-		var fidPos = FiducialPositionDlg(theMat);
-		var tMat = SMatrix.New(SVector.New(0, -fidPos.UCSDistance, -fidPos.UCSHeight));
-		tMat.ApplyTransformation(theMat);
+	// 	var fidPos = FiducialPositionDlg(theMat);
+	// 	var tMat = SMatrix.New(SVector.New(0, -fidPos.UCSDistance, -fidPos.UCSHeight));
+	// 	tMat.ApplyTransformation(theMat);
 
-		tMat.AddToDocAsUCS("Fiducial", true);
-		inv.InitInverse(tMat);
-		AddLabels(fidPos, inv);
-	}
+	// 	tMat.AddToDocAsUCS("Fiducial", true);
+	// 	inv.InitInverse(tMat);
+	// 	AddLabels(fidPos, inv);
+	// }
+
+
+	
 	// else if(UCSCreationMethod == 3)
 	// {
 	// 	tMat = SMatrix.FromActiveCS();
@@ -567,7 +570,6 @@ function Main()
         returnPoint.ShowName(true);
         returnPoint.AddToDoc();
         returnPoint.MoveToGroup("Fiducials",false);
-
 	}
 }
 
