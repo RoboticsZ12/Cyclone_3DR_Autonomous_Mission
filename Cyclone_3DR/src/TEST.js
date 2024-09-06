@@ -488,13 +488,6 @@ function Main()
 	var theMat = SMatrix.New();
 	if(UCSCreationMethod == 1)
 		theMat = CreateUCS3Points();
-	// else if(UCSCreationMethod == 2)
-	// {
-	// 	var allCloudsNb = SCloud.All(1).length + SCwCloud.All(1).length;
-	// 	if(allCloudsNb != 1)
-	// 		ErrorMessage("One single cloud should be visible in order to run this method");
-	// 	theMat = CreateUCSPointCloud();
-	// }
 	else if(UCSCreationMethod == 2)
 	{
 		theMat = CreateUCSDock();
@@ -502,31 +495,9 @@ function Main()
 	else if(UCSCreationMethod != 3)
 		ErrorMessage("Wrong method defined to create a UCS");
 
-	// var inv = SMatrix.New();
-	// if(UCSCreationMethod < 3)
-	// {
-	// 	var FakeUCS = CreateTempUCS(theMat);
-	// 	CheckAlignment(FakeUCS);
-	// 	for(var iM = 0; iM < FakeUCS.length; iM++)
-	// 		FakeUCS[iM].RemoveFromDoc();
-
-	// 	var fidPos = FiducialPositionDlg(theMat);
-	// 	var tMat = SMatrix.New(SVector.New(0, -fidPos.UCSDistance, -fidPos.UCSHeight));
-	// 	tMat.ApplyTransformation(theMat);
-
-	// 	tMat.AddToDocAsUCS("Fiducial", true);
-	// 	inv.InitInverse(tMat);
-	// 	AddLabels(fidPos, inv);
-	// }
-
-
+	var inv = SMatrix.New();
 	
-	// else if(UCSCreationMethod == 3)
-	// {
-	// 	tMat = SMatrix.FromActiveCS();
-	// 	inv.InitInverse(tMat);
-	// }
-	else if(UCSCreationMethod == 2)
+    if(UCSCreationMethod == 2)
 	{
 		var offsetX = -0.183 * 1000 / GetScaleFactor().Value;
 		var offsetY = 0 * 1000 / GetScaleFactor().Value;
