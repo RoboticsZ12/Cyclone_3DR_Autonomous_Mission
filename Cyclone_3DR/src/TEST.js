@@ -523,7 +523,7 @@ function Main()
 	// 	tMat = SMatrix.FromActiveCS();
 	// 	inv.InitInverse(tMat);
 	// }
-	else if(UCSCreationMethod == 4)
+	else if(UCSCreationMethod == 2)
 	{
 		var offsetX = -0.183 * 1000 / GetScaleFactor().Value;
 		var offsetY = 0 * 1000 / GetScaleFactor().Value;
@@ -547,7 +547,7 @@ function Main()
 	fiMesh.MoveToGroup("Fiducials", false);
 
 	// adding the Docking Station
-	if(UCSCreationMethod == 4)
+	if(UCSCreationMethod == 2)
 	{
 		var dockModel = CurrentScriptPath() + "/Docking_Station.msd";
 		var dockMesh = SPoly.FromFile(dockModel).PolyTbl[0];
