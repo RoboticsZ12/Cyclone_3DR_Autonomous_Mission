@@ -3,7 +3,6 @@
 //**CURRENTLY THREE SEPERATE SCRIPTS HAVE BEEN COMBINED IN THIS DOC**//
 //*******************************************************************//
 
-var ZValue = .309;
 // Error Message Function
 function ErrorMessage(iMessage) 
 {
