@@ -78,13 +78,17 @@ The final fix needed will be fixing the incrementation of the mission. It can be
 The updates provided below will be the final MAJOR updates to this program. I have now added a docking station method to the program, along with a time duration for the provided run. Once the code is finished compiling, the compiler will generate how long the mission will take to generate. Keep in mind, this is with a Spot velocity of .5m/s. The changes can be seen below. 
 
 The first image represents the user defining where to place the docking station for Spot. Once placed, the program will also generate a fiducial with the docking station as the real life scenario requires. 
+
 ![image](https://github.com/user-attachments/assets/e145d257-6111-43a2-895f-fe0c77c0df1a)
+
 ![image](https://github.com/user-attachments/assets/e6ecf2bc-db10-4d6c-85b3-0100e5e6439f)
 
 The image provided below shows the message that is displayed at the end of the program that will inform the user how long their mission will take. This is an estimate, but will be able to give the user insight to approxamately how long they should expect their mission to last. 
+
 ![image](https://github.com/user-attachments/assets/93c69adf-ac32-496a-b704-79c2c5e2a7ea)
 
 The final image shows the .json file that is extracted when the program finishes. This file is what will be exported to Spot as a G code guide for the waypoint mission. It can also be seen that each waypoint is seen to have an "action". These actions are present for each point and represent how long Spot should stop at each waypoint in seconds. For our cases, it is currently hard coded to stop at each waypoint for 30s. This is an aspect that I would like to incorporate as a user input, but for the time being these values will reamain hard coded. 
+
 ![image](https://github.com/user-attachments/assets/95c4d67b-dc87-4059-9bf3-4b8a8bb602a1)
 
 The program is currently up to its best state. Most unwanted code and comments have been removed, and the code has been reformatted in a professional manner. Any updates to the program will be minor adjustments unless testing with Spot returns with a faulty program. 
