@@ -847,7 +847,7 @@ class SMission
 
 		var I = 90; // Initialization and Fiducial Detection (90 sec)
 		var D = this.DummyPath.GetLength() * scaleFactorToMeters; // distance of the trajectory (m)
-		var V = 0.5; // Spot velocity (0.5 m/s)
+		var V = 1.5; // Spot velocity (0.5 m/s)
 		var Nwp = this.DummyPath.GetNumber(); // Number of way points (value)
 		var C = 2; // Constant (2 sec)
 		var Tsh = 75; // Time of static scan High (75 sec)
