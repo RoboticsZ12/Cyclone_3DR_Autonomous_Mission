@@ -69,6 +69,39 @@ function ErrorMessage(iMessage, iThrowError)
  * Function to launch a dialog allowing to define the UCS parameters
  * @returns {number} Number for each method
  */
+// function UCSMethod()
+// {
+// 	var curCS = SMatrix.New();
+// 	curCS = SMatrix.FromActiveCS();
+// 	var isWCS = curCS.IsIdentity();
+
+// 	var myDialog = SDialog.New("UCS Creation for BLK ARC");
+// 	myDialog.SetHeader( "", CurrentScriptPath()+"\\BLKARCFiducialUCS.svg", 48);
+// 	myDialog.AddChoices({
+//     	id: "method",
+//     	name: "List of methods",
+//     	choices: ["Three points (CAD/BIM drawing)","Docking station"],
+//     	tooltip: "Choose between the methods",
+//     	value: 0, 
+//     	saveValue: true, 
+//     	readOnly: false,
+//     	style: SDialog.ChoiceRepresentationMode.RadioButtons});
+
+// 	var dialogResult = myDialog.Run();
+
+// 	if(dialogResult.ErrorCode != 0)
+// 		ErrorMessage("Operation canceled");
+
+// 	var myMethod = dialogResult.method+1;
+// 	if(isWCS)
+// 	{
+// 		if(myMethod != 1 && myMethod != 2 && myMethod != 4)
+// 			ErrorMessage("not available, no UCS activated");
+// 	}
+
+// 	return myMethod;
+// }
+
 function UCSMethod()
 {
 	var curCS = SMatrix.New();
@@ -80,7 +113,7 @@ function UCSMethod()
 	myDialog.AddChoices({
     	id: "method",
     	name: "List of methods",
-    	choices: ["Three points (CAD/BIM drawing)","Docking station"],
+    	choices: ["Three points (CAD/BIM drawing)","Three planes (Point Cloud)","Active UCS","Docking station"],
     	tooltip: "Choose between the methods",
     	value: 0, 
     	saveValue: true, 
@@ -101,6 +134,9 @@ function UCSMethod()
 
 	return myMethod;
 }
+
+
+
 
 /**
 * @typedef {Object} FiducialParam
