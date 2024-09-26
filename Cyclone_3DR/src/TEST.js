@@ -1312,27 +1312,27 @@ class SWaypoint
 
 		oWaypoint.Label = newLab;
 		//////////////////////////////
-		oWaypoint.PointInWCS = iPoint
-		var ptCopy = SPoint.New(iPoint);
-		var invUCS = SMatrix.New();
-		invUCS.InitInverse(iMission.UCS);
-		ptCopy.ApplyTransformation(invUCS);
-		oWaypoint.PointInWCS = ptCopy;
-		oWaypoint.Index = iIndex;
-		oWaypoint.Type = iType;
-		oWaypoint.ScanningAction = iAction;
-
-		/////////////////////////////
-
-		// oWaypoint.PointInWCS = iPoint;
+		// oWaypoint.PointInWCS = iPoint
 		// var ptCopy = SPoint.New(iPoint);
 		// var invUCS = SMatrix.New();
 		// invUCS.InitInverse(iMission.UCS);
 		// ptCopy.ApplyTransformation(invUCS);
-		// oWaypoint.PointInUCS = ptCopy;
+		// oWaypoint.PointInWCS = ptCopy;
 		// oWaypoint.Index = iIndex;
 		// oWaypoint.Type = iType;
 		// oWaypoint.ScanningAction = iAction;
+
+		/////////////////////////////
+
+		oWaypoint.PointInWCS = iPoint;
+		var ptCopy = SPoint.New(iPoint);
+		var invUCS = SMatrix.New();
+		invUCS.InitInverse(iMission.UCS);
+		ptCopy.ApplyTransformation(invUCS);
+		oWaypoint.PointInUCS = ptCopy;
+		oWaypoint.Index = iIndex;
+		oWaypoint.Type = iType;
+		oWaypoint.ScanningAction = iAction;
 
 		return oWaypoint;
 	}
