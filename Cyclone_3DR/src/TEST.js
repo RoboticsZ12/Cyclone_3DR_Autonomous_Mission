@@ -2158,7 +2158,12 @@ if (myMission.GoZone == undefined)
 			var NewPointX = new SPoint(x, y, initialZValue); // z should remain as Zero
 
 			//WayPoint Projection
+			//////////////////////////////////////////////////////////
 			NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
+			// NewPointX = myMission.UCS.Proj3D(NewPointX).Point;
+			//////////////////////////////////////////////////////////
+
+
 
 			//waypoint verification (NO_GO/GO_ZONES)
 			var verified = IsWaypointAllowed(NewPointX, [myMission.GoZone], myMission.NoGoZonesTbl);
@@ -2185,6 +2190,7 @@ if (myMission.GoZone == undefined)
 			// WayPoint Projection
 			NewPointY = myMission.RefPlane.Proj3D(NewPointY).Point;
 
+
 			//waypoint verification (NO_GO/GO_ZONES)
 			var verified = IsWaypointAllowed(NewPointY, [myMission.GoZone], myMission.NoGoZonesTbl);
 			if(verified)
@@ -2210,6 +2216,7 @@ if (myMission.GoZone == undefined)
 
 			// WayPoint Projection
 			NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
+
 
 			//waypoint verification (NO_GO/GO_ZONES)
 			var verified = IsWaypointAllowed(NewPointX, [myMission.GoZone], myMission.NoGoZonesTbl);
