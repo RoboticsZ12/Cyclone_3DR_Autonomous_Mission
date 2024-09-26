@@ -1312,11 +1312,12 @@ class SWaypoint
 
 		oWaypoint.Label = newLab;
 		//////////////////////////////
-		oWaypoint.PointInUCS = iPoint
+		oWaypoint.PointInWCS = iPoint
 		var ptCopy = SPoint.New(iPoint);
 		var invUCS = SMatrix.New();
 		invUCS.InitInverse(iMission.UCS);
 		ptCopy.ApplyTransformation(invUCS);
+		oWaypoint.PointInWCS = ptCopy;
 		oWaypoint.Index = iIndex;
 		oWaypoint.Type = iType;
 		oWaypoint.ScanningAction = iAction;
