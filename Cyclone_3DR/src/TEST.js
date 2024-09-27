@@ -2182,7 +2182,7 @@ if (myMission.GoZone == undefined)
 		}
 
 		// Then, move along the Y-axis from initialYValue to 0.3 * ImageLat
-		for (initialYValue = y + Ycount; y <= (0.75*multiplier) * imageLat; y += NewYrecall) // THIS IS PROBLEM LINE
+		for (initialYValue = y + Ycount; y <= (0.2*multiplier) * imageLat; y += NewYrecall) // THIS IS PROBLEM LINE
 		{
 			print("Y value: " + y);
 			var NewPointY = new SPoint(imageLong, y, initialZValue); // z should remain as Zero
@@ -2212,7 +2212,7 @@ if (myMission.GoZone == undefined)
 		for (x = imageLong; x >= initialXValue-1; x -= NewXrecall) 
 		{
 			print("X value: " + x);
-			var NewPointX = new SPoint(x, (multiplier*0.75) * imageLat, initialZValue); // z should remain as Zero
+			var NewPointX = new SPoint(x, (multiplier*0.2) * imageLat, initialZValue); // z should remain as Zero
 
 			// WayPoint Projection
 			NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
