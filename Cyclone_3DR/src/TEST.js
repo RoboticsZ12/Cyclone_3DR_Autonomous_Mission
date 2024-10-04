@@ -2580,7 +2580,7 @@ if (myMission.GoZone == undefined)
 				NewPointX = myMission.RefPlane.Proj3D(NewPointX).Point;
 
 				// Creation Waypoint
-				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "Medium");
+				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "Low");
 
 				myMission.WaypointsTbl.push(NewWayPoint1X);
 				myMission.UpdateDummyPath();
@@ -2605,7 +2605,7 @@ if (myMission.GoZone == undefined)
 				NewPointY.SetName(myMission.MissionName + "_" + count);
 
 				//Waypoint creation
-				var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "Medium");
+				var NewWayPoint1Y = SWaypoint.CreateWayPoint(myMission, count, NewPointY, "1", "Low");
 
 				myMission.WaypointsTbl.push(NewWayPoint1Y);
 				myMission.UpdateDummyPath();
@@ -2632,7 +2632,7 @@ if (myMission.GoZone == undefined)
 				NewPointX.SetName(myMission.MissionName + "_" + count);
 
 				//Waypoint creation
-				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "Medium");
+				var NewWayPoint1X = SWaypoint.CreateWayPoint(myMission, count, NewPointX, "1", "Low");
 
 				myMission.WaypointsTbl.push(NewWayPoint1X);
 				myMission.UpdateDummyPath();
