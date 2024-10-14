@@ -2299,7 +2299,7 @@ function CreateMission()
         id: "isDocking",
         name: "Docking station",
         tooltip: "Is the active UCS related to a docking station?",
-        value: true,
+        value: false,
         saveValue: false, 
         readOnly: false });
 	var dialogResult = myDialog.Run();
