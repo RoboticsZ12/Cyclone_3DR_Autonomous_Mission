@@ -2660,7 +2660,7 @@ if (myMission.GoZone == undefined)
 	}
 
 
-if(multiplier == counter)
+if(multiplier >= counter)
 {
 		var Return = SDialog.New("Set return point?");
 		Return.AddBoolean({ 
