@@ -2660,44 +2660,44 @@ if (myMission.GoZone == undefined)
 	}
 
 
-if(multiplier >= counter)
-{
-		var Return = SDialog.New("Set return point?");
-		Return.AddBoolean({ 
-			id: "Return_Point",
-			name: "RP",
-			value: true,
-			saveValue: false,
-			readOnly: false});
-			var RETURN = Return.Run();
+// if(multiplier >= counter)
+// {
+// 		var Return = SDialog.New("Set return point?");
+// 		Return.AddBoolean({ 
+// 			id: "Return_Point",
+// 			name: "Return Point",
+// 			value: true,
+// 			saveValue: false,
+// 			readOnly: false});
+// 			var RETURN = Return.Run();
 	
-		if(Return.ErrorCode != 0)
-			ErrorMessage("Operation canceled");
+// 		if(Return.ErrorCode != 0)
+// 			ErrorMessage("Operation canceled");
 	
-		var RETURN = RETURN.Return_Point
-	if(RETURN == true)
-	{	
-		var NewPointX = new SPoint(x, (multiplier*0.2) * imageLat, initialZValue); // z should remain as Zero
+// 		var RETURN = RETURN.Return_Point
+// 	if(RETURN == true)
+// 	{	
+// 		var NewPointX = new SPoint(x, (multiplier*0.2) * imageLat, initialZValue); // z should remain as Zero
 
-			// WayPoint Projection
-			NewPoint = myMission.RefPlane.Proj3D(NewPoint).Point;
+// 			// WayPoint Projection
+// 			NewPoint = myMission.RefPlane.Proj3D(NewPoint).Point;
 
 
-			//waypoint verification (NO_GO/GO_ZONES)
-			var verified = IsWaypointAllowed(NewPoint, [myMission.GoZone], myMission.NoGoZonesTbl);
-			if(verified)
-			{
-				NewPoint.SetName(myMission.MissionName + "_" + count);
+// 			//waypoint verification (NO_GO/GO_ZONES)
+// 			var verified = IsWaypointAllowed(NewPoint, [myMission.GoZone], myMission.NoGoZonesTbl);
+// 			if(verified)
+// 			{
+// 				NewPoint.SetName(myMission.MissionName + "_" + count);
 
-				//Waypoint creation
-				var NewWayPoint = SWaypoint.CreateWayPoint(myMission, count, NewPoint, "2", "NONE");
+// 				//Waypoint creation
+// 				var NewWayPoint = SWaypoint.CreateWayPoint(myMission, count, NewPoint, "2", "NONE");
 
-				myMission.WaypointsTbl.push(NewWayPoint);
-				myMission.UpdateDummyPath();
-				count++; // Increment the count for each waypoint
-			}
-	}
-}
+// 				myMission.WaypointsTbl.push(NewWayPoint);
+// 				myMission.UpdateDummyPath();
+// 				count++; // Increment the count for each waypoint
+// 			}
+// 	}
+// }
 
 	print("initialX: " + initialXValue)
     print("initialYtrack: " + initialYTrack)
