@@ -1100,7 +1100,23 @@ function Main()
 	}
 }
 
+var FiducialCheck = SDialog.New("Is There A Current Fiducial?");
+	FiducialCheck.AddBoolean({ 
+		id: "Fid_Check",
+		name: "Fiducial Check",
+		value: true,
+        saveValue: false,
+        readOnly: false});
+		var FiducialCH = FiducialCheck.Run();
+
+	if(FiducialCH.ErrorCode != 0)
+		ErrorMessage("Operation canceled");
+
+    var FIDCHECK = FiducialCH.Fid_Check
+if(FIDCHECK == false)
+{
 Main();
+}
 
 
 
