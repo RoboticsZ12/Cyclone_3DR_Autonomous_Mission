@@ -2674,7 +2674,7 @@ if(multiplier == counter)
 		if(Return.ErrorCode != 0)
 			ErrorMessage("Operation canceled");
 	
-		var RETURNT = RETURN.Return_Point
+		var RETURN = RETURN.Return_Point
 	if(RETURN == true)
 	{	
 		var NewPointX = new SPoint(x, (multiplier*0.2) * imageLat, initialZValue); // z should remain as Zero
