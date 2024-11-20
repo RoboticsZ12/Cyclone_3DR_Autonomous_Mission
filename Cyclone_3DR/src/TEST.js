@@ -1,6 +1,7 @@
 //*******************************************************************//
-//**	 THIS IS TEST SCRIPT. WILL BE REFORMATTED WITH TIME        **//
-//**CURRENTLY THREE SEPERATE SCRIPTS HAVE BEEN COMBINED IN THIS DOC**//
+//**	           THIS IS SCRIPT IS READY FOR USE. 		       **//
+//**	 Southern Illinois University Edwardsville Senior Design   **//
+//**			Spot(R) Autonomous Step Voltage System			   **//
 //*******************************************************************//
 
 // Error Message Function
