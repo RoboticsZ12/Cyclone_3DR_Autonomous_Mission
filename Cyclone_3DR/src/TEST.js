@@ -1,7 +1,7 @@
 //*******************************************************************//
-//**	           THIS IS SCRIPT IS READY FOR USE. 		       **//
+//**	           THIS IS SCRIPT IS READY FOR USE. 		   **//
 //**	 Southern Illinois University Edwardsville Senior Design   **//
-//**			Spot(R) Autonomous Step Voltage System			   **//
+//**			Spot(R) Autonomous Step Voltage System     **//
 //*******************************************************************//
 
 // Error Message Function
